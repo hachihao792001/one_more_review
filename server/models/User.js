@@ -27,6 +27,7 @@ const userSchema = new mongoose.Schema({
     type: Number,
     min: 10,
     max: 100,
+    default:18
   },
   gender: {
     type: Boolean,

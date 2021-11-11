@@ -2,26 +2,29 @@ import express from 'express';
 import mongoose from 'mongoose';
 import path from 'path';
 import userRouter from './routers/userRouter.js';
+import dotenv from 'dotenv';
 
 
 const app=express();
+dotenv.config();
 
 const PORT =5000;  // port connect to backend
-const username='OneMoreReview';
-const password='TheFourNations';
+//const username='OneMoreReview';
+//const password='TheFourNations';
 const __dirname=path.resolve();  // get the current path ..\server
 
 // connect to database
+// using .env file to config
 const connectDB = async () => {
 	try {
 		await mongoose.connect(
-			`mongodb+srv://${username}:${password}@cluster0.8gxb0.mongodb.net/cluster0?retryWrites=true&w=majority`,
+			`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.8gxb0.mongodb.net/cluster0?retryWrites=true&w=majority`,
 		
 		)
-		console.log('MongoDB connected')
+		console.log('MongoDB connected');
 	} catch (error) {
-		console.log(error.message)
-		process.exit(1)
+		console.log(error.message);
+		process.exit(1);
 	}
 }
 connectDB();
@@ -29,7 +32,7 @@ connectDB();
 // app use
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-app.use('/resources',express.static(path.join(__dirname,'/resources')))
+app.use('/resources',express.static(path.join(__dirname,'/resources')));
 
 // routers
 app.use('/api/users',userRouter);

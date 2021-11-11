@@ -2,11 +2,19 @@ POST http://localhost:5000/api/users/register
 Content-Type: application/json
 
 {
-  "username": "leequang",
-  "password": "123456",
-  "name":"Nguyen Le Quang",
+  "username": "shiba",
+  "password": "shiba",
+  "name":"Nguyen Le Shiba",
   "age":"19"
-  
-  
 
+}
+
+###
+
+POST http://localhost:5000/api/users/login
+Content-Type: application/json
+
+{
+  "username": "leequang",
+  "password": "123456"
 }

@@ -1,6 +1,7 @@
 import express from 'express';
 import User from '../models/User.js';
 import argon2 from 'argon2';
+import jwt from 'jsonwebtoken';
 
 const userRouter=express.Router();
 
@@ -47,5 +48,34 @@ userRouter.post('/register',async(req,res)=>{
 
 
 })
+
+
+userRouter.post('/login',async(req,res)=>{
+    try {
+        const {username,password}=req.body;
+        if(!username||!password){
+            return res.status(400).json({success:false,message:"missing username or password"});
+        }
+
+        const user=await User.findOne({username});  // get user from database with username
+        if(user&&argon2.verify(user.password,password)){
+            const token=jwt.sign({
+                userId:user._id
+            },process.env.ACCESS_TOKEN);
+            
+            return res.status(200).json({success:true,message:"login successfully",token});
+
+        }
+        else{
+            return res.status(400).json({success:false,message:"incorrect username or pasword"});
+        }
+
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({success:false,message:'Internal server Error'});
+        
+    }
+});
 
 export default userRouter;
