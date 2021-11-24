@@ -82,7 +82,7 @@ userRouter.post('/login',async(req,res)=>{
 // get specific user
 userRouter.get('/:id',async(req,res)=>{
     try {
-        const user=await User.findById({_id:req.params.id});
+        const user=await User.findById(req.params.id);
         if(user){
             return res.json({success:true,message:"get user successfully",user:user});
         }
@@ -97,18 +97,19 @@ userRouter.get('/:id',async(req,res)=>{
 //update user
 userRouter.put('/:id',async(req,res)=>{
     try {
-        const user=await User.findById({_id:req.params.id});
+        const user=await User.findById(req.params.id);
         if(user){
-            const {password,name,image,age,gender,isAdmin,country}=req.params;
-            let hashedPassword=null;
-            if(!password)
-                hashedPassword=argon2.hash(password);
-            user.password=hashedPassword||user.password;  // chuyen sang argon2
+            const {password,name,image,age,gender,isAdmin,country}=req.body;
+            // chuyen sang argon2
             user.name=name||user.name;
             user.age=age||user.age;
             user.gender=gender||user.gender;
             user.isAdmin=isAdmin||user.isAdmin;
             user.country=country||user.country;
+            user.image=image||user.image;
+            if(password){
+                user.password=argon2.hash(password);
+            }
             
             const updatedUser=await user.save();
             return res.status(200).json({success:true,message:'update successfully',user:updatedUser});

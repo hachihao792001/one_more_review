@@ -2,10 +2,10 @@ POST http://localhost:5000/api/users/register
 Content-Type: application/json
 
 {
-  "username": "shiba",
-  "password": "shiba",
+  "username": "leequang459",
+  "password": "leequang459",
   "name":"Nguyen Le Shiba",
-  "age":"19"
+  "age":"29"
 
 }
 
@@ -15,6 +15,93 @@ POST http://localhost:5000/api/users/login
 Content-Type: application/json
 
 {
-  "username": "leequang",
+  "username": "leequang459",
   "password": "123456"
 }
+
+####
+
+PUT http://localhost:5000/api/users/619e5b431c83cc30adac1dc1
+Content-Type: application/json
+
+{
+  "name":"Lee Quang Shiba"
+}
+###
+
+DELETE http://localhost:5000/api/users/619e5b431c83cc30adac1dc1
+
+###
+POST http://localhost:5000/api/films
+Content-Type: application/json
+
+{
+  "name":"Tam Quoc Dien Nghia 2",
+  "gene":"document",
+  "description":"film hay",
+  "actor":""
+}
+
+###
+GET http://localhost:5000/api/films/619e5f7ba91cf58d80d776ba
+
+###
+PUT http://localhost:5000/api/films/619e5f7ba91cf58d80d776ba
+Content-Type: application/json
+
+{
+  "gene":"phim chinh kich",
+  "country":"Trung Quoc"
+}
+###
+
+DELETE http://localhost:5000/api/films/619e5f7ba91cf58d80d776ba
+
+###
+POST http://localhost:5000/api/comments
+Content-Type: application/json
+
+{
+  "idFilm":"619e65eda91cf58d80d776bd",
+  "idUser":"61878b4f493418ce38bdc85a",
+  "content":"phim Tam QUoc qua Hay"
+}
+###
+GET http://localhost:5000/api/comments/619e6705a91cf58d80d776c4
+
+###
+PUT http://localhost:5000/api/comments/619e6705a91cf58d80d776c4
+Content-Type: application/json
+
+{
+  "content":"phim nhu cc v"
+}
+###
+DELETE http://localhost:5000/api/comments/619e6705a91cf58d80d776c4
+
+### 
+POST http://localhost:5000/api/reviews
+Content-Type: application/json
+
+{
+  "idFilm":"619e65eda91cf58d80d776bd",
+  "idUser":"61878b4f493418ce38bdc85a",
+  "content":"Phim nay duoc qua nhi cho 4 sao",
+  "rating":"4"
+}
+
+###
+PUT http://localhost:5000/api/reviews/619e67fba91cf58d80d776cf
+Content-Type: application/json
+
+{
+  "content":"phim nay 2 sao thoi",
+  "rating":"3"
+}
+
+###
+GET http://localhost:5000/api/reviews/619e6baa47b7760baef20ed9
+
+### 
+DELETE  http://localhost:5000/api/reviews/619e6baa47b7760baef20ed9
+

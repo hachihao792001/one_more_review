@@ -1,16 +1,7 @@
 import mongoose from 'mongoose';
 
 const commentSchema=new mongoose.Schema({
-    filmName:{
-        type:String,
-        required:true,
-        default:"anonymous",
-    },
-    userName:{
-        type:String,
-        required:true,
-        default:'anonymous',
-    },
+ 
     idFilm:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Film',

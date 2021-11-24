@@ -2,6 +2,7 @@ import express from 'express';
 import Film from '../models/Film.js';
 
 
+
 const filmRouter=express.Router();
 
 
@@ -38,7 +39,7 @@ filmRouter.post('/',async(req,res)=>{
 // Find the film by Id (Read)
 filmRouter.get('/:id',async(req,res)=>{
     try {
-        const film=await Film.findById({_id:req.params.id}); // search by value _id in mongoose
+        const film=await Film.findById(req.params.id); // search by value _id in mongoose
         if(film){
             return res.status(200).json({success:true,message:'finding successfully',film:film});
 
@@ -47,7 +48,7 @@ filmRouter.get('/:id',async(req,res)=>{
 
     } catch (error) {
         console.log(error);
-        res.status(500).send({success:false,message:'Internal server error'});
+        res.status(500).send({success:false,message:'Internal server error'}); 
     }
 })
 
@@ -55,7 +56,10 @@ filmRouter.get('/:id',async(req,res)=>{
 //update Film
 filmRouter.put('/:id',async(req,res)=>{
     try {
-        const film=await Film.findById({_id:req.params.id});
+        const film=await Film.findById(req.params.id);
+        if(!film){
+            return res.status(404).json({success:false,message:'Film not found'});
+        }
         const {name,type,gene,country,isCinema,description,actors,avgRating,url,commentList,reviewList}=req.body;
         film.name=name||film.name;
         film.type=type||film.type;
@@ -85,6 +89,21 @@ filmRouter.put('/:id',async(req,res)=>{
 
     }
 })
+
+filmRouter.delete('/:id',async(req,res)=>{
+    try {
+        const film=await Film.findById(req.params.id);
+        if(!film){
+            return res.status(404).json({success:false,message:'film not found'});
+        }
+        const deletedFilm=await film.remove();
+        return res.status(200).json({success:true,message:'delete successfully',film:deletedFilm});
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({success:false,message:'Internal server error'});
+
+    }
+});
 
 // find film by name
 filmRouter.get('/:name',async(req,res)=>{

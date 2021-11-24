@@ -3,6 +3,9 @@ import mongoose from 'mongoose';
 import path from 'path';
 import userRouter from './routers/userRouter.js';
 import dotenv from 'dotenv';
+import filmRouter from './routers/filmRouter.js';
+import commentRouter from './routers/commentRouter.js';
+import reviewRouter from './routers/reviewRouter.js';
 
 
 const app=express();
@@ -36,6 +39,9 @@ app.use('/resources',express.static(path.join(__dirname,'/resources')));
 
 // routers
 app.use('/api/users',userRouter);
+app.use('/api/films',filmRouter);
+app.use('/api/comments',commentRouter);
+app.use('/api/reviews',reviewRouter);
 
 app.get('/', (req, res) => {
     res.send('Hello World!')
