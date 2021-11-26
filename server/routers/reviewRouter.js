@@ -1,10 +1,10 @@
 import express from 'express';
 import Review from '../models/Review.js';
-
+import { isAuth,isAdmin } from '../middleware/auth.js';
 const reviewRouter=express.Router();
 
 
-reviewRouter.get('/:id',async(req,res)=>{
+reviewRouter.get('/:id',isAuth,async(req,res)=>{
     try {
         const review=await Review.findById(req.params.id);
         if(review){
@@ -18,7 +18,7 @@ reviewRouter.get('/:id',async(req,res)=>{
     }
 });
 
-reviewRouter.post('/',async(req,res)=>{
+reviewRouter.post('/',isAuth,async(req,res)=>{
     try {
         const {idFilm,idUser,content,rating}=req.body;
         if(!idUser){
@@ -46,7 +46,7 @@ reviewRouter.post('/',async(req,res)=>{
     }
 });
 
-reviewRouter.put('/:id',async(req,res)=>{
+reviewRouter.put('/:id',isAuth,async(req,res)=>{
     try {
         const review=await Review.findById(req.params.id);
         const {content,rating}=req.body;
@@ -59,7 +59,6 @@ reviewRouter.put('/:id',async(req,res)=>{
         else{
             return res.status(404).json({success:false,message:'incorrect review'})
         }
-        return res.status(200).json({success:true,message:'update review successfully',review:updatedReview});
 
     } catch (error) {
         console.log(error);
@@ -69,7 +68,7 @@ reviewRouter.put('/:id',async(req,res)=>{
 });
 
 
-reviewRouter.delete('/:id',async(req,res)=>{
+reviewRouter.delete('/:id',isAuth,async(req,res)=>{
     try {
         const review=await Review.findById(req.params.id);
         if(!review){

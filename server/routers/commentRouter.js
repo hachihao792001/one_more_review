@@ -1,10 +1,10 @@
 import express from 'express';
 import Comment from '../models/Comment.js';
-
+import {isAuth,isAdmin} from '../middleware/auth.js'
 
 const commentRouter=express.Router();
 
-commentRouter.get('/:id',async(req,res)=>{
+commentRouter.get('/:id',isAuth,async(req,res)=>{
     try {
         const comment=await Comment.findById({_id:req.params.id});
         if(comment){
@@ -20,7 +20,7 @@ commentRouter.get('/:id',async(req,res)=>{
     }
 })
 
-commentRouter.post('/',async(req,res)=>{
+commentRouter.post('/',isAuth,async(req,res)=>{
     try {
         const {idFilm,idUser,content}=req.body;
         const newCommnet=new Comment({idFilm,idUser,content});
@@ -39,7 +39,7 @@ commentRouter.post('/',async(req,res)=>{
     }
 });
 
-commentRouter.put('/:id',async(req,res)=>{
+commentRouter.put('/:id',isAuth,async(req,res)=>{
     try {
         const comment=await Comment.findById(req.params.id);
         
@@ -62,7 +62,7 @@ commentRouter.put('/:id',async(req,res)=>{
     }
 });
 
-commentRouter.delete('/:id',async(req,res)=>{
+commentRouter.delete('/:id',isAuth,async(req,res)=>{
     try {
         const comment=await Comment.findById(req.params.id);
         if(!comment){

@@ -1,13 +1,13 @@
 import express from 'express';
 import Film from '../models/Film.js';
 
-
+import { isAuth,isAdmin } from '../middleware/auth.js';
 
 const filmRouter=express.Router();
 
 
 // Adding a film  (Create)
-filmRouter.post('/',async(req,res)=>{
+filmRouter.post('/',isAuth,isAdmin,async(req,res)=>{
        
     try {
         const {name,type,gene,country,isCinema,description,actors,avgRating,url}=req.body;
@@ -37,7 +37,7 @@ filmRouter.post('/',async(req,res)=>{
 });
 
 // Find the film by Id (Read)
-filmRouter.get('/:id',async(req,res)=>{
+filmRouter.get('/:id',isAuth,async(req,res)=>{
     try {
         const film=await Film.findById(req.params.id); // search by value _id in mongoose
         if(film){
@@ -54,7 +54,7 @@ filmRouter.get('/:id',async(req,res)=>{
 
 
 //update Film
-filmRouter.put('/:id',async(req,res)=>{
+filmRouter.put('/:id',isAuth,isAdmin,async(req,res)=>{
     try {
         const film=await Film.findById(req.params.id);
         if(!film){
@@ -90,7 +90,7 @@ filmRouter.put('/:id',async(req,res)=>{
     }
 })
 
-filmRouter.delete('/:id',async(req,res)=>{
+filmRouter.delete('/:id',isAuth,isAdmin,async(req,res)=>{
     try {
         const film=await Film.findById(req.params.id);
         if(!film){
@@ -106,7 +106,7 @@ filmRouter.delete('/:id',async(req,res)=>{
 });
 
 // find film by name
-filmRouter.get('/:name',async(req,res)=>{
+filmRouter.get('/:name',isAuth,async(req,res)=>{
     try {
         const film=await Film.findOne({name:req.params.name}); // find the Film with name
         if(film){
