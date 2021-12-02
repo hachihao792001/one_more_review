@@ -58,6 +58,30 @@ const filmSchema=new mongoose.Schema({
         type: Number,
         default: new Date().getTime(),
       },
+    status:{
+        type:String,
+        default:'HD Vietsub'
+    },
+    director:{
+        type:String,
+        default:"Lee Quang"
+    },
+    time:{
+        type:String,
+        default:"N/A"
+    },
+    year:{
+        type:Number,
+        default:2021
+    },
+    img_poster:{
+        type:String,
+        default:"https://img.bilutv.cc/film/18716/poster.jpg"
+    },
+    img_big:{
+        type:String,
+        default:"https://img.bilutv.cc/film/18716/big.jpg"
+    }
 });
 
 

@@ -2,7 +2,7 @@ POST http://localhost:5000/api/users/register
 Content-Type: application/json
 
 {
-  "username": "leequang459",
+  "username": "leequang9d7",
   "password": "leequang459",
   "name":"Nguyen Le Shiba",
   "age":"29"
@@ -21,6 +21,30 @@ Content-Type: application/json
 
 ####
 
+GET http://localhost:5000/api/users/61a252459970947d5ba3393c
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWEyNTI0NTk5NzA5NDdkNWJhMzM5M2MiLCJuYW1lIjoiTmd1eWVuIExlIFNoaWJhIiwidXNlcm5hbWUiOiJsZWVxdWFuZzlkNyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2MzgwMjc4NDUsImV4cCI6MTY0MDYxOTg0NX0.6f_krziKolZefTzRWZw3W96rw9_fb_-Vq_Cq_2bgHXE
+
+{
+  
+}
+###
+PUT http://localhost:5000/api/users/61a252459970947d5ba3393c
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWEyNTI0NTk5NzA5NDdkNWJhMzM5M2MiLCJuYW1lIjoiTmd1eWVuIExlIFNoaWJhIiwidXNlcm5hbWUiOiJsZWVxdWFuZzlkNyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2MzgwMjc4NDUsImV4cCI6MTY0MDYxOTg0NX0.6f_krziKolZefTzRWZw3W96rw9_fb_-Vq_Cq_2bgHXE
+
+{
+"name":"Quang dep trai"
+}
+
+
+###
+
+DELETE http://localhost:5000/api/users/61a252459970947d5ba3393c
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWEyNTI0NTk5NzA5NDdkNWJhMzM5M2MiLCJuYW1lIjoiTmd1eWVuIExlIFNoaWJhIiwidXNlcm5hbWUiOiJsZWVxdWFuZzlkNyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2MzgwMjc4NDUsImV4cCI6MTY0MDYxOTg0NX0.6f_krziKolZefTzRWZw3W96rw9_fb_-Vq_Cq_2bgHXE
+
+###
 PUT http://localhost:5000/api/users/619e5b431c83cc30adac1dc1
 Content-Type: application/json
 

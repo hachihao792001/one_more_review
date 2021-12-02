@@ -6,7 +6,7 @@ import {genarateToken,isAuth,isAdmin} from '../middleware/auth.js'
 
 const userRouter=express.Router();
 
-userRouter.get('/',async(req,res)=>{
+userRouter.get('/users',async(req,res)=>{
     try {
         const users=await User.find({});
         if(!users){
@@ -68,13 +68,14 @@ userRouter.post("/register", async (req, res) => {
   try {
     await newUser.save();
     const access_token=genarateToken(newUser);
+    return res.status(200).json({ message: true, user: newUser,access_token });
+
   } catch (error) {
     return res
       .status(404)
       .json({ success: false, message: "error at inserting user" });
   }
 
-  return res.status(200).json({ message: true, user: newUser,access_token });
 });
 
 
