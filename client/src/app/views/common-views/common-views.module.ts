@@ -13,6 +13,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { UserComponent } from './user/user.component';
+import { ReviewPageComponent } from './review-page/review-page.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { UserComponent } from './user/user.component';
     SignInComponent,
     SignUpComponent,
     UserComponent,
+    ReviewPageComponent,
   ],
   imports: [
     CommonModule,
