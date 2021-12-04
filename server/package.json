@@ -17,6 +17,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.1.4",
     "mongoose": "^6.0.12",
+    "mongoose-double": "^0.0.1",
     "parse-json": "^6.0.0"
   },
   "devDependencies": {

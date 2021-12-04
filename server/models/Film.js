@@ -5,9 +5,13 @@ const filmSchema=new mongoose.Schema({
     name:{
         type:String,
         required:true,
-        unique:true
+        unique:true,
     },
-
+    eng_name:{
+        type:String,
+        required:true,
+        default:"english name",
+    },
     type:{
         type:Boolean, // le hoac bo
         required:true,
@@ -15,15 +19,12 @@ const filmSchema=new mongoose.Schema({
     },
     gene:{
         type:String,  // the loai :tinh cam,kinh di,...
+        default:"actions"
     },
     country:{
         type:String,
         required:true,
         default:"Viet Nam",
-    },
-    isCinema:{
-        type:Boolean,
-        default:false,
     },
     description:{
         type:String,
@@ -31,8 +32,8 @@ const filmSchema=new mongoose.Schema({
         maxlength:10000,
     },
     actors:{
-        type:[String],
-        default:[],
+        type:String,
+        default:'',
 
     },
     avgRating:{
@@ -57,31 +58,28 @@ const filmSchema=new mongoose.Schema({
     createdAt: {
         type: Number,
         default: new Date().getTime(),
-      },
+    },
     status:{
         type:String,
-        default:'HD Vietsub'
+        default:'HD Vietsub',
     },
     director:{
         type:String,
         default:"Lee Quang"
     },
-    time:{
+    duration:{
         type:String,
-        default:"N/A"
+        default:"90"
     },
     year:{
         type:Number,
         default:2021
     },
-    img_poster:{
+    img:{
         type:String,
-        default:"https://img.bilutv.cc/film/18716/poster.jpg"
+        default:"https://www.ssphim.net/static/5fe2d564b3fa6403ffa11d1c/61a0e3157e072c580d171d1e_phong-than-dat-ky.jpg"
     },
-    img_big:{
-        type:String,
-        default:"https://img.bilutv.cc/film/18716/big.jpg"
-    }
+   
 });
 
 
