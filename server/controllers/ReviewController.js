@@ -1,3 +1,4 @@
+import Film from "../models/Film.js";
 import Review from "../models/Review.js";
 
 export const getReview = async (req, res) => {
@@ -33,6 +34,9 @@ export const createReview = async (req, res) => {
     const newReview = new Review({ idFilm, idUser, content, rating });
     try {
       await newReview.save();
+      let film=await Film.findOne({'_id':newReview.idFilm})
+      film.reviewList.push(newReview._id)
+      await film.save()
     } catch (error) {
       console.log(error);
       return res
@@ -106,3 +110,5 @@ export const deleteReview = async (req, res) => {
     res.status(500).send({ success: false, message: "Internal server error" });
   }
 };
+
+

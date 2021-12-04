@@ -1,4 +1,5 @@
 import Comment from '../models/Comment.js';
+import Film from '../models/Film.js';
 
 export const getComment=async(req,res)=>{
     try {
@@ -23,6 +24,19 @@ export const createComment=async(req,res)=>{
         
         try {
             await newCommnet.save()
+            console.log(newCommnet)
+            const films=await Film.find({})
+            // console.log(films)
+            for(let film of films){
+                // console.log(film._id)
+                // console.log(newCommnet.idFilm)
+                if(film._id.toString()==newCommnet.idFilm.toString()){
+                    console.log(film)
+                    film.commentList.push(newCommnet._id)
+                    await film.save();
+                    break;
+                }
+            }
         } catch (error) {
             console.log(error);
             return res.status(404).json({success:false,message:'insert fail'});
@@ -46,6 +60,7 @@ export const updateComment=async(req,res)=>{
             comment.content=content||comment.content;
 
             const updatedComment=await comment.save();
+           
             return res.status(200).json({success:true,message:'update successfully',comment:updatedComment});
         }
         else{
