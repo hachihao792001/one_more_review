@@ -1,13 +1,9 @@
-POST http://localhost:5000/api/users/register
+GET  http://localhost:5000/api/users/users
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWEyNTE5ZGRlMGYyMzk3OWJlNWI4NDIiLCJpYXQiOjE2Mzg1OTY0MjR9.0lXLnBdex_6vmpFyuvHVbT-6xasSrzdUWJU10YTWMJw
 
-{
-  "username": "leequang9d7",
-  "password": "leequang459",
-  "name":"Nguyen Le Shiba",
-  "age":"29"
 
-}
+
 
 ###
 
