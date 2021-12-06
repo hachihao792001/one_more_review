@@ -85,7 +85,10 @@ export const loginUser=async(req,res)=>{
         const user=await User.findOne({username});  // get user from database with username
         if(user&&argon2.verify(user.password,password)){
             const token=jwt.sign({
-                userId:user._id
+                _id:user._id,
+                name: user.name,
+                username: user.username,
+                isAdmin: user.isAdmin,
             },process.env.ACCESS_TOKEN);
             
             return res.status(200).json({success:true,message:"login successfully",token});
@@ -170,5 +173,27 @@ export const deleteUser=async(req,res)=>{
       }
   }
   
+export const searchUser=async(req,res)=>{
+    try {
+      
 
+        const name=req.query.name||'';
+        const username=req.query.username||'';
+        // const age=req.query.age&&Number(req.query.age)!==0?Number(req.query.age):0;
+        const country=req.query.country||''
+        try {
+            const users=await User.find({'name':{'$regex':name,'$options':'i'},'username':{'$regex':username,'$options':'i'},'country':country})
+            if(users.length!=0)
+                return res.status(200).json({success:true,message:'finding users successfully',users});   
+            return res.status(404).json({success:false,message:'not found success'});
+ 
+        } catch (error) {
+            return res.status(404).json({success:false,message:'not found success'});
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({success:false,message:'Internal server Error'});
+
+    }
+}
 

@@ -19,7 +19,9 @@ export const getComment=async(req,res)=>{
 
 export const createComment=async(req,res)=>{
     try {
-        const {idFilm,idUser,content}=req.body;
+        const {idFilm,content}=req.body;
+        const idUser=req.user._id;
+        console.log(req.user)
         const newCommnet=new Comment({idFilm,idUser,content});
         
         try {

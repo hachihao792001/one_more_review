@@ -20,7 +20,8 @@ export const getReview = async (req, res) => {
 
 export const createReview = async (req, res) => {
   try {
-    const { idFilm, idUser, content, rating } = req.body;
+    const { idFilm, content, rating } = req.body;
+    const idUser=req.user._id;
     if (!idUser) {
       return res
         .status(401)
@@ -36,6 +37,13 @@ export const createReview = async (req, res) => {
       await newReview.save();
       let film=await Film.findOne({'_id':newReview.idFilm})
       film.reviewList.push(newReview._id)
+      let avgRating=0;
+      for (let rating of film.reviewList){
+            const review=await Review.findById(rating);
+            avgRating+=review.rating;
+      }
+      avgRating=avgRating/(film.reviewList.length)
+      film.avgRating=avgRating;
       await film.save()
     } catch (error) {
       console.log(error);

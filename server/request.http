@@ -81,11 +81,11 @@ DELETE http://localhost:5000/api/films/619e5f7ba91cf58d80d776ba
 ###
 POST http://localhost:5000/api/comments
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWEyNTE5ZGRlMGYyMzk3OWJlNWI4NDIiLCJpYXQiOjE2Mzg2MDc0MzF9.iWfQSyBWFN4r8aI8wNkBayC-RQQZZiopzY7b7ro9ABU
 
 {
-  "idFilm":"619e65eda91cf58d80d776bd",
-  "idUser":"61878b4f493418ce38bdc85a",
-  "content":"phim Tam QUoc qua Hay"
+  "idFilm":"61aadb9d1c02b845c13918c5",
+  "content":"phim Tam shiba"
 }
 ###
 GET http://localhost:5000/api/comments/619e6705a91cf58d80d776c4
