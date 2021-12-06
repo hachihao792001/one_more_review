@@ -180,9 +180,24 @@ export const searchUser=async(req,res)=>{
         const name=req.query.name||'';
         const username=req.query.username||'';
         // const age=req.query.age&&Number(req.query.age)!==0?Number(req.query.age):0;
-        const country=req.query.country||''
+        const country=req.query.country||'';
+        let gender=req.query.gender||'';
+        console.log('gender is ',gender)
+        if(gender!='')
+            gender=(gender=='false')?false:true;
+        console.log(gender)
+        const nameFilter=name?{name:{'$regex':name,'$options':'i'}}:{};
+        const usernameFilter=username?{username:{'$regex':username,'$options':'i'}}:{};
+        const countryFilter=country?{country:country}:{};
+        const genderFilter=(gender!=='')?{gender}:{}
+        console.log(genderFilter)
         try {
-            const users=await User.find({'name':{'$regex':name,'$options':'i'},'username':{'$regex':username,'$options':'i'},'country':country})
+            const users=await User.find({
+                ...nameFilter,
+                ...usernameFilter,
+                ...countryFilter,
+                ...genderFilter
+            })
             if(users.length!=0)
                 return res.status(200).json({success:true,message:'finding users successfully',users});   
             return res.status(404).json({success:false,message:'not found success'});

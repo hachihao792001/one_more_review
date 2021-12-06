@@ -181,3 +181,13 @@ export const deleteFilm = async (req, res) => {
 //     return res.status(200).json({success:true.valueOf,films})
 //   }
 
+export const getAllFilms=async(req,res)=>{
+  try {
+    const films=await Film.find({})
+    return res.status(200).json({success:true,message:'find all film',films});
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ success: false, message: "Internal server error" });
+
+  }
+}

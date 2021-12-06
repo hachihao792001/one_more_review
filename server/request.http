@@ -59,7 +59,7 @@ Content-Type: application/json
   "name":"Tam Quoc Dien Nghia 2",
   "gene":"document",
   "description":"film hay",
-  "actor":""
+  
 }
 
 ###
@@ -106,7 +106,6 @@ Content-Type: application/json
 
 {
   "idFilm":"619e65eda91cf58d80d776bd",
-  "idUser":"61878b4f493418ce38bdc85a",
   "content":"Phim nay duoc qua nhi cho 4 sao",
   "rating":"4"
 }
