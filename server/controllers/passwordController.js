@@ -20,11 +20,17 @@ export const sendLink=async(req,res)=>{
                 
             })
         }
-        await token.save()
-        const link = `${process.env.BASE_URL}/reset-password/${user._id}/${token.token}`;
-        await sendEmail(user.username, "Password reset",link);
-
-        res.send("password reset link sent to your email account");
+        try {
+            await token.save()
+            const link = `${process.env.BASE_URL}/reset-password/${user._id}/${token.token}`;
+            await sendEmail(user.username, "Password reset",link);
+    
+        } catch (error) {
+            console.log(error);
+            return res.status(500).json({success:false,message:'Internal server Error'});
+    
+        }
+        res.status(200).json({success:true,message:"password reset link sent to your email account"});
     } catch (error) {
         res.send("An error occured");
         console.log(error);
@@ -47,7 +53,7 @@ export const resetPassword=async(req,res)=>{
         await user.save();
         await token.delete();
 
-        res.send("password reset sucessfully.");
+        res.status(200).json({success:true,message:"password reset sucessfully."});
     } catch (error) {
         res.send("An error occured");
         console.log(error);
