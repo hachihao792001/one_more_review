@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import filmRouter from "./routers/filmRouter.js";
 import commentRouter from "./routers/commentRouter.js";
 import reviewRouter from "./routers/reviewRouter.js";
+import passRouter from "./routers/passwordRouter.js";
 
 const app = express();
 dotenv.config();
@@ -40,12 +41,13 @@ app.use("/api/users", userRouter);
 app.use("/api/films", filmRouter);
 app.use("/api/comments", commentRouter);
 app.use("/api/reviews", reviewRouter);
+app.use("/api/password", passRouter);
 
 app.get("/", (req, res) => {
     res.send("Hello World!");
 });
 
 app.listen(PORT, () => {
-    console.log(`OMR server is listening at http://localhost:${PORT}`);
+    console.log(`Example app listening at http://localhost:${PORT}`);
     console.log(__dirname);
 });
