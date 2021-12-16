@@ -215,7 +215,9 @@ export const getFilmsWithFilter = async (req, res) => {
     //get filter and arg from params
     const { filter, arg } = req.params;
 
-    let films = await Film.find({ [filter]: arg });
+    let films;
+    if (filter === "genre") films = await Film.find({ gene: arg });
+    else films = await Film.find({ [filter]: arg });
 
     if (films.length > 0) {
       let comment_infos = [];

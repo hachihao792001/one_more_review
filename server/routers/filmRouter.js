@@ -17,6 +17,6 @@ filmRouter.post("/", isAuth, isAdmin, createFilm);
 filmRouter.get("/:id", isAuth, getFilm);
 filmRouter.put("/:id", isAuth, isAdmin, updateFilm);
 filmRouter.delete("/:id", isAuth, isAdmin, deleteFilm);
-filmRouter.get("/:filter/:arg", getFilmsWithFilter);
+filmRouter.get("/:filter/:arg", isAuth, getFilmsWithFilter);
 
 export default filmRouter;
