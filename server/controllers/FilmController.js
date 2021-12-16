@@ -63,34 +63,50 @@ export const getFilm = async (req, res) => {
         user_name_comment.push(user.idUser.name);
         user_username_comment.push(user.idUser.username);
         user_image_comment.push(user.idUser.image);
-        let cmt = await Comment.findOne({ _id: item })
+        let cmt = await Comment.findOne({ _id: item });
         comment_content.push(cmt.content);
       }
-      let comment_info=[user_name_comment,user_username_comment,user_image_comment,comment_content]
-      console.log(comment_info)
+      let comment_info = [
+        user_name_comment,
+        user_username_comment,
+        user_image_comment,
+        comment_content,
+      ];
+      console.log(comment_info);
 
-      const id_reviews=film.reviewList;
-      let user_name_review=[]
-      let user_username_review=[]
-      let user_image_review=[]
-      let review_content=[]
-      let review_rating=[]
-      for(let item of id_reviews){
-         let review =await Review.findOne({'_id':item})
-         review_content.push(review.content)
-         review_rating.push(review.rating)
-         let user =await Review.findOne({'_id':item}).populate('idUser').select('name username image')
-         user_name_review.push(user.idUser.name);
-         user_username_review.push(user.idUser.username);
-         user_image_review.push(user.idUser.image);
-    }
+      const id_reviews = film.reviewList;
+      let user_name_review = [];
+      let user_username_review = [];
+      let user_image_review = [];
+      let review_content = [];
+      let review_rating = [];
+      for (let item of id_reviews) {
+        let review = await Review.findOne({ _id: item });
+        review_content.push(review.content);
+        review_rating.push(review.rating);
+        let user = await Review.findOne({ _id: item })
+          .populate("idUser")
+          .select("name username image");
+        user_name_review.push(user.idUser.name);
+        user_username_review.push(user.idUser.username);
+        user_image_review.push(user.idUser.image);
+      }
 
-    let rating_info=[user_name_review,user_username_review,user_image_review,review_content,review_rating]
+      let rating_info = [
+        user_name_review,
+        user_username_review,
+        user_image_review,
+        review_content,
+        review_rating,
+      ];
 
-
-      return res
-        .status(200)
-        .json({ success: true, message: "finding successfully", film: film, comment_info,rating_info});
+      return res.status(200).json({
+        success: true,
+        message: "finding successfully",
+        film: film,
+        comment_info,
+        rating_info,
+      });
     }
     return res.status(404).json({ success: false, message: "Incorret Id" });
   } catch (error) {
@@ -181,13 +197,98 @@ export const deleteFilm = async (req, res) => {
 //     return res.status(200).json({success:true.valueOf,films})
 //   }
 
-export const getAllFilms=async(req,res)=>{
+export const getAllFilms = async (req, res) => {
   try {
-    const films=await Film.find({})
-    return res.status(200).json({success:true,message:'find all film',films});
+    const films = await Film.find({});
+    return res
+      .status(200)
+      .json({ success: true, message: "find all film", films });
   } catch (error) {
     console.log(error);
     res.status(500).send({ success: false, message: "Internal server error" });
-
   }
-}
+};
+
+// Find the film by Genre (Read)
+export const getFilmsWithFilter = async (req, res) => {
+  try {
+    //get filter and arg from params
+    const { filter, arg } = req.params;
+
+    let films;
+    if (filter === "genre") films = await Film.find({ gene: arg });
+    else films = await Film.find({ [filter]: arg });
+
+    if (films.length > 0) {
+      let comment_infos = [];
+      let rating_infos = [];
+
+      for (let film of films) {
+        const id_comments = film.commentList;
+        let user_name_comment = [];
+        let user_username_comment = [];
+        let user_image_comment = [];
+        let comment_content = [];
+        for (let item of id_comments) {
+          let user = await Comment.findOne({ _id: item })
+            .populate("idUser")
+            .select("username name image");
+          user_name_comment.push(user.idUser.name);
+          user_username_comment.push(user.idUser.username);
+          user_image_comment.push(user.idUser.image);
+          let cmt = await Comment.findOne({ _id: item });
+          comment_content.push(cmt.content);
+        }
+        let comment_info = [
+          user_name_comment,
+          user_username_comment,
+          user_image_comment,
+          comment_content,
+        ];
+        console.log(comment_info);
+        comment_infos.push(comment_info);
+
+        const id_reviews = film.reviewList;
+        let user_name_review = [];
+        let user_username_review = [];
+        let user_image_review = [];
+        let review_content = [];
+        let review_rating = [];
+        for (let item of id_reviews) {
+          let review = await Review.findOne({ _id: item });
+          review_content.push(review.content);
+          review_rating.push(review.rating);
+          let user = await Review.findOne({ _id: item })
+            .populate("idUser")
+            .select("name username image");
+          user_name_review.push(user.idUser.name);
+          user_username_review.push(user.idUser.username);
+          user_image_review.push(user.idUser.image);
+        }
+
+        let rating_info = [
+          user_name_review,
+          user_username_review,
+          user_image_review,
+          review_content,
+          review_rating,
+        ];
+        rating_infos.push(rating_info);
+      }
+
+      return res.status(200).json({
+        success: true,
+        message: "finding successfully",
+        films: films,
+        comment_infos,
+        rating_infos,
+      });
+    }
+    return res
+      .status(404)
+      .json({ success: false, message: "There isn't a film with that genre" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ success: false, message: "Internal server error" });
+  }
+};
