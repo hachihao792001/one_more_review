@@ -1,8 +1,12 @@
 @import "../../../../variables";
 
 .auth-container {
-  @apply flex justify-center items-center w-full h-screen bg-gray-800 p-14 shadow-xl;
-  .container {
+  @apply flex justify-center items-center w-full h-screen bg-gray-800 py-14 px-24 shadow-xl;
+
+  @media (max-width: 1200px) {
+    @apply px-8;
+  }
+  .main-container {
     @apply flex justify-center items-center w-full h-full bg-gray-900 relative;
 
     .poster {
@@ -17,7 +21,7 @@
       @apply flex justify-center items-center w-full h-full;
 
       &__content {
-        @apply bg-black w-full h-full py-14 px-14;
+        @apply bg-black w-full h-full py-10 px-14;
         @media (max-width: 768px) {
           @apply py-10;
         }
@@ -28,7 +32,7 @@
           @apply flex flex-col justify-center items-center;
 
           .form-group {
-            @apply w-full mb-5;
+            @apply w-full mt-5;
             min-height: 100px;
 
             @media (max-width: 576px) {
@@ -36,12 +40,12 @@
             }
 
             .invalid-feedback {
-              @apply text-xs leading-4 text-red-500;
+              @apply text-xs leading-4 text-red-500 mt-1;
             }
           }
 
           .form-title {
-            @apply mb-10 font-black text-4xl tracking-wider text-white;
+            @apply mb-5 font-black text-4xl tracking-wider text-white;
             @media (max-width: 768px) {
               @apply mb-8 text-3xl;
             }
@@ -96,7 +100,7 @@
           }
 
           .btn-submit {
-            @apply w-full py-3 inline-block text-xl uppercase text-white my-8 transition-all duration-500 font-medium rounded-3xl;
+            @apply w-full py-3 inline-block text-xl uppercase text-white mt-5 transition-all duration-500 font-medium rounded-3xl;
             @media (max-width: 768px) {
               @apply my-6;
             }
