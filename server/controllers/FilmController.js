@@ -210,10 +210,13 @@ export const getAllFilms = async (req, res) => {
 };
 
 // Find the film by Genre (Read)
-export const getFilmByGenre = async (req, res) => {
+export const getFilmsWithFilter = async (req, res) => {
   try {
-    // find film by genre
-    const films = await Film.find({ gene: req.params.arg });
+    //get filter and arg from params
+    const { filter, arg } = req.params;
+
+    let films = await Film.find({ [filter]: arg });
+
     if (films.length > 0) {
       let comment_infos = [];
       let rating_infos = [];

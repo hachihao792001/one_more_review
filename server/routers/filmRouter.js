@@ -7,7 +7,7 @@ import {
   updateFilm,
   deleteFilm,
   getAllFilms,
-  getFilmByGenre,
+  getFilmsWithFilter,
 } from "../controllers/FilmController.js";
 const filmRouter = express.Router();
 
@@ -17,9 +17,6 @@ filmRouter.post("/", isAuth, isAdmin, createFilm);
 filmRouter.get("/:id", isAuth, getFilm);
 filmRouter.put("/:id", isAuth, isAdmin, updateFilm);
 filmRouter.delete("/:id", isAuth, isAdmin, deleteFilm);
-filmRouter.get("/genre/:arg", isAuth, getFilmByGenre);
-//filmRouter.get("/type/:arg", isAuth, getFilmByType);
-//filmRouter.get("/nation/:arg", isAuth, getFilmByNation);
-//filmRouter.get("/year/:arg", isAuth, getFilmByYear);
+filmRouter.get("/:filter/:arg", getFilmsWithFilter);
 
 export default filmRouter;
