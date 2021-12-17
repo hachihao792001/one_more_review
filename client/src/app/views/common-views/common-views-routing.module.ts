@@ -3,10 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { SignInComponent } from './sign-in/sign-in.component';
 import { UserComponent } from './user/user.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
+import { AuthenticateComponent } from './authenticate/authenticate.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 const routes: Routes = [
   {
@@ -25,12 +25,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'sign-in',
-    component: SignInComponent,
+    path: 'authenticate',
+    component: AuthenticateComponent,
   },
   {
-    path: 'sign-up',
-    component: SignUpComponent,
+    path: 'forgot-password',
+    component: ForgotPasswordComponent,
   },
   {
     path: '**',

@@ -1,13 +1,9 @@
-POST http://localhost:5000/api/users/register
+GET  http://localhost:5000/api/users/users
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWEyNTE5ZGRlMGYyMzk3OWJlNWI4NDIiLCJpYXQiOjE2Mzg1OTY0MjR9.0lXLnBdex_6vmpFyuvHVbT-6xasSrzdUWJU10YTWMJw
 
-{
-  "username": "leequang9d7",
-  "password": "leequang459",
-  "name":"Nguyen Le Shiba",
-  "age":"29"
 
-}
+
 
 ###
 
@@ -63,11 +59,12 @@ Content-Type: application/json
   "name":"Tam Quoc Dien Nghia 2",
   "gene":"document",
   "description":"film hay",
-  "actor":""
+  
 }
 
 ###
-GET http://localhost:5000/api/films/619e5f7ba91cf58d80d776ba
+GET http://localhost:5000/api/films/61aadb9d1c02b845c13918c5
+
 
 ###
 PUT http://localhost:5000/api/films/619e5f7ba91cf58d80d776ba
@@ -84,11 +81,11 @@ DELETE http://localhost:5000/api/films/619e5f7ba91cf58d80d776ba
 ###
 POST http://localhost:5000/api/comments
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MWEyNTE5ZGRlMGYyMzk3OWJlNWI4NDIiLCJpYXQiOjE2Mzg2MDc0MzF9.iWfQSyBWFN4r8aI8wNkBayC-RQQZZiopzY7b7ro9ABU
 
 {
-  "idFilm":"619e65eda91cf58d80d776bd",
-  "idUser":"61878b4f493418ce38bdc85a",
-  "content":"phim Tam QUoc qua Hay"
+  "idFilm":"61aadb9d1c02b845c13918c5",
+  "content":"phim Tam shiba"
 }
 ###
 GET http://localhost:5000/api/comments/619e6705a91cf58d80d776c4
@@ -109,7 +106,6 @@ Content-Type: application/json
 
 {
   "idFilm":"619e65eda91cf58d80d776bd",
-  "idUser":"61878b4f493418ce38bdc85a",
   "content":"Phim nay duoc qua nhi cho 4 sao",
   "rating":"4"
 }

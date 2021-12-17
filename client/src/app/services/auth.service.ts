@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import {BehaviorSubject} from "rxjs";
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +12,9 @@ export class AuthService {
   private readonly ACCESS_TOKEN = 'ACCESS_TOKEN';
   token: any;
 
-  public isReady: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public isReady: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
+  );
 
   public isAuthenticated(): boolean {
     const accessTokenPayload: any = this.cookie.get(this.ACCESS_TOKEN);
@@ -59,6 +61,6 @@ export class AuthService {
 
   signOut(): void {
     this.cookie.deleteAll();
-    this.router.navigate(['sign-in']);
+    this.router.navigate(['authenticate']);
   }
 }

@@ -31,7 +31,7 @@ export class AuthGuard implements CanActivate {
     if (!isLoggedIn) {
       this.zone.run(() => {
         this.auth.signOut();
-        this.router.navigate(['sign-in']);
+        this.router.navigate(['authenticate']);
       });
       return false;
     }
