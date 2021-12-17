@@ -19,14 +19,14 @@ import { ProfileService } from 'src/app/services/profile.service';
   styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
-  resetPasswordForm!: FormGroup;
+  forgotPasswordForm!: FormGroup;
   confirmEmailForm!: FormGroup;
 
   confirmEmailSubmitted = false;
   confirmEmailNotification: String = '';
 
-  resetPasswordSubmitted = false;
-  resetPasswordNotification: String = '';
+  forgotPasswordSubmitted = false;
+  forgotPasswordNotification: String = '';
 
   check!: any;
 
@@ -47,50 +47,90 @@ export class ForgotPasswordComponent implements OnInit {
       this.router.navigateByUrl('');
     }
 
-    // xac thuc digit code cac kieu :v
     this.confirmEmailForm = this.formBuilder.group({
-      digitCode: ['', [Validators.required, Validators.maxLength(4)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
     });
 
-    this.resetPasswordForm = this.formBuilder.group(
+    this.forgotPasswordForm = this.formBuilder.group(
       {
+        email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', Validators.required],
       },
       { validators: [Validation.match('password', 'confirmPassword')] }
     );
   }
 
-  //   fc là form confirm email, fr là form reset password
-  get fc(): { [key: string]: AbstractControl } {
+  //   fl là form login, fr là form register
+  get fl(): { [key: string]: AbstractControl } {
     return this.confirmEmailForm.controls;
   }
 
   get fr(): { [key: string]: AbstractControl } {
-    return this.resetPasswordForm.controls;
+    return this.forgotPasswordForm.controls;
   }
 
   onResetPasswordSubmit(): void {
-    this.resetPasswordNotification = '';
-    this.resetPasswordSubmitted = true;
+    this.forgotPasswordNotification = '';
+    this.forgotPasswordSubmitted = true;
 
-    if (this.resetPasswordForm.invalid) {
+    if (this.forgotPasswordForm.invalid) {
       return;
     }
-    const getValue = this.resetPasswordForm.getRawValue();
-    const data = { password: getValue.password, confirmPassword: getValue.confirmPassword };
+
+    //this.spinner.show();
+
+    const getValue = this.forgotPasswordForm.getRawValue();
+    const data = { email: getValue.email, password: getValue.password };
+
     console.log(data);
+
+    // xử lý API sign up
   }
 
   onConfirmEmailSubmit(): void {
     this.confirmEmailNotification = '';
     this.confirmEmailSubmitted = true;
+
     if (this.confirmEmailForm.invalid) {
       return;
     }
+
+    //this.spinner.show();
+
     const getValue = this.confirmEmailForm.getRawValue();
-    const data = { digitCode: getValue.digitCode };
+    const data = { email: getValue.email, password: getValue.password };
+
     console.log(data);
+
+    // xử lý API sign in
+
+    // this.service.confirmEmail(data).subscribe(
+    //   (res) => {
+    //     if (res && res.length !== 0) {
+    //       this.cookie.set('ACCESS_TOKEN', res.token);
+
+    //       this.cookie.set('BTB_LOGIN_EMAIL', data.email);
+
+    //       this.router.navigate([`dashboard`]);
+    //     }
+    //     this.spinner.hide();
+    //   },
+    //   (err) => {
+    //     this.spinner.hide();
+    //     if (
+    //       err &&
+    //       err.error &&
+    //       err.error.error.message &&
+    //       err.error.error.message !== ''
+    //     ) {
+    //       this.notification = err.error.error.message;
+    //     } else {
+    //       this.notification = 'notMatch';
+    //     }
+    //   }
+    // );
   }
 
   togglePoster(): void {

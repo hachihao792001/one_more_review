@@ -47,7 +47,6 @@ export class ForgotPasswordComponent implements OnInit {
       this.router.navigateByUrl('');
     }
 
-    // xac thuc digit code cac kieu :v
     this.confirmEmailForm = this.formBuilder.group({
       digitCode: ['', [Validators.required, Validators.maxLength(4)]],
     });
@@ -55,13 +54,13 @@ export class ForgotPasswordComponent implements OnInit {
     this.resetPasswordForm = this.formBuilder.group(
       {
         password: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', Validators.required],
       },
       { validators: [Validation.match('password', 'confirmPassword')] }
     );
   }
 
-  //   fc là form confirm email, fr là form reset password
+  //   fl là form confirm email, fr là form reset password
   get fc(): { [key: string]: AbstractControl } {
     return this.confirmEmailForm.controls;
   }
@@ -78,7 +77,7 @@ export class ForgotPasswordComponent implements OnInit {
       return;
     }
     const getValue = this.resetPasswordForm.getRawValue();
-    const data = { password: getValue.password, confirmPassword: getValue.confirmPassword };
+    const data = { password: getValue.passwrod, confirmPassword: getValue.confirmPassword };
     console.log(data);
   }
 

@@ -47,21 +47,20 @@ export class ForgotPasswordComponent implements OnInit {
       this.router.navigateByUrl('');
     }
 
-    // xac thuc digit code cac kieu :v
     this.confirmEmailForm = this.formBuilder.group({
-      digitCode: ['', [Validators.required, Validators.maxLength(4)]],
+      digitCode: ['', [Validators.required,Validators.minLength(4)]],
     });
 
     this.resetPasswordForm = this.formBuilder.group(
       {
         password: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', Validators.required],
       },
       { validators: [Validation.match('password', 'confirmPassword')] }
     );
   }
 
-  //   fc là form confirm email, fr là form reset password
+  //   fl là form confirm email, fr là form reset password
   get fc(): { [key: string]: AbstractControl } {
     return this.confirmEmailForm.controls;
   }
@@ -77,20 +76,30 @@ export class ForgotPasswordComponent implements OnInit {
     if (this.resetPasswordForm.invalid) {
       return;
     }
+
+
     const getValue = this.resetPasswordForm.getRawValue();
-    const data = { password: getValue.password, confirmPassword: getValue.confirmPassword };
+    const data = { email: getValue.email, password: getValue.password };
+
     console.log(data);
+
   }
 
   onConfirmEmailSubmit(): void {
     this.confirmEmailNotification = '';
     this.confirmEmailSubmitted = true;
+
     if (this.confirmEmailForm.invalid) {
       return;
     }
+
+
     const getValue = this.confirmEmailForm.getRawValue();
     const data = { digitCode: getValue.digitCode };
+
     console.log(data);
+
+
   }
 
   togglePoster(): void {

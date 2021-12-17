@@ -47,15 +47,14 @@ export class ForgotPasswordComponent implements OnInit {
       this.router.navigateByUrl('');
     }
 
-    // xac thuc digit code cac kieu :v
     this.confirmEmailForm = this.formBuilder.group({
-      digitCode: ['', [Validators.required, Validators.maxLength(4)]],
+      digitCode: ['', [Validators.required]],
     });
 
     this.resetPasswordForm = this.formBuilder.group(
       {
         password: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', Validators.required] ,Validators.minLength(6),
       },
       { validators: [Validation.match('password', 'confirmPassword')] }
     );
