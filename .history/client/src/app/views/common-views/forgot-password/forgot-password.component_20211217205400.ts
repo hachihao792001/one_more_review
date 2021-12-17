@@ -94,7 +94,7 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   togglePoster(): void {
-    if (!this.fc.digitCode.errors)
+    if (this.fc.digitCode.errors)
       $('.poster').toggleClass('left');
     else
       return;
