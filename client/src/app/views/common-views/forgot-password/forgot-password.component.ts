@@ -46,6 +46,9 @@ export class ForgotPasswordComponent implements OnInit {
     if (this.check) {
       this.router.navigateByUrl('');
     }
+	else {
+		//this.router.navigateByUrl('/authenticate');
+	}
 
     // xac thuc digit code cac kieu :v
     this.confirmEmailForm = this.formBuilder.group({

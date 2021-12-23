@@ -14,6 +14,8 @@ import { UserComponent } from './user/user.component';
 import { ReviewPageComponent } from './review-page/review-page.component';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { CarouselModule } from 'primeng/carousel';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     ComponentsModule,
     FormsModule,
     ReactiveFormsModule,
+    DropdownModule,
+		CarouselModule,
   ],
 })
 export class CommonViewsModule {}
