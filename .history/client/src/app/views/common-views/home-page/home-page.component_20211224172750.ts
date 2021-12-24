@@ -18,9 +18,9 @@ export class HomePageComponent implements OnInit, AfterViewInit {
   years!: any[];
   films!: any[];
 
-  selectedType = "All";
-  selectedNation = "All";
-  selectedYear = "All";
+  selectedType = {};
+  selectedNation = {};
+  selectedYear = {};
   constructor(
     private spinner: NgxSpinnerService,
     private router: Router,
@@ -269,7 +269,7 @@ export class HomePageComponent implements OnInit, AfterViewInit {
     //Do stuff
   }
 
-  onFilterMovie(selectedType: any , selectedNation: any , selectedYear: any) {
+  onFilterMovie(selectedType: any = "All", selectedNation: any = "All", selectedYear: any= "All") {
     console.log('selectedType', selectedType);
     console.log('selectedNation', selectedNation);
     console.log('selectedYear', selectedYear);

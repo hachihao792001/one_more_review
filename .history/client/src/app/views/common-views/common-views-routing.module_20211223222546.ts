@@ -39,10 +39,6 @@ const routes: Routes = [
     component: FilterResultComponent,
   },
   {
-    path: 'filter-result/:type/:nation/:year',
-    component:FilterResultComponent,
-  },
-  {
     path: '**',
     component: PageNotFoundComponent,
   },

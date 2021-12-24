@@ -17,7 +17,6 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { DropdownModule } from 'primeng/dropdown';
 import { CarouselModule } from 'primeng/carousel';
 import { FilterResultComponent } from './filter-result/filter-result.component';
-import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [

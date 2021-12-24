@@ -3,29 +3,27 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { fadeIn, fadeOut } from '../../animations';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { FilterResultService } from 'src/app/services/filter-result.service';
 
 @Component({
-  selector: 'app-home-page',
-  templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.scss'],
-  animations: [fadeIn, fadeOut],
+  selector: 'app-filter-result',
+  templateUrl: './filter-result.component.html',
+  styleUrls: ['./filter-result.component.scss']
 })
-export class HomePageComponent implements OnInit, AfterViewInit {
+export class FilterResultComponent implements OnInit, AfterViewInit {
   carouselItems!: any[];
   types!: any[];
   nations!: any[];
   years!: any[];
   films!: any[];
 
-  selectedType = "All";
-  selectedNation = "All";
-  selectedYear = "All";
+  selectedType = {};
+  selectedNation = {};
+  selectedYear = {};
+
   constructor(
     private spinner: NgxSpinnerService,
     private router: Router,
-    public sanitizer: DomSanitizer,
-    private filterResultService: FilterResultService,
+    public sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -264,17 +262,14 @@ export class HomePageComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {}
 
   onPickFilm(id: string) {
-
     console.log('movie-id', id);
     //Do stuff
   }
 
-  onFilterMovie(selectedType: any , selectedNation: any , selectedYear: any) {
+  onFilterMovie(selectedType: any, selectedNation: any, selectedYear: any) {
     console.log('selectedType', selectedType);
     console.log('selectedNation', selectedNation);
     console.log('selectedYear', selectedYear);
-    this.router.navigate(['/filter-result',selectedType,selectedNation,selectedYear])
-
     //Do stuff
   }
 }

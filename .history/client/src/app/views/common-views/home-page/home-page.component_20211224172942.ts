@@ -18,9 +18,9 @@ export class HomePageComponent implements OnInit, AfterViewInit {
   years!: any[];
   films!: any[];
 
-  selectedType = "All";
-  selectedNation = "All";
-  selectedYear = "All";
+  selectedType = {};
+  selectedNation = {};
+  selectedYear = {};
   constructor(
     private spinner: NgxSpinnerService,
     private router: Router,

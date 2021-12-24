@@ -7,8 +7,6 @@ import { UserComponent } from './user/user.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { FilterResultComponent } from './filter-result/filter-result.component';
-
 
 const routes: Routes = [
   {
@@ -33,14 +31,6 @@ const routes: Routes = [
   {
     path: 'forgot-password',
     component: ForgotPasswordComponent,
-  },
-  {
-    path: 'filter-result',
-    component: FilterResultComponent,
-  },
-  {
-    path: 'filter-result/:type/:nation/:year',
-    component:FilterResultComponent,
   },
   {
     path: '**',
