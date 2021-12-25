@@ -9,7 +9,7 @@
                   styleClass="filter-dropdown"
                   placeholder="Select a type"
             [options]="types"
-            [(ngModel)]="tempType"
+            [(ngModel)]="selectType"
             optionLabel="name"
             optionValue="name"
           ></p-dropdown>
@@ -19,7 +19,7 @@
           <p-dropdown
                   placeholder="Select a nation"
             [options]="nations"
-            [(ngModel)]="tempNation"
+            [(ngModel)]="selectNation"
             optionLabel="name"
             optionValue="name"
           ></p-dropdown>
@@ -29,14 +29,14 @@
           <p-dropdown
                   placeholder="Select a year"
             [options]="years"
-            [(ngModel)]="tempYear"
+            [(ngModel)]="selectYear"
             optionLabel="year"
                       optionValue="year"
           ></p-dropdown>
         </div>
   
-        <div class="filter-btn" (click)="onFilterMovie(tempType, tempNation, tempYear)">
-          <i class="pi pi-filter"></i>
+        <div class="filter-btn" (click)="onFilterMovie(selectProperty, selectNation, selectYear)">
+          <i class="pi pi-filter" routerLink="/filter-result"></i>
         </div>
       </div>
       <div class="film-container">

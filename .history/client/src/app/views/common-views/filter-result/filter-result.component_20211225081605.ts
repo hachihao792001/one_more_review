@@ -107,9 +107,9 @@ export class FilterResultComponent implements OnInit, AfterViewInit {
   }
 
   onFilterMovie(tempType: any, tempNation: any, tempYear: any) {
-    this.selectedType = JSON.stringify(tempType);
-    this.selectedNation = JSON.stringify(tempNation);
-    this.selectedYear = JSON.stringify(tempYear);
+    this.selectedType = tempType;
+    this.selectedNation = tempNation;
+    this.selectedYear = tempYear;
     console.log('selectedType', tempType);
     console.log('selectedNation', tempNation);
     console.log('selectedYear', tempYear);

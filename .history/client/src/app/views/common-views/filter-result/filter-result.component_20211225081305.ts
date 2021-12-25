@@ -29,9 +29,9 @@ export class FilterResultComponent implements OnInit, AfterViewInit {
   selectedYear!: any;
   
 
-  tempType!: any;
-  tempNation!: any;
-  tempYear!: any;
+  selectType!: any;
+  selectNation!: any;
+  selectYear!: any;
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -106,15 +106,15 @@ export class FilterResultComponent implements OnInit, AfterViewInit {
     //Do stuff
   }
 
-  onFilterMovie(tempType: any, tempNation: any, tempYear: any) {
-    this.selectedType = JSON.stringify(tempType);
-    this.selectedNation = JSON.stringify(tempNation);
-    this.selectedYear = JSON.stringify(tempYear);
-    console.log('selectedType', tempType);
-    console.log('selectedNation', tempNation);
-    console.log('selectedYear', tempYear);
+  onFilterMovie(selectType: any, selectNation: any, selectYear: any) {
+    this.selectedType = selectType;
+    this.selectedNation = selectNation;
+    this.selectedYear = selectYear;
+    console.log('selectedType', selectType);
+    console.log('selectedNation', selectNation);
+    console.log('selectedYear', selectYear);
     //Do stuff
 
-    this.router.navigate(['/filter-result',tempType,tempNation,tempYear])
+    this.router.navigate(['/filter-result',selectType,selectNation,selectYear])
   }
 }

@@ -27,12 +27,6 @@ export class FilterResultComponent implements OnInit, AfterViewInit {
   selectedType!: any;
   selectedNation!: any;
   selectedYear!: any;
-  
-
-  tempType!: any;
-  tempNation!: any;
-  tempYear!: any;
-
   constructor(
     private spinner: NgxSpinnerService,
     private router: Router,
@@ -42,61 +36,13 @@ export class FilterResultComponent implements OnInit, AfterViewInit {
   ) {
   }
 
- 
-
-
   ngOnInit(): void {
     this.spinner.hide().then();
     this.resultList = this.filterResultService.getFilterResultList();
     this.selectedType = JSON.stringify(this.activatedRoute.snapshot.paramMap.get('type'));
     this.selectedNation = JSON.stringify(this.activatedRoute.snapshot.paramMap.get('nation'));
     this.selectedYear = JSON.stringify(this.activatedRoute.snapshot.paramMap.get('year'));
-    this.types = [
-      {
-        name: 'Action',
-      },
-      { name: 'Romantic' },
-    ];
-  
-    this.nations = [
-      {
-        name: 'USA',
-      },
-      {
-        name: 'India',
-      },
-      {
-        name: 'China',
-      },
-      {
-        name: 'Japan',
-      },
-      {
-        name: 'Korea',
-      },
-      {
-        name: 'France',
-      },
-    ];
-  
-    this.years = [
-      {
-        year: '2021',
-      },
-      {
-        year: '2020',
-      },
-      {
-        year: '2019',
-      },
-      {
-        year: '2018',
-      },
-      {
-        year: '2017',
-      },
-    ];
-  
+
   }
 
   ngAfterViewInit(): void {}
@@ -106,15 +52,12 @@ export class FilterResultComponent implements OnInit, AfterViewInit {
     //Do stuff
   }
 
-  onFilterMovie(tempType: any, tempNation: any, tempYear: any) {
-    this.selectedType = JSON.stringify(tempType);
-    this.selectedNation = JSON.stringify(tempNation);
-    this.selectedYear = JSON.stringify(tempYear);
-    console.log('selectedType', tempType);
-    console.log('selectedNation', tempNation);
-    console.log('selectedYear', tempYear);
+  onFilterMovie(selectedType: any, selectedNation: any, selectedYear: any) {
+    console.log('selectedType', selectedType);
+    console.log('selectedNation', selectedNation);
+    console.log('selectedYear', selectedYear);
     //Do stuff
+    this.router.navigate(['/filter-result',selectedType,selectedNation,selectedYear])
 
-    this.router.navigate(['/filter-result',tempType,tempNation,tempYear])
   }
 }
