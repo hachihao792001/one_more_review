@@ -1,13 +1,11 @@
 <div class="home">
     <app-header></app-header>
     <div class="home-container">
-
-  
       <div class="filter-container">
         <div class="dropdown">
           <p-dropdown
-                  styleClass="filter-dropdown"
-                  placeholder="Select a type"
+            styleClass="filter-dropdown"
+            placeholder="Select a type"
             [options]="types"
             [(ngModel)]="tempType"
             optionLabel="name"
@@ -17,7 +15,7 @@
   
         <div class="dropdown">
           <p-dropdown
-                  placeholder="Select a nation"
+            placeholder="Select a nation"
             [options]="nations"
             [(ngModel)]="tempNation"
             optionLabel="name"
@@ -27,11 +25,11 @@
         >
         <div class="drop-down">
           <p-dropdown
-                  placeholder="Select a year"
+          	placeholder="Select a year"
             [options]="years"
             [(ngModel)]="tempYear"
             optionLabel="year"
-                      optionValue="year"
+            optionValue="year"
           ></p-dropdown>
         </div>
   

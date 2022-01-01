@@ -18,6 +18,10 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CarouselModule } from 'primeng/carousel';
 import { FilterResultComponent } from './filter-result/filter-result.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FilmComponent } from './film/film.component';
+import { EditFilmComponent } from './edit-film/edit-film.component';
+import { AddFilmComponent } from './add-film/add-film.component';
+import { AddAdminComponent } from './add-admin/add-admin.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +33,10 @@ import { HttpClientModule } from '@angular/common/http';
     AuthenticateComponent,
     ForgotPasswordComponent,
     FilterResultComponent,
+    FilmComponent,
+    EditFilmComponent,
+    AddFilmComponent,
+    AddAdminComponent,
   ],
   imports: [
     CommonModule,

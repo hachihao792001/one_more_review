@@ -12,6 +12,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ProfileService } from 'src/app/services/profile.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-authenticate',
@@ -23,10 +24,10 @@ export class AuthenticateComponent implements OnInit {
   signInForm!: FormGroup;
 
   signInSubmitted = false;
-  signInNotification: String = '';
+  signInNotification: string = '';
 
   signUpSubmitted = false;
-  signUpNotification: String = '';
+  signUpNotification: string = '';
 
   check!: any;
 
@@ -36,7 +37,8 @@ export class AuthenticateComponent implements OnInit {
     private service: ApiService,
     private router: Router,
     private cookie: CookieService,
-    private profile: ProfileService
+    private profile: ProfileService,
+    private toast: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -79,14 +81,33 @@ export class AuthenticateComponent implements OnInit {
       return;
     }
 
-    //this.spinner.show();
+    this.spinner.show();
 
     const getValue = this.signUpForm.getRawValue();
-    const data = { email: getValue.email, password: getValue.password };
+    const data = { username: getValue.email, password: getValue.password };
 
-    console.log(data);
-
-    // xử lý API sign up
+    this.service.signUp(data).subscribe(
+      (res) => {
+        console.log(res);
+        if (res && res.length !== 0) {
+          this.cookie.set('ACCESS_TOKEN', res.token);
+          this.cookie.set('USER_ID', res.user._id);
+          this.router.navigate([`/`]);
+        }
+        this.spinner.hide();
+      },
+      (err) => {
+        this.spinner.hide();
+				console.log(this.signUpForm);
+        if (err && err.error && err.error.message && err.error.message !== '') {
+          this.signUpNotification = err.error.message;
+        } else {
+          this.signUpNotification = 'Error';
+        }
+				this.toast.error(this.signUpNotification.toUpperCase());
+				this.signUpSubmitted = false;
+      }
+    );
   }
 
   onLoginSubmit(): void {
@@ -97,40 +118,32 @@ export class AuthenticateComponent implements OnInit {
       return;
     }
 
-    //this.spinner.show();
+    this.spinner.show();
 
     const getValue = this.signInForm.getRawValue();
-    const data = { email: getValue.email, password: getValue.password };
+    const data = { username: getValue.email, password: getValue.password };
 
-    console.log(data);
+    this.service.signIn(data).subscribe(
+      (res) => {
+        if (res && res.length !== 0) {
+          console.log(res);
+          this.cookie.set('ACCESS_TOKEN', res.token);
 
-    // xử lý API sign in
-
-    // this.service.signIn(data).subscribe(
-    //   (res) => {
-    //     if (res && res.length !== 0) {
-    //       this.cookie.set('ACCESS_TOKEN', res.token);
-
-    //       this.cookie.set('BTB_LOGIN_EMAIL', data.email);
-
-    //       this.router.navigate([`dashboard`]);
-    //     }
-    //     this.spinner.hide();
-    //   },
-    //   (err) => {
-    //     this.spinner.hide();
-    //     if (
-    //       err &&
-    //       err.error &&
-    //       err.error.error.message &&
-    //       err.error.error.message !== ''
-    //     ) {
-    //       this.notification = err.error.error.message;
-    //     } else {
-    //       this.notification = 'notMatch';
-    //     }
-    //   }
-    // );
+          this.router.navigate([`/`]);
+        }
+        this.spinner.hide();
+      },
+      (err) => {
+        this.spinner.hide();
+        if (err && err.error && err.error.message && err.error.message !== '') {
+          this.signInNotification = err.error.message;
+        } else {
+          this.signInNotification = 'Error';
+        }
+        this.toast.error(this.signInNotification.toUpperCase());
+				this.signInSubmitted = false;
+      }
+    );
   }
 
   togglePoster(): void {

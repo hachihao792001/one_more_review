@@ -33,7 +33,8 @@ export class AppComponent implements AfterViewInit {
 
     this.auth.isReady.subscribe((r) => {
       if (r) {
-        this.profile.getProfile();
+				const id = this.profile.getId();
+        this.profile.getProfile(id);
       }
     });
 

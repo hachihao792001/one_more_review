@@ -20,43 +20,10 @@ export class AuthService {
     const accessTokenPayload: any = this.cookie.get(this.ACCESS_TOKEN);
 
     if (accessTokenPayload && accessTokenPayload !== '') {
-      try {
-        this.token = this.parseJwt(accessTokenPayload);
-      } catch {
-        return false;
-      }
-
-      const current = Math.floor(new Date().getTime() / 1000);
-      if (this.token.exp < current) {
-        this.signOut();
-        return false;
-      } else {
-        const timeOut = (this.token.exp - current) * 1000;
-        setTimeout(() => {
-          this.signOut();
-        }, timeOut);
-      }
-      if (!this.isReady.value) {
-        this.isReady.next(true);
-      }
-      return true;
-    }
-    this.isReady.next(false);
-    return false;
-  }
-
-  parseJwt(token: string): string {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(
-      atob(base64)
-        .split('')
-        .map((c) => {
-          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        })
-        .join('')
-    );
-    return JSON.parse(jsonPayload);
+			return true
+		} else {
+			return false;
+		}
   }
 
   signOut(): void {

@@ -9,13 +9,13 @@ const HttpsProxyAgent = require("https-proxy-agent");
  * For more details and options, see https://github.com/angular/angular-cli#proxy-to-backend
  */
 const proxyConfig = [
-  //   {
-  //     context: "/public",
-  //     pathRewrite: { "^/public": "/public" },
-  //     target: "https://btb-manager-api.krafsmenships.com",
-  //     changeOrigin: true,
-  //     secure: false,
-  //   }
+  {
+    context: "/api",
+    pathRewrite: { "^/api": "/api" },
+    target: "http://localhost:5000",
+    changeOrigin: true,
+    secure: false,
+  },
 ];
 
 /*

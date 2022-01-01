@@ -264,9 +264,7 @@ export class HomePageComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {}
 
   onPickFilm(id: string) {
-
-    console.log('movie-id', id);
-    //Do stuff
+		this.router.navigate(['/films', id]);
   }
 
   onFilterMovie(selectedType: any , selectedNation: any , selectedYear: any) {

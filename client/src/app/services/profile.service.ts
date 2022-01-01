@@ -31,9 +31,14 @@ export class ProfileService {
     };
   }
 
+	getId() {
+		return this.cookie.get('USER_ID') || "";
+	}
+
   getDataProfile(): void {
     this.spinner.show();
-    this.getProfile().subscribe(
+		const id = this.getId();
+    this.getProfile(id).subscribe(
       (res) => {
         if (res) {
           this.dataProfile = res;
@@ -82,11 +87,7 @@ export class ProfileService {
       observe: 'response' as 'body',
     };
 
-    return this.http.post<any>(
-      `${this.apiUrl}/public/auth/login`,
-      data,
-      options
-    );
+    return this.http.post<any>(`${this.apiUrl}/api/users/login`, data, options);
   }
 
   clearDataProfile(): void {
@@ -98,8 +99,8 @@ export class ProfileService {
     }
   }
 
-  public getProfile(): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/user/get_profile`);
+  public getProfile(id:string): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/api/users/${id}`);
   }
 
   public updateProfile(user: User): any {
