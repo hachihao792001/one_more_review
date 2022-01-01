@@ -2,6 +2,14 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { fadeIn, fadeOut } from '../../animations';
 import { Router } from '@angular/router';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { FilterResultService } from 'src/app/services/filter-result.service';
+import { User } from 'src/app/models/user';
+import { ProfileService } from 'src/app/services/profile.service';
+import { CookieService } from 'ngx-cookie-service';
+import { ToastrService } from 'ngx-toastr';
+import { FilmService } from 'src/app/services/film.service';
+import { Movie } from 'src/app/models/movie';
 
 @Component({
   selector: 'app-home-page',
@@ -10,26 +18,167 @@ import { Router } from '@angular/router';
   animations: [fadeIn, fadeOut],
 })
 export class HomePageComponent implements OnInit, AfterViewInit {
-  whiteScreen = true;
+  carouselItems!: any[];
+  types!: any[];
+  nations!: any[];
+  years!: any[];
+  films!: Movie[];
+  allFilms!: Movie[];
+  userInfo!: User;
+	page: number = 0;
+	allPage: number = 0;
+	filmPerPage: number = 10;
 
-  constructor(private spinner: NgxSpinnerService, private router: Router) {
-    this.whiteScreen = true;
+  selectedType = 'All';
+  selectedNation = 'All';
+  selectedYear = 'All';
+  constructor(
+    private spinner: NgxSpinnerService,
+    private router: Router,
+    public sanitizer: DomSanitizer,
+    private filterResultService: FilterResultService,
+    private profileService: ProfileService,
+    private cookie: CookieService,
+    private toast: ToastrService,
+    private filmService: FilmService
+  ) {}
+
+  ngOnInit(): void {
+    const id = this.cookie.get('USER_ID');
+    this.profileService.getProfile(id).subscribe(
+      (res) => {
+        if (res) {
+          console.log(res.user);
+          this.userInfo = res.user;
+        }
+      },
+      (err) => {
+        this.spinner.hide();
+        this.toast.error('ERROR LOADING DATA FROM SERVER');
+      }
+    );
+
+    this.filmService.getAllFilms().subscribe(
+      (res) => {
+        if (res) {
+          this.allFilms = res.films;
+					this.allPage = Math.floor(this.allFilms.length / this.filmPerPage);
+          this.films = this.allFilms.slice(0, this.filmPerPage);
+        }
+        this.spinner.hide();
+      },
+      (err) => {
+        this.spinner.hide();
+        this.toast.error('ERROR LOADING DATA FROM SERVER');
+      }
+    );
+
+    this.carouselItems = [
+      {
+        id: 1,
+        name: 'Spiderman - No way home',
+        poster:
+          'https://image.thanhnien.vn/w1024/Uploaded/2021/tnabtw/2021_11_17/poster-3930.jpg',
+      },
+      {
+        id: 2,
+        name: 'Spiderman - No way home',
+        poster:
+          'https://image.thanhnien.vn/w1024/Uploaded/2021/tnabtw/2021_11_17/poster-3930.jpg',
+      },
+      {
+        id: 3,
+        name: 'Spiderman - No way home',
+        poster:
+          'https://image.thanhnien.vn/w1024/Uploaded/2021/tnabtw/2021_11_17/poster-3930.jpg',
+      },
+    ];
+
+    this.types = [
+      {
+        name: 'Action',
+      },
+      { name: 'Romantic' },
+    ];
+
+    this.nations = [
+      {
+        name: 'USA',
+      },
+      {
+        name: 'India',
+      },
+      {
+        name: 'China',
+      },
+      {
+        name: 'Japan',
+      },
+      {
+        name: 'Korea',
+      },
+      {
+        name: 'France',
+      },
+    ];
+
+    this.years = [
+      {
+        year: '2021',
+      },
+      {
+        year: '2020',
+      },
+      {
+        year: '2019',
+      },
+      {
+        year: '2018',
+      },
+      {
+        year: '2017',
+      },
+    ];
   }
 
-  ngOnInit(): void {}
+  ngAfterViewInit(): void {}
 
-  ngAfterViewInit(): void {
-    this.spinner.hide().then();
-    setTimeout(() => {
-      this.whiteScreen = false;
-    }, 2600);
+  onPickFilm(id: string) {
+    this.router.navigate(['/films', id]);
   }
 
-  handleClickWhiteScreen(): void {
-    this.whiteScreen = false;
+  onFilterMovie(selectedType: any, selectedNation: any, selectedYear: any) {
+    console.log('selectedType', selectedType);
+    console.log('selectedNation', selectedNation);
+    console.log('selectedYear', selectedYear);
+    this.router.navigate([
+      '/filter-result',
+      selectedType,
+      selectedNation,
+      selectedYear,
+    ]);
+
+    //Do stuff
   }
 
-  handleClickDashboard(): void {
-    this.router.navigate(['dashboard']).then();
+  onPrevPage() {
+		if (this.page > 0) {
+			this.page--;
+			this.films = this.allFilms.slice(
+      this.page * this.filmPerPage,
+      this.page * this.filmPerPage + this.filmPerPage
+    );
+		}
+  }
+
+  onNextPage() {
+		if (this.page < this.allPage - 1) {
+			this.page++;
+			this.films = this.allFilms.slice(
+      this.page * this.filmPerPage,
+      this.page * this.filmPerPage + this.filmPerPage
+    );
+		console.log(this.films)
+		}
   }
 }

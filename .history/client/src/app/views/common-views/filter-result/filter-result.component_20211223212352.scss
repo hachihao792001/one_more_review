@@ -1,0 +1,46 @@
+.home {
+    &-container {
+      @apply w-full min-h-screen bg-gray-900 px-20 py-10;
+    }
+  
+      .filter-container {
+          @apply my-10 flex justify-end items-center;
+          .dropdown {
+              @apply ml-2;
+          }
+  
+          .filter-btn {
+              @apply ml-4 cursor-pointer;
+              i {
+                  @apply text-white text-2xl;
+              }
+          }
+      }
+  
+    .film-container {
+        h2 {
+            @apply text-white font-bold text-4xl uppercase mb-10;
+          }
+      .list-type {
+        @apply mt-16;
+  
+      
+  
+        .list-container {
+          @apply grid grid-cols-5 justify-around items-center gap-12;
+  
+          .film-item {
+            @apply shadow-2xl rounded-lg bg-gray-800 pb-1 cursor-pointer;
+            img {
+              @apply rounded-t-xl;
+              min-height: 300px;
+            }
+            h3 {
+              @apply text-white text-center text-lg my-3;
+            }
+          }
+        }
+      }
+    }
+  }
+  

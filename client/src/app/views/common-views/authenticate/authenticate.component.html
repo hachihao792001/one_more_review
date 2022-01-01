@@ -1,0 +1,148 @@
+<div class="auth-container">
+  <div class="main-container">
+    <img
+      src="../../../../assets/imgs/auth-poster.jpg"
+      alt="Poster"
+      class="poster"
+    />
+    <div class="sign-up">
+      <div class="sign-up__content">
+        <form [formGroup]="signUpForm" (ngSubmit)="onResigterSubmit()">
+          <h2 class="form-title">RESIGTER</h2>
+          <div class="form-group">
+            <span class="label-input">Email</span>
+            <input
+              class="inputEmail"
+              type="text"
+              formControlName="email"
+              name="email"
+              placeholder="Type your email"
+              [ngClass]="{ 'is-invalid': signUpSubmitted && fr.email.errors }"
+            />
+            <div
+              *ngIf="signUpSubmitted && fr.email.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="fr.email.errors.required">Email is required</div>
+              <div *ngIf="fr.email.errors.email">Email is invalid</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <span class="label-input">Password</span>
+            <input
+              class="inputPassword"
+              type="password"
+              formControlName="password"
+              name="password"
+              placeholder="Type your password"
+              [ngClass]="{
+                'is-invalid': signUpSubmitted && fr.password.errors
+              }"
+            />
+            <div
+              *ngIf="
+                signUpSubmitted && (fr.password.errors || signUpNotification)
+              "
+              class="invalid-feedback"
+            >
+              <div>Password must be at least 6 characters</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <span class="label-input">Confirm Password</span>
+            <input
+              class="inputPassword"
+              type="password"
+              formControlName="confirmPassword"
+              name="password"
+              placeholder="Confirm your password"
+              [ngClass]="{
+                'is-invalid': signUpSubmitted && fr.confirmPassword.errors
+              }"
+            />
+            <div
+              *ngIf="
+                signUpSubmitted &&
+                (fr.confirmPassword.errors || signUpNotification)
+              "
+              class="invalid-feedback"
+            >
+              <div>Confirm password does not match</div>
+            </div>
+          </div>
+          <div class="switch-link">
+            <span>Already have an account?</span>
+            <a (click)="togglePoster()"> Sign in </a>
+          </div>
+
+          <button class="btn-submit" type="submit">register</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="sign-in">
+      <div class="sign-in__content">
+        <form [formGroup]="signInForm" (ngSubmit)="onLoginSubmit()">
+          <h2 class="form-title">LOGIN</h2>
+
+          <div class="form-group">
+            <span class="label-input">Email</span>
+            <input
+              class="inputEmail"
+              type="text"
+              formControlName="email"
+              name="email"
+              placeholder="Type your email"
+              [ngClass]="{ 'is-invalid': signInSubmitted && fl.email.errors }"
+            />
+            <div
+              *ngIf="signInSubmitted && fl.email.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="fl.email.errors.required">Email is required</div>
+              <div *ngIf="fl.email.errors.email">Email is invalid</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <span class="label-input">Password</span>
+            <input
+              class="inputPassword"
+              type="password"
+              formControlName="password"
+              name="password"
+              placeholder="Type your password"
+              [ngClass]="{
+                'is-invalid': signInSubmitted && fl.password.errors
+              }"
+            />
+            <div
+              *ngIf="
+                signInSubmitted && (fl.password.errors || signInNotification)
+              "
+              class="invalid-feedback"
+            >
+              <div>Password is required</div>
+            </div>
+          </div>
+
+          <a
+            routerLink="/forgot-password"
+            class="label-input forgot-password text-right hover:underline"
+          >
+            Forgot password?
+          </a>
+
+          <button class="btn-submit" type="submit">Login</button>
+
+          <div class="switch-link">
+            <span>Don't have an account? </span>
+            <a (click)="togglePoster()"> Sign Up </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

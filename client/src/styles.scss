@@ -10,3 +10,31 @@
 body {
   font-family: "Lato", sans-serif;
 }
+
+.p-dropdown {
+  @apply border-gray-500;
+  .p-dropdown-label {
+    @apply bg-gray-900 text-white w-36 border-r-0;
+  }
+
+  .p-dropdown-filter {
+    @apply bg-gray-900 text-white;
+  }
+
+  .p-dropdown-trigger {
+    @apply text-white bg-purple-900;
+  }
+}
+
+.p-carousel-container {
+  .p-carousel-items-content {
+    height: 650px !important;
+    .p-carousel-item {
+      @apply w-full h-full;
+
+      img {
+        @apply w-full h-full rounded-2xl bg-gray-900;
+      }
+    }
+  }
+}

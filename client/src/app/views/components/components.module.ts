@@ -9,8 +9,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { DropdownModule } from 'primeng/dropdown';
 import { ChartModule } from 'primeng/chart';
 import { TooltipModule } from 'primeng/tooltip';
+import { FooterComponent } from './footer/footer.component';
 @NgModule({
-  declarations: [HeaderComponent],
+  declarations: [HeaderComponent, FooterComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -23,5 +24,6 @@ import { TooltipModule } from 'primeng/tooltip';
     ChartModule,
     TooltipModule,
   ],
+  exports: [HeaderComponent, FooterComponent],
 })
 export class ComponentsModule {}

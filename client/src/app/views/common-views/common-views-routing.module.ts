@@ -3,10 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { SignInComponent } from './sign-in/sign-in.component';
 import { UserComponent } from './user/user.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
+import { AuthenticateComponent } from './authenticate/authenticate.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { FilterResultComponent } from './filter-result/filter-result.component';
+import { FilmComponent } from './film/film.component';
+import { AddFilmComponent } from './add-film/add-film.component';
+import { EditFilmComponent } from './edit-film/edit-film.component';
+import { AddAdminComponent } from './add-admin/add-admin.component';
+
 
 const routes: Routes = [
   {
@@ -25,12 +31,36 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'sign-in',
-    component: SignInComponent,
+    path: 'authenticate',
+    component: AuthenticateComponent,
   },
   {
-    path: 'sign-up',
-    component: SignUpComponent,
+    path: 'forgot-password',
+    component: ForgotPasswordComponent,
+  },
+  {
+    path: 'filter-result',
+    component: FilterResultComponent,
+  },
+  {
+    path: 'films/:id',
+    component: FilmComponent,
+  },
+  {
+    path: 'add-film',
+    component: AddFilmComponent,
+  },
+  {
+    path: 'edit-film/:id',
+    component: EditFilmComponent,
+  },
+	{
+		path: 'add-admin',
+		component: AddAdminComponent,
+	},
+  {
+    path: 'filter-result/:type/:nation/:year',
+    component: FilterResultComponent,
   },
   {
     path: '**',
