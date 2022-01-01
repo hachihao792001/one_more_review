@@ -83,20 +83,26 @@ export const loginUser=async(req,res)=>{
         }
 
         const user=await User.findOne({username});  // get user from database with username
-        if(user&&argon2.verify(user.password,password)){
-            const token=jwt.sign({
-                _id:user._id,
-                name: user.name,
-                username: user.username,
-                isAdmin: user.isAdmin,
-            },process.env.ACCESS_TOKEN);
-            
-            return res.status(200).json({success:true,message:"login successfully",token});
+        if(!user)
+            return res.status(404).message({success:false,message:"can not find user"})
+        const isValidPassword=await argon2.verify(user.password,password)
+        console.log(isValidPassword)
+        if(!isValidPassword){
+            return res
+            .status(400)
+            .json({ success: false, message: 'Incorrect username or password' })
+
 
         }
-        else{
-            return res.status(404).json({success:false,message:"incorrect username or pasword"});
-        }
+       
+        const token=jwt.sign({
+            _id:user._id,
+            name: user.name,
+            username: user.username,
+            isAdmin: user.isAdmin,
+        },process.env.ACCESS_TOKEN);
+        
+        return res.status(200).json({success:true,message:"login successfully",token,id:user._id});
 
 
     } catch (error) {
