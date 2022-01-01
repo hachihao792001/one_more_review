@@ -213,11 +213,58 @@ export const getAllFilms = async (req, res) => {
 export const getFilmsWithFilter = async (req, res) => {
   try {
     //get filter and arg from params
-    const { filter, arg } = req.params;
+    const { genre, country, year } = req.query;
+    //print out genre, country, year
+    console.log(genre, country, year);
 
-    let films;
-    if (filter === "genre") films = await Film.find({ gene: arg });
-    else films = await Film.find({ [filter]: arg });
+    let filter = {};
+    if (genre) {
+      //add genre to filter
+      filter.gene = genre;
+    }
+    if (country) {
+      //add country to filter
+      filter.country = country;
+    }
+    if (year) {
+      //add year to filter
+      filter.year = year;
+    }
+    //log the filter
+    console.log(filter);
+
+    let films = await Film.find(filter);
+    // if (genre) {
+    //   if (country) {
+    //     if (year) {
+    //       films = await Film.find({
+    //         gene: genre,
+    //         country: country,
+    //         year: year,
+    //       });
+    //     } else {
+    //       films = await Film.find({ gene: genre, country: country });
+    //     }
+    //   } else {
+    //     if (year) {
+    //       films = await Film.find({ gene: genre, year: year });
+    //     } else {
+    //       films = await Film.find({ gene: genre });
+    //     }
+    //   }
+    // } else {
+    //   if (country) {
+    //     if (year) {
+    //       films = await Film.find({ country: country, year: year });
+    //     } else {
+    //       films = await Film.find({ country: country });
+    //     }
+    //   } else {
+    //     if (year) {
+    //       films = await Film.find({ year: year });
+    //     }
+    //   }
+    // }
 
     if (films.length > 0) {
       let comment_infos = [];
