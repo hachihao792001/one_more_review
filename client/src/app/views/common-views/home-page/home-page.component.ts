@@ -4,6 +4,12 @@ import { fadeIn, fadeOut } from '../../animations';
 import { Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FilterResultService } from 'src/app/services/filter-result.service';
+import { User } from 'src/app/models/user';
+import { ProfileService } from 'src/app/services/profile.service';
+import { CookieService } from 'ngx-cookie-service';
+import { ToastrService } from 'ngx-toastr';
+import { FilmService } from 'src/app/services/film.service';
+import { Movie } from 'src/app/models/movie';
 
 @Component({
   selector: 'app-home-page',
@@ -16,22 +22,58 @@ export class HomePageComponent implements OnInit, AfterViewInit {
   types!: any[];
   nations!: any[];
   years!: any[];
-  films!: any[];
+  films!: Movie[];
+  allFilms!: Movie[];
+  userInfo!: User;
+	page: number = 0;
+	allPage: number = 0;
+	filmPerPage: number = 10;
 
-  selectedType = "All";
-  selectedNation = "All";
-  selectedYear = "All";
+  selectedType = 'All';
+  selectedNation = 'All';
+  selectedYear = 'All';
   constructor(
     private spinner: NgxSpinnerService,
     private router: Router,
     public sanitizer: DomSanitizer,
     private filterResultService: FilterResultService,
+    private profileService: ProfileService,
+    private cookie: CookieService,
+    private toast: ToastrService,
+    private filmService: FilmService
   ) {}
 
   ngOnInit(): void {
-    this.spinner.hide().then();
+    const id = this.cookie.get('USER_ID');
+    this.profileService.getProfile(id).subscribe(
+      (res) => {
+        if (res) {
+          console.log(res.user);
+          this.userInfo = res.user;
+        }
+      },
+      (err) => {
+        this.spinner.hide();
+        this.toast.error('ERROR LOADING DATA FROM SERVER');
+      }
+    );
 
-		this.carouselItems = [
+    this.filmService.getAllFilms().subscribe(
+      (res) => {
+        if (res) {
+          this.allFilms = res.films;
+					this.allPage = Math.floor(this.allFilms.length / this.filmPerPage);
+          this.films = this.allFilms.slice(0, this.filmPerPage);
+        }
+        this.spinner.hide();
+      },
+      (err) => {
+        this.spinner.hide();
+        this.toast.error('ERROR LOADING DATA FROM SERVER');
+      }
+    );
+
+    this.carouselItems = [
       {
         id: 1,
         name: 'Spiderman - No way home',
@@ -97,182 +139,46 @@ export class HomePageComponent implements OnInit, AfterViewInit {
         year: '2017',
       },
     ];
-
-    this.films = [
-      {
-        type: 'Newest',
-        list: [
-          {
-            id: 1,
-            name: 'Spiderman - Homecoming',
-            poster:
-              'https://gamek.mediacdn.vn/133514250583805952/2021/11/17/photo-1-1637118381839432740223.jpg',
-          },
-          {
-            id: 1,
-            name: 'Spiderman - Homecoming',
-            poster:
-              'https://gamek.mediacdn.vn/133514250583805952/2021/11/17/photo-1-1637118381839432740223.jpg',
-          },
-          {
-            id: 1,
-            name: 'Spiderman - Homecoming',
-            poster:
-              'https://gamek.mediacdn.vn/133514250583805952/2021/11/17/photo-1-1637118381839432740223.jpg',
-          },
-          {
-            id: 1,
-            name: 'Spiderman - Homecoming',
-            poster:
-              'https://gamek.mediacdn.vn/133514250583805952/2021/11/17/photo-1-1637118381839432740223.jpg',
-          },
-          {
-            id: 1,
-            name: 'Spiderman - Homecoming',
-            poster:
-              'https://gamek.mediacdn.vn/133514250583805952/2021/11/17/photo-1-1637118381839432740223.jpg',
-          },
-          {
-            id: 1,
-            name: 'Spiderman - Homecoming',
-            poster:
-              'https://gamek.mediacdn.vn/133514250583805952/2021/11/17/photo-1-1637118381839432740223.jpg',
-          },
-          {
-            id: 1,
-            name: 'Spiderman - Homecoming',
-            poster:
-              'https://gamek.mediacdn.vn/133514250583805952/2021/11/17/photo-1-1637118381839432740223.jpg',
-          },
-          {
-            id: 1,
-            name: 'Spiderman - Homecoming',
-            poster:
-              'https://gamek.mediacdn.vn/133514250583805952/2021/11/17/photo-1-1637118381839432740223.jpg',
-          },
-        ],
-      },
-      {
-        type: 'High Rating',
-        list: [
-          {
-            id: 1,
-            name: 'Spiderman - Homecoming',
-            poster:
-              'https://gamek.mediacdn.vn/133514250583805952/2021/11/17/photo-1-1637118381839432740223.jpg',
-          },
-          {
-            id: 1,
-            name: 'Spiderman - Homecoming',
-            poster:
-              'https://gamek.mediacdn.vn/133514250583805952/2021/11/17/photo-1-1637118381839432740223.jpg',
-          },
-          {
-            id: 1,
-            name: 'Spiderman - Homecoming',
-            poster:
-              'https://gamek.mediacdn.vn/133514250583805952/2021/11/17/photo-1-1637118381839432740223.jpg',
-          },
-          {
-            id: 1,
-            name: 'Spiderman - Homecoming',
-            poster:
-              'https://gamek.mediacdn.vn/133514250583805952/2021/11/17/photo-1-1637118381839432740223.jpg',
-          },
-          {
-            id: 1,
-            name: 'Spiderman - Homecoming',
-            poster:
-              'https://gamek.mediacdn.vn/133514250583805952/2021/11/17/photo-1-1637118381839432740223.jpg',
-          },
-          {
-            id: 1,
-            name: 'Spiderman - Homecoming',
-            poster:
-              'https://gamek.mediacdn.vn/133514250583805952/2021/11/17/photo-1-1637118381839432740223.jpg',
-          },
-          {
-            id: 1,
-            name: 'Spiderman - Homecoming',
-            poster:
-              'https://gamek.mediacdn.vn/133514250583805952/2021/11/17/photo-1-1637118381839432740223.jpg',
-          },
-          {
-            id: 1,
-            name: 'Spiderman - Homecoming',
-            poster:
-              'https://gamek.mediacdn.vn/133514250583805952/2021/11/17/photo-1-1637118381839432740223.jpg',
-          },
-        ],
-      },
-      {
-        type: 'Recommended',
-        list: [
-          {
-            id: 1,
-            name: 'Spiderman - Homecoming',
-            poster:
-              'https://gamek.mediacdn.vn/133514250583805952/2021/11/17/photo-1-1637118381839432740223.jpg',
-          },
-          {
-            id: 1,
-            name: 'Spiderman - Homecoming',
-            poster:
-              'https://gamek.mediacdn.vn/133514250583805952/2021/11/17/photo-1-1637118381839432740223.jpg',
-          },
-          {
-            id: 1,
-            name: 'Spiderman - Homecoming',
-            poster:
-              'https://gamek.mediacdn.vn/133514250583805952/2021/11/17/photo-1-1637118381839432740223.jpg',
-          },
-          {
-            id: 1,
-            name: 'Spiderman - Homecoming',
-            poster:
-              'https://gamek.mediacdn.vn/133514250583805952/2021/11/17/photo-1-1637118381839432740223.jpg',
-          },
-          {
-            id: 1,
-            name: 'Spiderman - Homecoming',
-            poster:
-              'https://gamek.mediacdn.vn/133514250583805952/2021/11/17/photo-1-1637118381839432740223.jpg',
-          },
-          {
-            id: 1,
-            name: 'Spiderman - Homecoming',
-            poster:
-              'https://gamek.mediacdn.vn/133514250583805952/2021/11/17/photo-1-1637118381839432740223.jpg',
-          },
-          {
-            id: 1,
-            name: 'Spiderman - Homecoming',
-            poster:
-              'https://gamek.mediacdn.vn/133514250583805952/2021/11/17/photo-1-1637118381839432740223.jpg',
-          },
-          {
-            id: 1,
-            name: 'Spiderman - Homecoming',
-            poster:
-              'https://gamek.mediacdn.vn/133514250583805952/2021/11/17/photo-1-1637118381839432740223.jpg',
-          },
-        ],
-      },
-    ];
   }
 
   ngAfterViewInit(): void {}
 
   onPickFilm(id: string) {
-		this.router.navigate(['/films', id]);
+    this.router.navigate(['/films', id]);
   }
 
-  onFilterMovie(selectedType: any , selectedNation: any , selectedYear: any) {
+  onFilterMovie(selectedType: any, selectedNation: any, selectedYear: any) {
     console.log('selectedType', selectedType);
     console.log('selectedNation', selectedNation);
     console.log('selectedYear', selectedYear);
-    this.router.navigate(['/filter-result',selectedType,selectedNation,selectedYear])
+    this.router.navigate([
+      '/filter-result',
+      selectedType,
+      selectedNation,
+      selectedYear,
+    ]);
 
     //Do stuff
+  }
+
+  onPrevPage() {
+		if (this.page > 0) {
+			this.page--;
+			this.films = this.allFilms.slice(
+      this.page * this.filmPerPage,
+      this.page * this.filmPerPage + this.filmPerPage
+    );
+		}
+  }
+
+  onNextPage() {
+		if (this.page < this.allPage - 1) {
+			this.page++;
+			this.films = this.allFilms.slice(
+      this.page * this.filmPerPage,
+      this.page * this.filmPerPage + this.filmPerPage
+    );
+		console.log(this.films)
+		}
   }
 }

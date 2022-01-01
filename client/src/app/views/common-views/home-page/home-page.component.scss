@@ -17,21 +17,22 @@
 		}
 	}
 
+	.page-buttons {
+		@apply flex justify-start items-center mb-10;
+		p {
+			@apply text-white text-xl ml-3;
+		}
+	}
+
   .film-container {
-    .list-type {
-      @apply mt-16;
-
-      h2 {
-        @apply text-white font-bold text-4xl uppercase mb-10;
-      }
-
-      .list-container {
-        @apply grid grid-cols-5 justify-around items-center gap-12;
+ .list-container {
+        @apply grid grid-cols-5 justify-around items-center gap-12 w-full;
 
         .film-item {
           @apply shadow-2xl rounded-lg bg-gray-800 pb-1 cursor-pointer;
+					min-height: 500px;
           img {
-            @apply rounded-t-xl;
+            @apply rounded-t-xl w-full;
             min-height: 300px;
           }
           h3 {
@@ -39,6 +40,5 @@
           }
         }
       }
-    }
   }
 }

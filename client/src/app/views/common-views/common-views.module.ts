@@ -22,6 +22,7 @@ import { FilmComponent } from './film/film.component';
 import { EditFilmComponent } from './edit-film/edit-film.component';
 import { AddFilmComponent } from './add-film/add-film.component';
 import { AddAdminComponent } from './add-admin/add-admin.component';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { AddAdminComponent } from './add-admin/add-admin.component';
     ReactiveFormsModule,
     DropdownModule,
 		CarouselModule,
+		ButtonModule
   ],
 })
 export class CommonViewsModule {}

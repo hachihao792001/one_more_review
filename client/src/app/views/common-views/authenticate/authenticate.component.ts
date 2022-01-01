@@ -128,7 +128,7 @@ export class AuthenticateComponent implements OnInit {
         if (res && res.length !== 0) {
           console.log(res);
           this.cookie.set('ACCESS_TOKEN', res.token);
-
+					this.cookie.set('USER_ID', res.id);
           this.router.navigate([`/`]);
         }
         this.spinner.hide();

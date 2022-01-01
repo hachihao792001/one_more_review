@@ -99,7 +99,7 @@ export class ProfileService {
     }
   }
 
-  public getProfile(id:string): Observable<User> {
+  public getProfile(id:string): Observable<any> {
     return this.http.get<User>(`${this.apiUrl}/api/users/${id}`);
   }
 
