@@ -39,7 +39,6 @@
               [ngClass]="{
                 'is-invalid': signUpSubmitted && fr.password.errors
               }"
-              [ngClass]="{ 'is-invalid': signUpNotification }"
             />
             <div
               *ngIf="
@@ -62,7 +61,6 @@
               [ngClass]="{
                 'is-invalid': signUpSubmitted && fr.confirmPassword.errors
               }"
-              [ngClass]="{ 'is-invalid': signUpNotification }"
             />
             <div
               *ngIf="
@@ -119,7 +117,6 @@
               [ngClass]="{
                 'is-invalid': signInSubmitted && fl.password.errors
               }"
-              [ngClass]="{ 'is-invalid': signInNotification }"
             />
             <div
               *ngIf="

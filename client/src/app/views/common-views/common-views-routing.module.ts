@@ -7,6 +7,12 @@ import { UserComponent } from './user/user.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { FilterResultComponent } from './filter-result/filter-result.component';
+import { FilmComponent } from './film/film.component';
+import { AddFilmComponent } from './add-film/add-film.component';
+import { EditFilmComponent } from './edit-film/edit-film.component';
+import { AddAdminComponent } from './add-admin/add-admin.component';
+
 
 const routes: Routes = [
   {
@@ -31,6 +37,30 @@ const routes: Routes = [
   {
     path: 'forgot-password',
     component: ForgotPasswordComponent,
+  },
+  {
+    path: 'filter-result',
+    component: FilterResultComponent,
+  },
+  {
+    path: 'films/:id',
+    component: FilmComponent,
+  },
+  {
+    path: 'add-film',
+    component: AddFilmComponent,
+  },
+  {
+    path: 'edit-film/:id',
+    component: EditFilmComponent,
+  },
+	{
+		path: 'add-admin',
+		component: AddAdminComponent,
+	},
+  {
+    path: 'filter-result/:type/:nation/:year',
+    component: FilterResultComponent,
   },
   {
     path: '**',

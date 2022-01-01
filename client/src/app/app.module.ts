@@ -33,7 +33,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     TranslocoModule,
     NgxChartsModule,
     ToastrModule.forRoot({
-      positionClass: 'toast-bottom-left',
+      positionClass: 'toast-top-right',
       closeButton: true,
     }),
   ],

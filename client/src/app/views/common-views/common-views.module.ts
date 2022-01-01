@@ -14,6 +14,14 @@ import { UserComponent } from './user/user.component';
 import { ReviewPageComponent } from './review-page/review-page.component';
 import { AuthenticateComponent } from './authenticate/authenticate.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { CarouselModule } from 'primeng/carousel';
+import { FilterResultComponent } from './filter-result/filter-result.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FilmComponent } from './film/film.component';
+import { EditFilmComponent } from './edit-film/edit-film.component';
+import { AddFilmComponent } from './add-film/add-film.component';
+import { AddAdminComponent } from './add-admin/add-admin.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +32,11 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     ReviewPageComponent,
     AuthenticateComponent,
     ForgotPasswordComponent,
+    FilterResultComponent,
+    FilmComponent,
+    EditFilmComponent,
+    AddFilmComponent,
+    AddAdminComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +46,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     ComponentsModule,
     FormsModule,
     ReactiveFormsModule,
+    DropdownModule,
+		CarouselModule,
   ],
 })
 export class CommonViewsModule {}

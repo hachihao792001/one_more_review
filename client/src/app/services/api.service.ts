@@ -23,7 +23,7 @@ export class ApiService {
 
   public signUp(data: any): Observable<any> {
     return this.http.post<any>(
-      `${this.apiUrl}/public/auth/register`,
+      `${this.apiUrl}/api/users/register`,
       data,
       this.httpOptions
     );
@@ -31,7 +31,7 @@ export class ApiService {
 
   public signIn(data: any): Observable<any> {
     return this.http.post<any>(
-      `${this.apiUrl}/public/auth/login`,
+      `${this.apiUrl}/api/users/login`,
       data,
       this.httpOptions
     );
