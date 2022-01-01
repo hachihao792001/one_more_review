@@ -234,37 +234,6 @@ export const getFilmsWithFilter = async (req, res) => {
     console.log(filter);
 
     let films = await Film.find(filter);
-    // if (genre) {
-    //   if (country) {
-    //     if (year) {
-    //       films = await Film.find({
-    //         gene: genre,
-    //         country: country,
-    //         year: year,
-    //       });
-    //     } else {
-    //       films = await Film.find({ gene: genre, country: country });
-    //     }
-    //   } else {
-    //     if (year) {
-    //       films = await Film.find({ gene: genre, year: year });
-    //     } else {
-    //       films = await Film.find({ gene: genre });
-    //     }
-    //   }
-    // } else {
-    //   if (country) {
-    //     if (year) {
-    //       films = await Film.find({ country: country, year: year });
-    //     } else {
-    //       films = await Film.find({ country: country });
-    //     }
-    //   } else {
-    //     if (year) {
-    //       films = await Film.find({ year: year });
-    //     }
-    //   }
-    // }
 
     if (films.length > 0) {
       let comment_infos = [];
