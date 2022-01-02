@@ -1,5 +1,5 @@
 <div class="home">
-  <app-header [username]="userInfo!.name"></app-header>
+  <app-header></app-header>
   <div class="home-container">
     <p-carousel
       [value]="carouselItems"
@@ -17,7 +17,7 @@
       <div class="dropdown">
         <p-dropdown
           styleClass="filter-dropdown"
-          placeholder="Select a type"
+          placeholder="Thể loại"
           [options]="types"
           [(ngModel)]="selectedType"
           optionLabel="name"
@@ -27,17 +27,17 @@
 
       <div class="dropdown">
         <p-dropdown
-          placeholder="Select a nation"
+          placeholder="Quốc gia"
           [options]="nations"
           [(ngModel)]="selectedNation"
           optionLabel="name"
           optionValue="name"
         ></p-dropdown>
       </div>
-      >
-      <div class="drop-down">
+
+      <div class="dropdown">
         <p-dropdown
-          placeholder="Select a year"
+          placeholder="Năm phát hành"
           [options]="years"
           [(ngModel)]="selectedYear"
           optionLabel="year"
@@ -53,16 +53,36 @@
       </div>
     </div>
 
-		<div class="page-buttons">
-			<button pButton pRipple type="button" class="p-button-outlined p-button-rounded p-button-info mr-2" icon="pi pi-minus" (click)="onPrevPage()"></button>
-			<button pButton pRipple type="button" class="p-button-outlined p-button-rounded p-button-info" icon="pi pi-plus" (click)="onNextPage()"></button>
-			<p>Page {{this.page + 1}} of {{this.allPage}}</p>
-		</div>
+    <div class="page-buttons" *ngIf="allPage">
+      <button
+        pButton
+        pRipple
+        type="button"
+        class="p-button-outlined p-button-rounded p-button-info mr-2"
+        icon="pi pi-minus"
+        (click)="onPrevPage()"
+      ></button>
+      <button
+        pButton
+        pRipple
+        type="button"
+        class="p-button-outlined p-button-rounded p-button-info"
+        icon="pi pi-plus"
+        (click)="onNextPage()"
+      ></button>
+      <p>Trang {{ page + 1 }}/{{ allPage }}</p>
+    </div>
 
     <div class="film-container">
       <div class="list-container">
         <div *ngFor="let film of films">
-          <div class="film-item" (click)="onPickFilm(film._id)">
+          <div class="film-item relative" (click)="onPickFilm(film._id)">
+            <p-rating
+              [(ngModel)]="film.avgRating"
+              [readonly]="true"
+              [cancel]="false"
+              class="flex justify-center items-center absolute top-3 right-3"
+            ></p-rating>
             <img
               src="{{ film.img }}"
               alt="{{ film.name }}"

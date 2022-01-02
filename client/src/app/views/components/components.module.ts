@@ -10,6 +10,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ChartModule } from 'primeng/chart';
 import { TooltipModule } from 'primeng/tooltip';
 import { FooterComponent } from './footer/footer.component';
+import { ToolbarModule } from 'primeng/toolbar';
+import { SplitButtonModule } from 'primeng/splitbutton';
 @NgModule({
   declarations: [HeaderComponent, FooterComponent],
   imports: [
@@ -23,6 +25,8 @@ import { FooterComponent } from './footer/footer.component';
     DropdownModule,
     ChartModule,
     TooltipModule,
+		ToolbarModule,
+		SplitButtonModule
   ],
   exports: [HeaderComponent, FooterComponent],
 })

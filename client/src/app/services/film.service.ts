@@ -31,8 +31,8 @@ export class FilmService {
     return this.http.delete<Movie>(`${this.apiUrl}/api/films/${id}`);
   }
 
-  getFilmsByFilter(gene:string, country:string, year:string): Observable<Movie[]> {
-    return this.http.get<Movie[]>(`${this.apiUrl}/api/films/films/filter?gene=${gene}&country=${country}&year=${year}`);
+  getFilmsByFilter(gene:string, country:string, year:string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/films/?gene=${gene}&country=${country}&year=${year}`);
   }
 
 	postFilm(data: any): Observable<any> {

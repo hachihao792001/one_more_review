@@ -24,14 +24,13 @@ export class HomePageComponent implements OnInit, AfterViewInit {
   years!: any[];
   films!: Movie[];
   allFilms!: Movie[];
-  userInfo!: User;
 	page: number = 0;
 	allPage: number = 0;
 	filmPerPage: number = 10;
 
-  selectedType = 'All';
-  selectedNation = 'All';
-  selectedYear = 'All';
+  selectedType = '';
+  selectedNation = '';
+  selectedYear = '';
   constructor(
     private spinner: NgxSpinnerService,
     private router: Router,
@@ -44,25 +43,12 @@ export class HomePageComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    const id = this.cookie.get('USER_ID');
-    this.profileService.getProfile(id).subscribe(
-      (res) => {
-        if (res) {
-          console.log(res.user);
-          this.userInfo = res.user;
-        }
-      },
-      (err) => {
-        this.spinner.hide();
-        this.toast.error('ERROR LOADING DATA FROM SERVER');
-      }
-    );
-
+		this.spinner.show();
     this.filmService.getAllFilms().subscribe(
       (res) => {
         if (res) {
           this.allFilms = res.films;
-					this.allPage = Math.floor(this.allFilms.length / this.filmPerPage);
+					this.allPage = Math.floor(this.allFilms.length / this.filmPerPage) + 1;
           this.films = this.allFilms.slice(0, this.filmPerPage);
         }
         this.spinner.hide();
@@ -148,15 +134,7 @@ export class HomePageComponent implements OnInit, AfterViewInit {
   }
 
   onFilterMovie(selectedType: any, selectedNation: any, selectedYear: any) {
-    console.log('selectedType', selectedType);
-    console.log('selectedNation', selectedNation);
-    console.log('selectedYear', selectedYear);
-    this.router.navigate([
-      '/filter-result',
-      selectedType,
-      selectedNation,
-      selectedYear,
-    ]);
+    this.router.navigate([`/filter-result`], { queryParams: {gene: selectedType, country: selectedNation, year: selectedYear} });
 
     //Do stuff
   }

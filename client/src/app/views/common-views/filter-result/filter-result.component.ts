@@ -5,59 +5,94 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FilterResultService } from 'src/app/services/filter-result.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Movie } from 'src/app/models/movie';
+import { FilmService } from 'src/app/services/film.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-filter-result',
   templateUrl: './filter-result.component.html',
-  styleUrls: ['./filter-result.component.scss']
+  styleUrls: ['./filter-result.component.scss'],
 })
 export class FilterResultComponent implements OnInit, AfterViewInit {
   types!: any[];
   nations!: any[];
   years!: any[];
-  films!: any[];
-  resultList!: any[];
 
   selectedProperty = {
-    type: "All",
-    year: "All",
-    nation: "All",
+    type: '',
+    year: '',
+    nation: '',
   };
 
   selectedType!: any;
   selectedNation!: any;
   selectedYear!: any;
-  
 
   tempType!: any;
   tempNation!: any;
   tempYear!: any;
+
+  films!: Movie[];
+  allFilms!: Movie[];
+  page: number = 0;
+  allPage: number = 0;
+  filmPerPage: number = 10;
+	isFound: boolean = true;
 
   constructor(
     private spinner: NgxSpinnerService,
     private router: Router,
     public sanitizer: DomSanitizer,
     private filterResultService: FilterResultService, // 1 service trả về list film sau khi lọc
-    private activatedRoute: ActivatedRoute,
+    private route: ActivatedRoute,
+    private filmService: FilmService,
+		private toast: ToastrService
   ) {
+    this.route.queryParams.subscribe((params) => {
+      this.selectedType = params['gene'] || '';
+      this.selectedNation = params['country'] || '';
+      this.selectedYear = params['year'] || '';
+
+      this.tempNation = this.selectedNation;
+      this.tempType = this.selectedType;
+      this.tempYear = this.selectedYear;
+    });
   }
 
- 
-
+  getFilmsByFilter() {
+    this.spinner.show();
+    this.filmService
+      .getFilmsByFilter(
+        this.selectedType,
+        this.selectedNation,
+        this.selectedYear
+      )
+      .subscribe(
+        (res) => {
+          this.allFilms = res.films;
+					this.allPage = Math.floor(this.allFilms.length / this.filmPerPage) + 1;
+          this.films = this.allFilms.slice(0, this.filmPerPage);
+          this.spinner.hide().then();
+        },
+        (err) => {
+          this.spinner.hide().then();
+					this.isFound = false;
+        }
+      );
+  }
 
   ngOnInit(): void {
-    this.spinner.hide().then();
-    this.resultList = this.filterResultService.getFilterResultList();
-    this.selectedType = JSON.stringify(this.activatedRoute.snapshot.paramMap.get('type'));
-    this.selectedNation = JSON.stringify(this.activatedRoute.snapshot.paramMap.get('nation'));
-    this.selectedYear = JSON.stringify(this.activatedRoute.snapshot.paramMap.get('year'));
+		this.spinner.show();
+    this.getFilmsByFilter();
+
     this.types = [
       {
         name: 'Action',
       },
       { name: 'Romantic' },
     ];
-  
+
     this.nations = [
       {
         name: 'USA',
@@ -78,7 +113,7 @@ export class FilterResultComponent implements OnInit, AfterViewInit {
         name: 'France',
       },
     ];
-  
+
     this.years = [
       {
         year: '2021',
@@ -96,7 +131,6 @@ export class FilterResultComponent implements OnInit, AfterViewInit {
         year: '2017',
       },
     ];
-  
   }
 
   ngAfterViewInit(): void {}
@@ -107,14 +141,43 @@ export class FilterResultComponent implements OnInit, AfterViewInit {
   }
 
   onFilterMovie(tempType: any, tempNation: any, tempYear: any) {
-    this.selectedType = JSON.stringify(tempType);
-    this.selectedNation = JSON.stringify(tempNation);
-    this.selectedYear = JSON.stringify(tempYear);
-    console.log('selectedType', tempType);
-    console.log('selectedNation', tempNation);
-    console.log('selectedYear', tempYear);
-    //Do stuff
+    this.selectedType = tempType || '';
+    this.selectedNation = tempNation || '';
+    this.selectedYear = tempYear || '';
 
-    this.router.navigate(['/filter-result',tempType,tempNation,tempYear])
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+      this.router.navigate([`/filter-result`], {
+        queryParams: {
+          gene: tempType,
+          country: tempNation,
+          year: tempYear,
+        },
+      })
+    );
   }
+
+  onPrevPage() {
+    if (this.page > 0) {
+      this.page--;
+      this.films = this.allFilms.slice(
+        this.page * this.filmPerPage,
+        this.page * this.filmPerPage + this.filmPerPage
+      );
+    }
+  }
+
+  onNextPage() {
+    if (this.page < this.allPage - 1) {
+      this.page++;
+      this.films = this.allFilms.slice(
+        this.page * this.filmPerPage,
+        this.page * this.filmPerPage + this.filmPerPage
+      );
+      console.log(this.films);
+    }
+  }
+
+	backToHome() {
+		this.router.navigate(["/"]);
+	}
 }

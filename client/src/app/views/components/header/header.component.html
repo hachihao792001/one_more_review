@@ -11,8 +11,10 @@
       </a>
     </form>
 
-    <div class="user-area">
-      <span class="user-name"> {{username}} </span>
-    </div>
+        <p-splitButton
+          label="{{ userInfo.name }}"
+          [model]="items"
+          styleClass="p-button-help"
+        ></p-splitButton>
   </div>
 </div>

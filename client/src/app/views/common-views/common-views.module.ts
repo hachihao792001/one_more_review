@@ -23,7 +23,9 @@ import { EditFilmComponent } from './edit-film/edit-film.component';
 import { AddFilmComponent } from './add-film/add-film.component';
 import { AddAdminComponent } from './add-admin/add-admin.component';
 import { ButtonModule } from 'primeng/button';
-
+import { RatingModule } from 'primeng/rating';
+import { SkeletonModule } from 'primeng/skeleton';
+import { ToolbarModule } from 'primeng/toolbar';
 @NgModule({
   declarations: [
     PageNotFoundComponent,
@@ -49,7 +51,10 @@ import { ButtonModule } from 'primeng/button';
     ReactiveFormsModule,
     DropdownModule,
 		CarouselModule,
-		ButtonModule
+		ButtonModule,
+		RatingModule,
+		SkeletonModule,
+		ToolbarModule
   ],
 })
 export class CommonViewsModule {}

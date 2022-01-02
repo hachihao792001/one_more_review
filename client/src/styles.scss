@@ -14,15 +14,15 @@ body {
 .p-dropdown {
   @apply border-gray-500;
   .p-dropdown-label {
-    @apply bg-gray-900 text-white w-36 border-r-0;
+    @apply w-36 border-r-0;
   }
 
   .p-dropdown-filter {
-    @apply bg-gray-900 text-white;
+    // @apply bg-gray-900 text-white;
   }
 
   .p-dropdown-trigger {
-    @apply text-white bg-purple-900;
+    // @apply text-white bg-purple-900;
   }
 }
 
@@ -37,4 +37,8 @@ body {
       }
     }
   }
+}
+
+.p-rating .p-rating-icon.pi-star {
+	color: rgb(255, 236, 68);
 }
