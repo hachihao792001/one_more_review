@@ -1,0 +1,20 @@
+.user {
+    &-container {
+        @apply w-full min-h-screen text-white;
+    }
+    .infor-container {
+        @apply w-full;
+        .user-profile {
+            @apply block w-full h-auto bg-black pt-4 pb-4;
+            .avatar {
+                @apply block mx-auto w-72 h-72 rounded-full;
+            }
+            h3 {
+                @apply block text-center text-4xl mt-5;
+            }
+            h4 {
+                @apply block text-center text-2xl mt-1;
+            }
+        }
+    }
+}
