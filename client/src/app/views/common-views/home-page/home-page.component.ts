@@ -6,7 +6,6 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { FilterResultService } from 'src/app/services/filter-result.service';
 import { User } from 'src/app/models/user';
 import { ProfileService } from 'src/app/services/profile.service';
-import { CookieService } from 'ngx-cookie-service';
 import { ToastrService } from 'ngx-toastr';
 import { FilmService } from 'src/app/services/film.service';
 import { Movie } from 'src/app/models/movie';
@@ -35,9 +34,6 @@ export class HomePageComponent implements OnInit, AfterViewInit {
     private spinner: NgxSpinnerService,
     private router: Router,
     public sanitizer: DomSanitizer,
-    private filterResultService: FilterResultService,
-    private profileService: ProfileService,
-    private cookie: CookieService,
     private toast: ToastrService,
     private filmService: FilmService
   ) {}

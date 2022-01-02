@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private cookie: CookieService, private router: Router) {}
+  constructor(private router: Router) {}
 
   private readonly ACCESS_TOKEN = 'ACCESS_TOKEN';
   token: any;
@@ -17,9 +16,10 @@ export class AuthService {
   );
 
   public isAuthenticated(): boolean {
-    const accessTokenPayload: any = this.cookie.get(this.ACCESS_TOKEN);
+    const accessTokenPayload: any = localStorage.getItem(this.ACCESS_TOKEN);
+		const idPayload:any = localStorage.getItem('USER_ID');
 
-    if (accessTokenPayload && accessTokenPayload !== '') {
+    if (accessTokenPayload && accessTokenPayload !== '' && idPayload && idPayload !== '') {
 			return true
 		} else {
 			return false;
@@ -27,7 +27,8 @@ export class AuthService {
   }
 
   signOut(): void {
-    this.cookie.deleteAll();
+    localStorage.removeItem(this.ACCESS_TOKEN);
+		localStorage.removeItem('USER_ID');
     this.router.navigate(['authenticate']);
   }
 }

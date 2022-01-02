@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { CookieService } from 'ngx-cookie-service';
 import { ApiService } from './../../../services/api.service';
 import { Router } from '@angular/router';
 import Validation from '../../../utils/validation';
@@ -11,7 +10,6 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ProfileService } from 'src/app/services/profile.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -36,15 +34,13 @@ export class AuthenticateComponent implements OnInit {
     private formBuilder: FormBuilder,
     private service: ApiService,
     private router: Router,
-    private cookie: CookieService,
-    private profile: ProfileService,
     private toast: ToastrService
   ) {}
 
   ngOnInit(): void {
     this.spinner.hide().then();
 
-    this.check = this.cookie.get('ACCESS_TOKEN');
+    this.check = localStorage.getItem('ACCESS_TOKEN');
     if (this.check) {
       this.router.navigateByUrl('');
     }
@@ -90,8 +86,8 @@ export class AuthenticateComponent implements OnInit {
       (res) => {
         console.log(res);
         if (res && res.length !== 0) {
-          this.cookie.set('ACCESS_TOKEN', res.token);
-          this.cookie.set('USER_ID', res.user._id);
+          localStorage.setItem('ACCESS_TOKEN', res.access_token);
+          localStorage.setItem('USER_ID', res.user._id);
           this.router.navigate([`/`]);
         }
         this.spinner.hide();
@@ -127,8 +123,8 @@ export class AuthenticateComponent implements OnInit {
       (res) => {
         if (res && res.length !== 0) {
           console.log(res);
-          this.cookie.set('ACCESS_TOKEN', res.token);
-					this.cookie.set('USER_ID', res.id);
+          localStorage.setItem('ACCESS_TOKEN', res.token);
+					localStorage.setItem('USER_ID', res.id);
           this.router.navigate([`/`]);
         }
         this.spinner.hide();

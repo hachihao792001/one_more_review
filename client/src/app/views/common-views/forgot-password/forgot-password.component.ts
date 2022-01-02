@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { CookieService } from 'ngx-cookie-service';
 import { ApiService } from './../../../services/api.service';
 import { Router } from '@angular/router';
 import Validation from '../../../utils/validation';
@@ -33,16 +32,13 @@ export class ForgotPasswordComponent implements OnInit {
   constructor(
     private spinner: NgxSpinnerService,
     private formBuilder: FormBuilder,
-    private service: ApiService,
     private router: Router,
-    private cookie: CookieService,
-    private profile: ProfileService
   ) {}
 
   ngOnInit(): void {
     this.spinner.hide().then();
 
-    this.check = this.cookie.get('ACCESS_TOKEN');
+    this.check = localStorage.getItem('ACCESS_TOKEN');
     if (this.check) {
       this.router.navigateByUrl('');
     }
