@@ -19,8 +19,8 @@ export class FilmService {
     };
   }
 
-  getFilm(id: string): Observable<Movie> {
-    return this.http.get<Movie>(`${this.apiUrl}/api/films/${id}`);
+  getFilm(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/films/${id}`);
   }
 
   getAllFilms(): Observable<any> {
@@ -31,8 +31,8 @@ export class FilmService {
     return this.http.delete<Movie>(`${this.apiUrl}/api/films/${id}`);
   }
 
-  getFilmsByFilter(gene:string, country:string, year:string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/api/films/?gene=${gene}&country=${country}&year=${year}`);
+  getFilmsByFilter(genre:string, country:string, year:string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/films/?genre=${genre}&country=${country}&year=${year}`);
   }
 
 	postFilm(data: any): Observable<any> {

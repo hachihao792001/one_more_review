@@ -6,7 +6,7 @@
         <p-dropdown
           styleClass="filter-dropdown"
           placeholder="Thể loại"
-          [options]="types"
+          [options]="genres"
           [(ngModel)]="tempType"
           optionLabel="name"
           optionValue="name"
@@ -67,10 +67,10 @@
     <div class="film-container">
       <h2 *ngIf="isFound">
         Kết quả tìm kiếm
-        <span *ngIf="selectedType || selectedYear || selectedNation">
+        <span *ngIf="selectedGenre || selectedYear || selectedNation">
           phim có
         </span>
-        <span *ngIf="selectedType"> thể loại: "{{ selectedType }}" | </span>
+        <span *ngIf="selectedGenre"> thể loại: "{{ selectedGenre }}" | </span>
         <span *ngIf="selectedNation">
           quốc gia phát hành: "{{ selectedNation }}" |
         </span>

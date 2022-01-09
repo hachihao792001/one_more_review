@@ -4,7 +4,7 @@ import User from "../models/User.js";
 import Review from "../models/Review.js";
 export const createFilm = async (req, res) => {
   try {
-    const { name, type, gene, country, description, actors, avgRating, url } =
+    const { name, type, genre, country, description, actors, avgRating, url } =
       req.body;
     if (!name) {
       return res
@@ -20,7 +20,7 @@ export const createFilm = async (req, res) => {
     const newFilm = new Film({
       name,
       type,
-      gene,
+      genre,
       country,
       description,
       actors,
@@ -220,7 +220,7 @@ export const getFilmsWithFilter = async (req, res) => {
     let filter = {};
     if (genre) {
       //add genre to filter
-      filter.gene = genre;
+      filter.genre = genre;
     }
     if (country) {
       //add country to filter

@@ -17,6 +17,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { TranslocoModule } from '@ngneat/transloco';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
+
 @NgModule({
   declarations: [AppComponent],
   imports: [

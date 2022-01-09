@@ -8,6 +8,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Movie } from 'src/app/models/movie';
 import { FilmService } from 'src/app/services/film.service';
 import { ToastrService } from 'ngx-toastr';
+import { NATIONS, GENRES, YEARS } from 'src/app/utils/constants';
 
 @Component({
   selector: 'app-filter-result',
@@ -15,9 +16,9 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./filter-result.component.scss'],
 })
 export class FilterResultComponent implements OnInit, AfterViewInit {
-  types!: any[];
-  nations!: any[];
-  years!: any[];
+  genres: any[] = GENRES;
+  nations: any[] = NATIONS;
+  years: any[] = YEARS;
 
   selectedProperty = {
     type: '',
@@ -25,7 +26,7 @@ export class FilterResultComponent implements OnInit, AfterViewInit {
     nation: '',
   };
 
-  selectedType!: any;
+  selectedGenre!: any;
   selectedNation!: any;
   selectedYear!: any;
 
@@ -37,8 +38,8 @@ export class FilterResultComponent implements OnInit, AfterViewInit {
   allFilms!: Movie[];
   page: number = 0;
   allPage: number = 0;
-  filmPerPage: number = 10;
-	isFound: boolean = true;
+  filmPerPage: number = 8;
+  isFound: boolean = true;
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -47,15 +48,15 @@ export class FilterResultComponent implements OnInit, AfterViewInit {
     private filterResultService: FilterResultService, // 1 service trả về list film sau khi lọc
     private route: ActivatedRoute,
     private filmService: FilmService,
-		private toast: ToastrService
+    private toast: ToastrService
   ) {
     this.route.queryParams.subscribe((params) => {
-      this.selectedType = params['gene'] || '';
+      this.selectedGenre = params['genre'] || '';
       this.selectedNation = params['country'] || '';
       this.selectedYear = params['year'] || '';
 
       this.tempNation = this.selectedNation;
-      this.tempType = this.selectedType;
+      this.tempType = this.selectedGenre;
       this.tempYear = this.selectedYear;
     });
   }
@@ -63,74 +64,45 @@ export class FilterResultComponent implements OnInit, AfterViewInit {
   getFilmsByFilter() {
     this.spinner.show();
     this.filmService
-      .getFilmsByFilter(
-        this.selectedType,
-        this.selectedNation,
-        this.selectedYear
-      )
+      .getAllFilms()
       .subscribe(
         (res) => {
-          this.allFilms = res.films;
-					this.allPage = Math.floor(this.allFilms.length / this.filmPerPage) + 1;
-          this.films = this.allFilms.slice(0, this.filmPerPage);
+					this.allFilms = res.films;
+					console.log(this.allFilms);
+          if (this.selectedGenre) {
+						this.allFilms = this.allFilms.filter((film:Movie) => {
+							return film.gene.includes(this.selectedGenre);
+						});
+					}
+
+          if (this.selectedNation) {
+            this.allFilms = this.allFilms.filter((film: Movie) => {
+              return film.country.includes(this.selectedNation);
+            });
+          }
+
+					if (this.selectedYear) {
+						this.allFilms = this.allFilms.filter((film: Movie) => {
+              return film.year === Number.parseInt(this.selectedYear);
+            });
+					}
+					
+
+          this.allPage =
+            Math.floor(this.allFilms.length / this.filmPerPage) + 1;
+					this.films = this.allFilms.slice(0, this.filmPerPage);
           this.spinner.hide().then();
         },
         (err) => {
           this.spinner.hide().then();
-					this.isFound = false;
+          this.isFound = false;
         }
       );
   }
 
   ngOnInit(): void {
-		this.spinner.show();
+    this.spinner.show();
     this.getFilmsByFilter();
-
-    this.types = [
-      {
-        name: 'Action',
-      },
-      { name: 'Romantic' },
-    ];
-
-    this.nations = [
-      {
-        name: 'USA',
-      },
-      {
-        name: 'India',
-      },
-      {
-        name: 'China',
-      },
-      {
-        name: 'Japan',
-      },
-      {
-        name: 'Korea',
-      },
-      {
-        name: 'France',
-      },
-    ];
-
-    this.years = [
-      {
-        year: '2021',
-      },
-      {
-        year: '2020',
-      },
-      {
-        year: '2019',
-      },
-      {
-        year: '2018',
-      },
-      {
-        year: '2017',
-      },
-    ];
   }
 
   ngAfterViewInit(): void {}
@@ -141,14 +113,14 @@ export class FilterResultComponent implements OnInit, AfterViewInit {
   }
 
   onFilterMovie(tempType: any, tempNation: any, tempYear: any) {
-    this.selectedType = tempType || '';
+    this.selectedGenre = tempType || '';
     this.selectedNation = tempNation || '';
     this.selectedYear = tempYear || '';
 
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
       this.router.navigate([`/filter-result`], {
         queryParams: {
-          gene: tempType,
+          genre: tempType,
           country: tempNation,
           year: tempYear,
         },
@@ -177,7 +149,7 @@ export class FilterResultComponent implements OnInit, AfterViewInit {
     }
   }
 
-	backToHome() {
-		this.router.navigate(["/"]);
-	}
+  backToHome() {
+    this.router.navigate(['/']);
+  }
 }

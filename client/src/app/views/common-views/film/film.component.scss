@@ -1,0 +1,57 @@
+.film-container {
+  @apply min-h-screen w-full;
+  .film {
+    @apply flex justify-between items-center p-20 relative;
+
+    .img-overlay {
+      @apply absolute z-0 top-0 left-0 w-full h-full;
+      &:before {
+        @apply absolute z-0 top-0 left-0 w-full h-full bg-black opacity-80;
+        content: "";
+      }
+      img {
+        @apply w-full h-full;
+      }
+    }
+
+    &__image {
+      @apply mr-20 z-10;
+      min-width: 400px;
+      max-width: 400px;
+      img {
+        @apply w-full h-full rounded;
+      }
+    }
+
+    &__info {
+      @apply z-10 text-white;
+      h2 {
+        @apply text-5xl uppercase font-bold;
+      }
+
+      .info-group {
+        @apply mt-6;
+        span {
+          @apply font-bold uppercase relative pl-3 mb-2;
+          &:before {
+            @apply absolute top-0 left-0 w-1 h-full bg-purple-900;
+            content: "";
+          }
+        }
+        p {
+          @apply pl-3;
+        }
+      }
+    }
+  }
+
+  .film-player {
+    @apply flex justify-center items-center w-full h-full bg-gray-900 p-20;
+
+    iframe {
+      @apply w-full rounded-lg;
+      max-width: 1300px;
+      min-height: 700px;
+    }
+  }
+}

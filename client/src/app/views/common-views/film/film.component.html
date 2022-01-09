@@ -1,1 +1,107 @@
-<p>film works!</p>
+<app-header></app-header>
+
+<div class="film-container">
+  <div class="film">
+    <div class="img-overlay">
+      <img [src]="film?.poster" alt="film?.name" />
+    </div>
+    <div class="film__image">
+      <img src="{{ film?.img }}" alt="{{ film?.name }}" />
+    </div>
+    <div class="film__info">
+      <h2 class="film__title">{{ film?.name }}</h2>
+      <div class="mt-5 mb-2">
+        <a [href]="film.trailer" target="blanc"
+          ><button
+            pButton
+            type="button"
+            label="Trailer"
+            icon="pi pi-play"
+            class="p-button-danger mr-3"
+          ></button
+        ></a>
+      </div>
+      <p-rating
+        [(ngModel)]="film.avgRating"
+        [readonly]="true"
+        [cancel]="false"
+        class="flex justify-start items-center text-3xl"
+      ></p-rating>
+      <p class="film__description text-2xl my-5 text-justify">
+        {{ film?.description }}
+      </p>
+
+      <div class="info-grid grid grid-cols-3 text-xl">
+        <div class="info-group">
+          <span>Thể loại</span>
+          <p>{{ film?.gene }}</p>
+        </div>
+        <div class="info-group">
+          <span>Quốc gia</span>
+          <p>{{ film?.country }}</p>
+        </div>
+        <div class="info-group">
+          <span>Trạng thái</span>
+          <p>{{ film?.status }}</p>
+        </div>
+        <div class="info-group">
+          <span>Đạo diễn</span>
+          <p>{{ film?.directors }}</p>
+        </div>
+        <div class="info-group">
+          <span>Thời lượng</span>
+          <p>{{ film?.duration }} phút</p>
+        </div>
+        <div class="info-group">
+          <span>Năm phát hành</span>
+          <p>{{ film?.year }}</p>
+        </div>
+      </div>
+      <div class="info-group text-xl">
+        <span>Diễn viên</span>
+        <p>{{ film?.actors }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="film-player">
+    <iframe [src]="iframeUrl" frameborder="0" allowfullscreen="true"></iframe>
+  </div>
+
+  <div class="reviews">
+    <h2 class="reviews__title">Đánh giá</h2>
+    <div class="reviews__list" *ngFor="let review of reviews">
+      <div class="reviews__item">
+				<p-rating [cancel]="false" [(ngModel)]="review.rating" [disabled]="true"></p-rating>
+				{{review.content}}
+			</div>
+    </div>
+
+    <div class="reviews__form">
+			<p-rating [(ngModel)]="reviewScore" [cancel]="false"></p-rating>
+      <textarea
+        placeholder="Nhập đánh giá của bạn"
+        id="review-content"
+				[(ngModel)]="yourReview"
+      ></textarea>
+      <button class="btn btn-primary" (click)="postReview()">Gửi</button>
+    </div>
+  </div>
+
+  <div class="comments">
+    <h2 class="comments__title">Bình luận</h2>
+    <div class="comments__list" *ngFor="let comment of comments">
+      <div class="comments__item">
+				{{comment.content}}
+				{{comment.created_at}}
+			</div>
+			</div>
+    </div>
+
+    <div class="comment-form">
+      <input type="text" placeholder="Nhập bình luận của bạn" [(ngModel)]="yourComment"/>
+      <button class="btn btn-primary" (click)="postComment()">Gửi</button>
+    </div>
+  </div>
+
+<app-footer></app-footer>

@@ -57,7 +57,7 @@ Content-Type: application/json
 
 {
   "name":"Tam Quoc Dien Nghia 2",
-  "gene":"document",
+  "genre":"document",
   "description":"film hay",
   
 }
@@ -71,7 +71,7 @@ PUT http://localhost:5000/api/films/619e5f7ba91cf58d80d776ba
 Content-Type: application/json
 
 {
-  "gene":"phim chinh kich",
+  "genre":"phim chinh kich",
   "country":"Trung Quoc"
 }
 ###

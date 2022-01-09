@@ -12,6 +12,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { FooterComponent } from './footer/footer.component';
 import { ToolbarModule } from 'primeng/toolbar';
 import { SplitButtonModule } from 'primeng/splitbutton';
+import { InputTextModule } from 'primeng/inputtext';
 @NgModule({
   declarations: [HeaderComponent, FooterComponent],
   imports: [
@@ -26,7 +27,8 @@ import { SplitButtonModule } from 'primeng/splitbutton';
     ChartModule,
     TooltipModule,
 		ToolbarModule,
-		SplitButtonModule
+		SplitButtonModule,
+		InputTextModule
   ],
   exports: [HeaderComponent, FooterComponent],
 })

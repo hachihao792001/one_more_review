@@ -52,16 +52,23 @@ export class HeaderComponent implements OnInit {
     );
 
 		this.items = [
-        {
-            label: 'Tài khoản',
-            icon: 'pi pi-user-edit',
-						url: '/profile',
+      {
+        label: 'Trang chủ',
+        icon: 'pi pi-home',
+        url: '/',
+      },
+      {
+        label: 'Tài khoản',
+        icon: 'pi pi-user-edit',
+        url: '/profile',
+      },
+      {
+        label: 'Đăng xuất',
+        icon: 'pi pi-sign-out',
+        command: () => {
+          this.authService.signOut();
         },
-        {
-            label: 'Đăng xuất',
-            icon: 'pi pi-sign-out',
-						command: () => {this.authService.signOut();},
-        }
+      },
     ];
   }
 
@@ -69,3 +76,8 @@ export class HeaderComponent implements OnInit {
     this.authService.signOut();
   }
 }
+
+$(window).on("scroll", () => {
+	const y = $(window).scrollTop();
+	y || 0 > 100 ? $(".header").addClass("header-scrolled") : $(".header").removeClass("header-scrolled");
+})

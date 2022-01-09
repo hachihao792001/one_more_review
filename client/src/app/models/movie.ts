@@ -16,5 +16,8 @@ export interface Movie {
 	duration: string;
 	year: number;
 	img: string;
+	poster: string;
 	director: string;
+	trailer: string;
+	reviewChannel: string;
 }
