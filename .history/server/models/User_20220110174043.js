@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     image: {
         type: String,
         required: true,
-        default: "https://i.pinimg.com/236x/d5/b9/81/d5b98102441250ce1e86802ff71be61f.jpg"
+        default: "https://st3.depositphotos.com/1767687/16607/v/600/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg"
     },
 
     age: {

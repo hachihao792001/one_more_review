@@ -4,7 +4,7 @@
         <div class="infor-container">
             <div class="user-profile">
                 <img [src]="user && user.image ? user.image: 'https://i.pinimg.com/236x/ff/df/4e/ffdf4edc47c7c2675101a6eeedca1e53.jpg'" class="avatar">
-                <h3>{{user.name}}</h3>
+                <h3>{{user.name && user?'anymouse' : user.name}}</h3>
                 <h4>{{user.username}}</h4>
             </div>
             <div class="detail-info">

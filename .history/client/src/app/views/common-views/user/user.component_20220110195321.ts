@@ -22,8 +22,4 @@ export class UserComponent implements OnInit {
       this.user = res.user;
     });
   }
-
-  onEditProfile(): void{
-    this.editStatus = true;
-  }
 }

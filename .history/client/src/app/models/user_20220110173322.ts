@@ -3,9 +3,9 @@ export interface User {
 	password: string;
 	name: string;
 	image: string;
-	age: number;
+	age: string;
 	gender: boolean;
 	isAdmin: boolean;
 	country: string;
-	createdAt: number;
+	createdAt: string;
 }

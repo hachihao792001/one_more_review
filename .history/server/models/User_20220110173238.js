@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     image: {
         type: String,
         required: true,
-        default: "https://i.pinimg.com/236x/d5/b9/81/d5b98102441250ce1e86802ff71be61f.jpg"
+        default: "https://thelifetank.com/wp-content/uploads/2018/08/avatar-default-icon.png"
     },
 
     age: {

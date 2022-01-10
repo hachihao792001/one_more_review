@@ -13,17 +13,13 @@ export class UserComponent implements OnInit {
   constructor(private spinner: NgxSpinnerService,
     private userService: UserService)
   { }
-  editStatus: boolean = false;
+
   user!: User;
+  myReviews!: Review[];
   id!: any;
   ngOnInit(): void {
-    this.id = localStorage.getItem('USER_ID');
+   this.id = localStorage.getItem('USER_ID');
     this.userService.getUser(this.id).subscribe((res) => {
       this.user = res.user;
-    });
-  }
-
-  onEditProfile(): void{
-    this.editStatus = true;
   }
 }

@@ -31,14 +31,14 @@
                     @media (max-width: 576px) {
                         @apply my-5;
                     }
-                    background: $gradient-block-info;
+                    background: $gradient-bg;
                     background-size: 300%;
                     &:hover {
                         background-position: 50%;
                         @apply shadow-2xl;
                     }
                     p {
-                        @apply p-4 text-center text-xl font-bold;
+                        @apply p-4 text-center text-xl;
                     }
                     h4 {
                         @apply text-base;

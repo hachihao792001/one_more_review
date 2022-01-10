@@ -13,7 +13,7 @@ export class UserComponent implements OnInit {
   constructor(private spinner: NgxSpinnerService,
     private userService: UserService)
   { }
-  editStatus: boolean = false;
+  editStatus: boolean = true;
   user!: User;
   id!: any;
   ngOnInit(): void {
@@ -21,9 +21,5 @@ export class UserComponent implements OnInit {
     this.userService.getUser(this.id).subscribe((res) => {
       this.user = res.user;
     });
-  }
-
-  onEditProfile(): void{
-    this.editStatus = true;
   }
 }

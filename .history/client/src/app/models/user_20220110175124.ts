@@ -7,5 +7,5 @@ export interface User {
 	gender: boolean;
 	isAdmin: boolean;
 	country: string;
-	createdAt: number;
+	createdAt: string;
 }
