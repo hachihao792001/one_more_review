@@ -9,7 +9,7 @@ import { ProfileService } from 'src/app/services/profile.service';
 import { ToastrService } from 'ngx-toastr';
 import { FilmService } from 'src/app/services/film.service';
 import { Movie } from 'src/app/models/movie';
-import { TYPES, NATIONS, YEARS } from 'src/app/utils/constants';
+import { GENRES, NATIONS, YEARS } from 'src/app/utils/constants';
 
 @Component({
   selector: 'app-home-page',
@@ -26,7 +26,7 @@ export class HomePageComponent implements OnInit, AfterViewInit {
   allPage: number = 0;
   filmPerPage: number = 8;
 
-  types: any[] = TYPES;
+  types: any[] = GENRES;
   nations: any[] = NATIONS;
   years: any[] = YEARS;
 
