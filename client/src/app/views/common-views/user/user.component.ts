@@ -20,6 +20,7 @@ export class UserComponent implements OnInit {
     this.id = localStorage.getItem('USER_ID');
     this.userService.getUser(this.id).subscribe((res) => {
       this.user = res.user;
+			this.spinner.hide().then();
     });
   }
 
