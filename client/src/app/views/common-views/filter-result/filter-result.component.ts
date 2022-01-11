@@ -61,41 +61,41 @@ export class FilterResultComponent implements OnInit, AfterViewInit {
 
   getFilmsByFilter() {
     this.spinner.show();
-    this.filmService
-      .getAllFilms()
-      .subscribe(
-        (res) => {
-					this.allFilms = res.films;
-					console.log(this.allFilms);
-          if (this.selectedGenre) {
-						this.allFilms = this.allFilms.filter((film:Movie) => {
-							return film.gene.includes(this.selectedGenre);
-						});
-					}
-
-          if (this.selectedNation) {
-            this.allFilms = this.allFilms.filter((film: Movie) => {
-              return film.country.includes(this.selectedNation);
-            });
-          }
-
-					if (this.selectedYear) {
-						this.allFilms = this.allFilms.filter((film: Movie) => {
-              return film.year === Number.parseInt(this.selectedYear);
-            });
-					}
-					
-
-          this.allPage =
-            Math.floor(this.allFilms.length / this.filmPerPage) + 1;
-					this.films = this.allFilms.slice(0, this.filmPerPage);
-          this.spinner.hide().then();
-        },
-        (err) => {
-          this.spinner.hide().then();
-          this.isFound = false;
+    this.filmService.getAllFilms().subscribe(
+      (res) => {
+        this.allFilms = res.films;
+        console.log(this.allFilms);
+        if (this.selectedGenre) {
+          this.allFilms = this.allFilms.filter((film: Movie) => {
+            return film.gene.includes(this.selectedGenre);
+          });
         }
-      );
+
+        if (this.selectedNation) {
+          this.allFilms = this.allFilms.filter((film: Movie) => {
+            return film.country.includes(this.selectedNation);
+          });
+        }
+
+        if (this.selectedYear) {
+          this.allFilms = this.allFilms.filter((film: Movie) => {
+            if (this.selectedYear.includes('<'))
+              return film.year < Number.parseInt(this.selectedYear.substring(1));
+            else return film.year === Number.parseInt(this.selectedYear);
+          });
+        }
+
+        this.allPage = Math.floor(this.allFilms.length / this.filmPerPage) + 1;
+        this.films = this.allFilms.slice(0, this.filmPerPage);
+				if (this.allFilms.length === 0) 
+					this.isFound = false;
+        this.spinner.hide().then();
+      },
+      (err) => {
+        this.spinner.hide().then();
+        this.isFound = false;
+      }
+    );
   }
 
   ngOnInit(): void {
@@ -106,8 +106,7 @@ export class FilterResultComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {}
 
   onPickFilm(id: string) {
-    console.log('movie-id', id);
-    //Do stuff
+    this.router.navigate(['/films', id]);
   }
 
   onFilterMovie(tempType: any, tempNation: any, tempYear: any) {

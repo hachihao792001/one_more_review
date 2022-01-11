@@ -23,6 +23,12 @@ export const GENRES = [
   { name: 'Hài' },
   { name: 'Kinh dị - Giật gân' },
   { name: 'Hoạt hình' },
+  { name: 'Tội phạm' },
+  { name: 'Tâm lý' },
+  { name: 'Cổ trang' },
+  { name: 'Lịch sử' },
+  { name: 'Võ thuật' },
+  { name: 'Kỳ ảo - Đen tối' },
 ];
 
 export const NATIONS = [
@@ -60,12 +66,6 @@ export const YEARS = [
     year: '2019',
   },
   {
-    year: '2018',
-  },
-  {
-    year: '2017',
-  },
-  {
-    year: '< 2017',
+    year: '<2019',
   },
 ];

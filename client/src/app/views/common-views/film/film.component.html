@@ -11,7 +11,7 @@
     <div class="film__info">
       <h2 class="film__title">{{ film?.name }}</h2>
       <div class="mt-5 mb-2">
-        <a [href]="film.trailer" target="blanc"
+        <a [href]="film?.trailer" target="blanc"
           ><button
             pButton
             type="button"
@@ -68,40 +68,103 @@
     <iframe [src]="iframeUrl" frameborder="0" allowfullscreen="true"></iframe>
   </div>
 
-  <div class="reviews">
-    <h2 class="reviews__title">Đánh giá</h2>
-    <div class="reviews__list" *ngFor="let review of reviews">
-      <div class="reviews__item">
-				<p-rating [cancel]="false" [(ngModel)]="review.rating" [disabled]="true"></p-rating>
-				{{review.content}}
-			</div>
-    </div>
+  <div class="reviews px-20 bg-gray-900">
+    <h2 class="reviews__title text-white text-4xl py-5">Đánh giá</h2>
+    <p-carousel
+			*ngIf="reviews.length"
+      [showIndicators]="false"
+      [value]="reviews"
+      orientation="horizontal"
+      [autoplayInterval]="7500"
+      [circular]="false"
+      [numVisible]="2"
+      [numScroll]="1"
+      styleClass="carousel-container"
+    >
+      <ng-template let-review pTemplate="item" styleClass="carousel-item">
+        <div class="">
+          <button
+            *ngIf="review.idUser === userId"
+            (click)="deleteReview(review._id)"
+          >
+            <span class="pi pi-trash text-white"></span>
+          </button>
+        </div>
+        <div class="flex justify-between items-center">
+          <p-rating
+            [(ngModel)]="review.rating"
+            [readonly]="true"
+            [cancel]="false"
+            class="flex justify-start items-center text-3xl"
+          ></p-rating>
+          <span class="text-white">{{ toDateTime(review.createdAt) }}</span>
+        </div>
+        <p class="text-white">{{ review?.content }}</p>
+      </ng-template>
+    </p-carousel>
 
-    <div class="reviews__form">
-			<p-rating [(ngModel)]="reviewScore" [cancel]="false"></p-rating>
-      <textarea
-        placeholder="Nhập đánh giá của bạn"
-        id="review-content"
-				[(ngModel)]="yourReview"
-      ></textarea>
-      <button class="btn btn-primary" (click)="postReview()">Gửi</button>
+    <div class="reviews__form flex flex-col justify-center items-center w-full">
+      <p-rating [(ngModel)]="reviewScore" [cancel]="false" class="my-3"></p-rating>
+      <div class="flex justify-center items-center w-full">
+        <textarea
+          class="rounded-lg bg-gray-700 text-white w-1/2"
+          placeholder="Nhập đánh giá của bạn"
+          id="review-content"
+          [(ngModel)]="yourReview"
+        ></textarea>
+        <button class="btn btn-primary text-white h-full" (click)="postReview()">
+          <i class="pi pi-send text-5xl p-3 ml-3"></i>
+        </button>
+      </div>
     </div>
   </div>
 
-  <div class="comments">
-    <h2 class="comments__title">Bình luận</h2>
-    <div class="comments__list" *ngFor="let comment of comments">
-      <div class="comments__item">
-				{{comment.content}}
-				{{comment.created_at}}
-			</div>
-			</div>
-    </div>
+  <div class="reviews px-20 bg-gray-900">
+    <h2 class="reviews__title text-white text-4xl py-5">Bình luận</h2>
+    <p-carousel
+			*ngIf="comments.length"
+      [showIndicators]="false"
+      [value]="comments"
+      orientation="horizontal"
+      [autoplayInterval]="7500"
+      [circular]="false"
+      [numVisible]="2"
+      [numScroll]="1"
+      styleClass="carousel-container"
+    >
+      <ng-template let-comment pTemplate="item" styleClass="carousel-item">
+        <div class="">
+          <button
+            *ngIf="comment.idUser === userId"
+            (click)="deleteComment(comment._id)"
+          >
+            <span class="pi pi-trash text-white"></span>
+          </button>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-white">{{ toDateTime(comment.createdAt) }}</span>
+        </div>
+        <p class="text-white">{{ comment?.content }}</p>
+      </ng-template>
+    </p-carousel>
 
-    <div class="comment-form">
-      <input type="text" placeholder="Nhập bình luận của bạn" [(ngModel)]="yourComment"/>
-      <button class="btn btn-primary" (click)="postComment()">Gửi</button>
+    <div class="comment__form flex flex-col justify-center items-center w-full">
+      <div class="flex justify-center items-center w-full">
+        <input
+          class="rounded-lg bg-gray-700 text-white w-1/2"
+          placeholder="Nhập bình luận của bạn"
+          id="comment-content"
+          [(ngModel)]="yourComment"
+					type="text"
+        />
+        <button class="btn btn-primary text-white h-full" (click)="postComment()">
+          <i class="far fa-share-square text-3xl p-3 ml-3"></i>
+        </button>
+      </div>
     </div>
   </div>
+</div>
 
 <app-footer></app-footer>
+
+

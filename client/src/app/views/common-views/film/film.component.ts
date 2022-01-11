@@ -21,6 +21,7 @@ export class FilmComponent implements OnInit {
   yourComment: string = '';
   yourReview: string = '';
   reviewScore: number = 1;
+  userId = localStorage.getItem('USER_ID');
 
   constructor(
     private filmService: FilmService,
@@ -38,28 +39,37 @@ export class FilmComponent implements OnInit {
       this.filmService.getFilm(id).subscribe((res) => {
         this.film = res.film;
         console.log(this.film);
-        this.spinner.hide().then();
         this.iframeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
           this.film.url
         );
 
         for (let commentId of this.film.commentList) {
+          this.spinner.show();
           this.commentService.getComment(commentId).subscribe(
             (res) => {
               this.comments.push(res.comment);
+              this.spinner.hide().then();
             },
             (err) => {
               console.log(err);
+							 this.spinner.hide().then();
             }
           );
         }
 
         for (let reviewId of this.film.reviewList) {
+          this.spinner.show();
           this.reviewService.getReview(reviewId).subscribe(
             (res) => {
+              console.log(res);
               this.reviews.push(res.review);
+              this.spinner.hide().then();
             },
-            (err) => console.log(err)
+            (err) => {
+							console.log(err);
+							this.spinner.hide().then();
+						}
+						
           );
         }
       });
@@ -67,7 +77,7 @@ export class FilmComponent implements OnInit {
   }
 
   postComment() {
-		this.spinner.show().then();
+    this.spinner.show().then();
     const data = {
       idFilm: this.film._id,
       content: this.yourComment,
@@ -77,34 +87,72 @@ export class FilmComponent implements OnInit {
         console.log(res);
         this.comments.push(res.comment);
         this.yourComment = '';
-				this.spinner.hide().then();
+        this.spinner.hide().then();
       },
       (err) => {
         console.log(err);
-				this.spinner.hide().then();
+        this.spinner.hide().then();
       }
     );
   }
 
   postReview() {
-		this.spinner.show().then();
+    this.spinner.show().then();
     const data = {
       rating: this.reviewScore.toString(),
       idFilm: this.film._id,
       content: this.yourReview,
     };
-		console.log(data);
+    console.log(data);
     this.reviewService.postReview(data).subscribe(
       (res) => {
         console.log(res);
         this.reviews.push(res.review);
         this.yourReview = '';
-				this.spinner.hide().then();
+        this.spinner.hide().then();
       },
       (err) => {
         console.log(err);
-				this.spinner.hide().then();
+        this.spinner.hide().then();
       }
     );
+  }
+
+  deleteReview(reviewId: string) {
+    this.spinner.show().then();
+    this.reviewService.deleteReview(reviewId).subscribe(
+      (res) => {
+        console.log(res);
+        this.reviews = this.reviews.filter((review) => review._id !== reviewId);
+        this.spinner.hide().then();
+      },
+      (err) => {
+        console.log(err);
+        this.spinner.hide().then();
+      }
+    );
+  }
+
+  deleteComment(commentId: string) {
+    this.spinner.show().then();
+    this.commentService.deleteComment(commentId).subscribe(
+      (res) => {
+        console.log(res);
+        this.comments = this.comments.filter(
+          (comment) => comment._id !== commentId
+        );
+        this.spinner.hide().then();
+      },
+      (err) => {
+        console.log(err);
+        this.spinner.hide().then();
+      }
+    );
+  }
+
+  toDateTime(secs: number) {
+    let t = new Date();
+    t.setSeconds(secs);
+    return t.toLocaleString();
   }
 }
