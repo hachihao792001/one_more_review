@@ -30,7 +30,6 @@ export class AddAdminComponent implements OnInit {
       alert("Add admin failed!");
       return;
     }
-
     this.user.isAdmin = true;
     this.userService.updateUser(this.user, this.id).subscribe();
     console.log(this.user);
@@ -38,7 +37,6 @@ export class AddAdminComponent implements OnInit {
   }
 
   onCancel() {
-  window.location.reload();
-
+    window.location.reload();
   }
 }
