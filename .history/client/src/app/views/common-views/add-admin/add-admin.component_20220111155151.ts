@@ -27,14 +27,14 @@ export class AddAdminComponent implements OnInit {
 			this.spinner.hide().then();
     });
     if (this.user.username !== this.email) {
-      alert("Add admin failed!");
+      alert("Failed!");
       return;
     }
 
     this.user.isAdmin = true;
     this.userService.updateUser(this.user, this.id).subscribe();
     console.log(this.user);
-    alert("Add admin Successful!y");
+    alert("Sucess!");
   }
 
   onCancel() {

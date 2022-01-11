@@ -11,6 +11,7 @@ export class AddAdminComponent implements OnInit {
   name!: string;
   email!: string;
   id!: string;
+
   user!:User;
   constructor(private spinner: NgxSpinnerService,
   private userService:UserService) { 
@@ -26,19 +27,8 @@ export class AddAdminComponent implements OnInit {
       this.user = res.user;
 			this.spinner.hide().then();
     });
-    if (this.user.username !== this.email) {
-      alert("Add admin failed!");
-      return;
-    }
 
     this.user.isAdmin = true;
     this.userService.updateUser(this.user, this.id).subscribe();
-    console.log(this.user);
-    alert("Add admin Successful!y");
-  }
-
-  onCancel() {
-  window.location.reload();
-
   }
 }
