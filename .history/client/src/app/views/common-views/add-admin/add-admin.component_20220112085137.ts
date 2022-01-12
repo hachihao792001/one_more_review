@@ -23,10 +23,11 @@ export class AddAdminComponent implements OnInit {
   onSubmit(): void{
     this.userService.getUser(this.id).subscribe((res) => {
       this.user = res.user;
+      console.log(this.user);
 			this.spinner.hide().then();
     });
     if (this.user.username !== this.email) {
-      alert("Add admin failed! Email or ID is incorrect!");
+      alert("Add admin failed!");
       return;
     }
     this.user.isAdmin = true;

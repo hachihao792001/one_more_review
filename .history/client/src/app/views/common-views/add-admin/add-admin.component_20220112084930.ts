@@ -8,9 +8,9 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./add-admin.component.scss']
 })
 export class AddAdminComponent implements OnInit {
-  name: string='';
-  email: string='';
-  id: string='';
+  name!: string;
+  email!: string;
+  id!: string;
   user!:User;
   constructor(
     private spinner: NgxSpinnerService,
@@ -21,12 +21,16 @@ export class AddAdminComponent implements OnInit {
   }
 
   onSubmit(): void{
+    console.log(this.email);
+    console.log(this.id);
+    console.log(this.name);
+    alert('read succes!');
     this.userService.getUser(this.id).subscribe((res) => {
       this.user = res.user;
 			this.spinner.hide().then();
     });
     if (this.user.username !== this.email) {
-      alert("Add admin failed! Email or ID is incorrect!");
+      alert("Add admin failed!");
       return;
     }
     this.user.isAdmin = true;
