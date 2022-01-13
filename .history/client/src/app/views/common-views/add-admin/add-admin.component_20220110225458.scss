@@ -1,0 +1,21 @@
+.add-admin {
+    &-container {
+        @apply w-full min-h-screen text-white bg-gray-900;
+        .title {
+            @apply py-5 px-12;
+            h1 {
+                @apply text-4xl;
+            }
+            h3 {
+                @apply text-xl;
+            }
+        }
+        .add-container {
+            .block-info {
+                h2 {}
+                input {}
+            }
+            .btn {}
+        }
+    }
+}

@@ -7,7 +7,6 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from '../services/auth.service';
 
 /**
@@ -15,15 +14,15 @@ import { AuthService } from '../services/auth.service';
  */
 @Injectable()
 export class ApiAuthorizationInterceptor implements HttpInterceptor {
-  constructor(private auth: AuthService, private cookie: CookieService) {}
+  constructor(private auth: AuthService) {}
 
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    let token = '';
+    let token:string = '';
     if (this.auth.isAuthenticated()) {
-      token = this.cookie.get('ACCESS_TOKEN');
+      token = localStorage.getItem('ACCESS_TOKEN') || '';
     }
     const header: any = {
       'Cache-Control':

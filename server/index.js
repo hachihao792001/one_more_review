@@ -7,8 +7,10 @@ import filmRouter from "./routers/filmRouter.js";
 import commentRouter from "./routers/commentRouter.js";
 import reviewRouter from "./routers/reviewRouter.js";
 import passRouter from "./routers/passwordRouter.js";
+import cors from "cors"
 
 const app = express();
+const CORS = cors();
 dotenv.config();
 
 const PORT = 5000; // port connect to backend
@@ -32,6 +34,7 @@ const connectDB = async () => {
 connectDB();
 
 // app use
+app.use(CORS);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/resources", express.static(path.join(__dirname, "/resources")));

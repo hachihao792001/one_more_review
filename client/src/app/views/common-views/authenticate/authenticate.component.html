@@ -1,14 +1,14 @@
 <div class="auth-container">
-  <div class="main-container">
+  <div class="main-container" [ngClass]="{'sign-in': isSignIn, 'sign-up': !isSignIn}">
     <img
       src="../../../../assets/imgs/auth-poster.jpg"
       alt="Poster"
       class="poster"
     />
-    <div class="sign-up">
+    <div class="sign-up" *ngIf="!isSignIn">
       <div class="sign-up__content">
         <form [formGroup]="signUpForm" (ngSubmit)="onResigterSubmit()">
-          <h2 class="form-title">RESIGTER</h2>
+          <h2 class="form-title">ĐĂNG KÍ</h2>
           <div class="form-group">
             <span class="label-input">Email</span>
             <input
@@ -23,13 +23,13 @@
               *ngIf="signUpSubmitted && fr.email.errors"
               class="invalid-feedback"
             >
-              <div *ngIf="fr.email.errors.required">Email is required</div>
-              <div *ngIf="fr.email.errors.email">Email is invalid</div>
+              <div *ngIf="fr.email.errors.required">*Trường này là bắt buộc</div>
+              <div *ngIf="fr.email.errors.email">*Email không hợp lệ</div>
             </div>
           </div>
 
           <div class="form-group">
-            <span class="label-input">Password</span>
+            <span class="label-input">Mật khẩu</span>
             <input
               class="inputPassword"
               type="password"
@@ -46,12 +46,12 @@
               "
               class="invalid-feedback"
             >
-              <div>Password must be at least 6 characters</div>
+              <div>Mật khẩu phải có độ dài ít nhất 6 kí tự</div>
             </div>
           </div>
 
           <div class="form-group">
-            <span class="label-input">Confirm Password</span>
+            <span class="label-input">Xác nhận mật khẩu</span>
             <input
               class="inputPassword"
               type="password"
@@ -69,23 +69,23 @@
               "
               class="invalid-feedback"
             >
-              <div>Confirm password does not match</div>
+              <div>Xác nhận mật khẩu không đúng</div>
             </div>
           </div>
           <div class="switch-link">
-            <span>Already have an account?</span>
-            <a (click)="togglePoster()"> Sign in </a>
+            <span>Đã có tài khoản?</span>
+            <a (click)="togglePoster()"> Đăng nhập ngay </a>
           </div>
 
-          <button class="btn-submit" type="submit">register</button>
+          <button class="btn-submit" type="submit">Đăng kí</button>
         </form>
       </div>
     </div>
 
-    <div class="sign-in">
+    <div class="sign-in" *ngIf="isSignIn">
       <div class="sign-in__content">
         <form [formGroup]="signInForm" (ngSubmit)="onLoginSubmit()">
-          <h2 class="form-title">LOGIN</h2>
+          <h2 class="form-title">ĐĂNG NHẬP</h2>
 
           <div class="form-group">
             <span class="label-input">Email</span>
@@ -101,13 +101,13 @@
               *ngIf="signInSubmitted && fl.email.errors"
               class="invalid-feedback"
             >
-              <div *ngIf="fl.email.errors.required">Email is required</div>
-              <div *ngIf="fl.email.errors.email">Email is invalid</div>
+              <div *ngIf="fl.email.errors.required">*Trường này là bắt buộc</div>
+              <div *ngIf="fl.email.errors.email">*Email không hợp lệ</div>
             </div>
           </div>
 
           <div class="form-group">
-            <span class="label-input">Password</span>
+            <span class="label-input">Mật khẩu</span>
             <input
               class="inputPassword"
               type="password"
@@ -124,22 +124,22 @@
               "
               class="invalid-feedback"
             >
-              <div>Password is required</div>
+              <div>*Trường này là bắt buộc</div>
             </div>
           </div>
 
           <a
-            routerLink="/forgot-password"
-            class="label-input forgot-password text-right hover:underline"
+            (click)="onResetPassword()"
+            class="label-input forgot-password text-right hover:underline cursor-pointer"
           >
-            Forgot password?
+            Quên mật khẩu?
           </a>
 
-          <button class="btn-submit" type="submit">Login</button>
+          <button class="btn-submit" type="submit">ĐĂNG NHẬP</button>
 
           <div class="switch-link">
-            <span>Don't have an account? </span>
-            <a (click)="togglePoster()"> Sign Up </a>
+            <span>Chưa có tài khoản? </span>
+            <a (click)="togglePoster()"> Đăng kí ngay </a>
           </div>
         </form>
       </div>

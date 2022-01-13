@@ -59,10 +59,6 @@ const routes: Routes = [
 		component: AddAdminComponent,
 	},
   {
-    path: 'filter-result/:type/:nation/:year',
-    component: FilterResultComponent,
-  },
-  {
     path: '**',
     component: PageNotFoundComponent,
   },

@@ -1,7 +1,6 @@
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
@@ -21,7 +20,6 @@ export class ProfileService {
 
   constructor(
     private http: HttpClient,
-    private cookie: CookieService,
     private spinner: NgxSpinnerService
   ) {
     this.httpOptions = {
@@ -32,7 +30,7 @@ export class ProfileService {
   }
 
 	getId() {
-		return this.cookie.get('USER_ID') || "";
+		return localStorage.getItem('USER_ID') || "";
 	}
 
   getDataProfile(): void {
@@ -52,13 +50,6 @@ export class ProfileService {
             // const apiKey = res.apiKey;
             // const secretKey = res.secretKey;
             // const userRoleId = res.userRoleId;
-            const lang = this.cookie.get('LANG');
-
-            if (lang) {
-              this.cookie.set('LANG', lang);
-            } else {
-              this.cookie.set('LANG', 'en');
-            }
           }
 
           this.subjectProfile.next(true);
@@ -99,7 +90,7 @@ export class ProfileService {
     }
   }
 
-  public getProfile(id:string): Observable<User> {
+  public getProfile(id:string): Observable<any> {
     return this.http.get<User>(`${this.apiUrl}/api/users/${id}`);
   }
 

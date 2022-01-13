@@ -4,7 +4,7 @@ import User from "../models/User.js";
 import Review from "../models/Review.js";
 export const createFilm = async (req, res) => {
   try {
-    const { name, type, gene, country, description, actors, avgRating, url } =
+    const { name, type, genre, country, description, actors, avgRating, url } =
       req.body;
     if (!name) {
       return res
@@ -20,7 +20,7 @@ export const createFilm = async (req, res) => {
     const newFilm = new Film({
       name,
       type,
-      gene,
+      genre,
       country,
       description,
       actors,
@@ -213,11 +213,27 @@ export const getAllFilms = async (req, res) => {
 export const getFilmsWithFilter = async (req, res) => {
   try {
     //get filter and arg from params
-    const { filter, arg } = req.params;
+    const { genre, country, year } = req.query;
+    //print out genre, country, year
+    console.log(genre, country, year);
 
-    let films;
-    if (filter === "genre") films = await Film.find({ gene: arg });
-    else films = await Film.find({ [filter]: arg });
+    let filter = {};
+    if (genre) {
+      //add genre to filter
+      filter.genre = genre;
+    }
+    if (country) {
+      //add country to filter
+      filter.country = country;
+    }
+    if (year) {
+      //add year to filter
+      filter.year = year;
+    }
+    //log the filter
+    console.log(filter);
+
+    let films = await Film.find(filter);
 
     if (films.length > 0) {
       let comment_infos = [];

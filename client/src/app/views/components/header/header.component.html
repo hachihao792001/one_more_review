@@ -2,17 +2,21 @@
   <div class="header-container">
     <a href="./" class="brand">
       <img src="../../../../assets/imgs/brand-img.png" alt="OMR" />
+			<h1>ONE MORE REVIEW</h1>
     </a>
 
-    <form class="search-container">
-      <input type="text" id="search-bar" placeholder="Search films..." />
-      <a href="#" class="search-icon">
-        <i class="fa fa-search"></i>
-      </a>
-    </form>
-
-    <div class="user-area">
-      <span class="user-name"> Đình đẹp trai </span>
+    <div class="flex justify-end items-center flex-wrap">
+      <span class="p-input-icon-right search relative">
+        <input type="text" pInputText placeholder="Search a film..." class="inputSearch pr-10" [(ngModel)]="searchName" (keyup)="onType($event)"/>
+				<span (click)="onSearch()" class="hidden pi pi-search absolute right-2 top-1 md:inline-block text-white text-2xl cursor-pointer hover:text-blue-500 transition-all duration-200"></span>
+      </span>
+      <p-splitButton
+				class="my-2 ml-5"
+        label="{{ userInfo?.name }}"
+        [model]="items"
+        styleClass="p-button-secondary"
+				icon="pi pi-user"
+      ></p-splitButton>
     </div>
   </div>
 </div>

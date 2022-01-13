@@ -1,0 +1,36 @@
+    .add-admin {
+        &-container {
+            @apply w-full min-h-screen text-white bg-gray-900 ml-10;
+            .title {
+                @apply py-10;
+                h1 {
+                    @apply text-4xl py-4;
+                }
+                h3 {
+                    @apply text-xl;
+                }
+            }
+            .add-container {
+                @apply bg-gray-800 py-8;
+                h2 {
+                    @apply text-3xl;
+                }
+                .info-container {
+                    .block-info {
+                        @apply inline-block mr-4 my-4;
+                        h4 {
+                            @apply mb-1;
+                        }
+                        input {
+                            @apply text-gray-900;
+                        }
+                    }
+                }
+                .btn-container {
+                    @apply flex justify-start items-center;
+                    @apply mt-10;
+                    button {}
+                }
+            }
+        }
+    }

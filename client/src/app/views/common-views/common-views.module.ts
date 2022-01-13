@@ -22,7 +22,12 @@ import { FilmComponent } from './film/film.component';
 import { EditFilmComponent } from './edit-film/edit-film.component';
 import { AddFilmComponent } from './add-film/add-film.component';
 import { AddAdminComponent } from './add-admin/add-admin.component';
-
+import { ButtonModule } from 'primeng/button';
+import { RatingModule } from 'primeng/rating';
+import { SkeletonModule } from 'primeng/skeleton';
+import { ToolbarModule } from 'primeng/toolbar';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { DialogModule } from 'primeng/dialog';
 @NgModule({
   declarations: [
     PageNotFoundComponent,
@@ -48,6 +53,12 @@ import { AddAdminComponent } from './add-admin/add-admin.component';
     ReactiveFormsModule,
     DropdownModule,
 		CarouselModule,
+		ButtonModule,
+		RatingModule,
+		SkeletonModule,
+		ToolbarModule,
+		ConfirmPopupModule,
+		DialogModule
   ],
 })
 export class CommonViewsModule {}

@@ -1,0 +1,46 @@
+<header>
+</header>
+<div class="add-admin">
+
+    <div class="add-admin-container">
+        <div class="title">
+            <h1>Add new admin</h1>
+            <h3>Adding new admin to OMR system to control films and users.</h3>
+        </div>
+
+        <div class="add-container">
+            <h2>New admin</h2><br>
+            <form (ngSubmit)="onSubmit()">
+                <div class="info-container">
+                    <div class="block-info">
+                        <h4>Admin's name</h4>
+                        <input class="input" type="text" placeholder="name..." [(ngModel)]="name">
+                    </div>
+                    <div class="block-info">
+                        <h4>Email</h4>
+                        <input class="input" type="text" placeholder="abc@gmail.com" [(ngModel)]="email">
+                    </div>
+                    <div class="block-info">
+                        <h4>ID</h4>
+                        <input class="input" type="text" placeholder="admin's ID" [(ngModel)]="id">
+                    </div>
+                </div>
+                <button type="submit" btn bg-transparent hover:bg-red-400 text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded ">Cancel</button>
+                <button type="submit " class="btn bg-transparent hover:bg-green-400 text-white font-semibold hover:text-white py-2 px-4 border border-white hover:border-transparent rounded ">Save</button>
+            </form>
+        </div>
+
+        <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 " role="alert " *ngIf="failed ">
+            <p class="font-bold ">Be Warned</p>
+            <p>Something not ideal might be happening.</p>
+        </div>
+
+        <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3 " role="alert " *ngIf="success ">
+            <p class="font-bold ">Informational message</p>
+            <p class="text-sm ">Some additional text to explain said message.</p>
+        </div>
+    </div>
+
+
+</div>
+<footer></footer>
