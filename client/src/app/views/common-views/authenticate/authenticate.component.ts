@@ -21,6 +21,8 @@ export class AuthenticateComponent implements OnInit {
   signUpForm!: FormGroup;
   signInForm!: FormGroup;
 
+	isSignIn: boolean = true;
+
   signInSubmitted = false;
   signInNotification: string = '';
 
@@ -140,7 +142,13 @@ export class AuthenticateComponent implements OnInit {
     );
   }
 
+	onResetPassword(): void {
+		this.toast.info("Tính năng này đang được phát triển, vui lòng thử lại sau")
+		//this.router.navigate(['/forgot-password']);
+	}
+
   togglePoster(): void {
     $('.poster').toggleClass('left');
+		this.isSignIn = !this.isSignIn;
   }
 }
