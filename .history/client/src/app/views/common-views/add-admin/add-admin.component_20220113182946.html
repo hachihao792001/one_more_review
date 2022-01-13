@@ -3,8 +3,8 @@
 <div class="add-admin">
     <div class="add-admin-container">
         <div class="title">
-            <h1>Thêm admin mới</h1>
-            <h3>Thêm một admin mới để quản lý các phim và người dùng.</h3>
+            <h1>Add new admin</h1>
+            <h3>Adding new admin to OMR system to control films and users.</h3>
         </div>
 
         <div class="add-container">
@@ -12,16 +12,16 @@
             <form (ngSubmit)="onSubmit()">
                 <div class="info-container">
                     <div class="block-info">
-                        <h4>Tên admin:</h4>
-                        <input class="input" type="text" placeholder="Nobita..." name="name" [(ngModel)]="name">
+                        <h4>Admin's name</h4>
+                        <input class="input" type="text" placeholder="name..." name="name" [(ngModel)]="name">
                     </div>
                     <div class="block-info">
-                        <h4>Email:</h4>
+                        <h4>Email</h4>
                         <input class="input" type="text" placeholder="abc@gmail.com" name="email" [(ngModel)]="email">
                     </div>
                     <div class="block-info">
-                        <h4>ID:</h4>
-                        <input class="input" type="text" placeholder="ID..." name="id" [(ngModel)]="id">
+                        <h4>ID</h4>
+                        <input class="input" type="text" placeholder="admin's ID" name="id" [(ngModel)]="id">
                     </div>
                 </div>
                 <div class="btn-container">

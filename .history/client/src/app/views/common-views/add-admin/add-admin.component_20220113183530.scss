@@ -11,7 +11,7 @@
                 }
             }
             .add-container {
-                @apply bg-gray-800 py-8 ml-10 pl-14;
+                @apply bg-gray-800 py-8;
                 h2 {
                     @apply text-3xl;
                 }
@@ -29,9 +29,7 @@
                 .btn-container {
                     @apply flex justify-start items-center;
                     @apply mt-10;
-                    button {
-                        @apply mr-5;
-                    }
+                    button {}
                 }
             }
         }
