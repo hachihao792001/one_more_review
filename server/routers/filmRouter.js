@@ -8,10 +8,11 @@ import {
   deleteFilm,
   getAllFilms,
   getFilmsWithFilter,
+  updateAll
 } from "../controllers/FilmController.js";
 const filmRouter = express.Router();
 
-// filmRouter.put('/update',updateAll)
+filmRouter.put('/update',updateAll)
 filmRouter.get("/films", isAuth, getAllFilms);
 filmRouter.post("/", isAuth, isAdmin, createFilm);
 filmRouter.get("/:id", isAuth, getFilm);

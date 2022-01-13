@@ -187,15 +187,15 @@ export const deleteFilm = async (req, res) => {
   }
 };
 
-// export const updateAll=async(req,res)=>{
-//     let films=await Film.find({})
-//     for(let film of films){
-//         film.commentList=[]
-//         film.reviewList=[]
-//         await film.save()
-//     }
-//     return res.status(200).json({success:true.valueOf,films})
-//   }
+export const updateAll=async(req,res)=>{
+    let films=await Film.find({})
+    for(let film of films){
+       film.commentList=[]
+        film.reviewList=[]
+        await film.save()
+    }
+    return res.status(200).json({success:true.valueOf,films})
+  }
 
 export const getAllFilms = async (req, res) => {
   try {
