@@ -12,7 +12,7 @@
         .brand {
             @apply h-12 rounded-sm flex items-center;
             img {
-                @apply w-32 h-10 rounded-sm;
+                @apply w-10 h-10 rounded-full;
             }
 						h1 {
 							@apply text-white font-bold text-2xl ml-3 relative pl-3;
