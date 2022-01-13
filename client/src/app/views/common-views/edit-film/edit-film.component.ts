@@ -7,6 +7,7 @@ import { Movie } from 'src/app/models/movie';
 import { FilmService } from 'src/app/services/film.service';
 import { NATIONS, TYPES, YEARS, GENRES, STATUS } from 'src/app/utils/constants';
 import { ConfirmationService } from 'primeng/api';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-edit-film',
@@ -50,11 +51,19 @@ export class EditFilmComponent implements OnInit {
     private toast: ToastrService,
     private router: Router,
     private route: ActivatedRoute,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
     this.spinner.show();
+
+    this.spinner.hide().then();
+    const id = localStorage.getItem('USER_ID') || '';
+    this.userService.getUser(id).subscribe((res) => {
+      if (!res.user.isAdmin) this.router.navigate(['/']);
+    });
+
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id') || '';
       this.filmService.getFilm(id).subscribe(
@@ -96,15 +105,18 @@ export class EditFilmComponent implements OnInit {
       message: 'Xác nhận xóa phim này?',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-				this.spinner.show();
-        this.filmService.deleteFilm(this.film._id).subscribe(res => {
-					this.toast.success("Xóa phim thành công");
-					this.spinner.hide();
-					this.router.navigate(['/']);
-				}, error => {
-					this.toast.error(`${'Xóa phim thất bại:'} ${error.message}`);
-					this.spinner.hide();
-				})
+        this.spinner.show();
+        this.filmService.deleteFilm(this.film._id).subscribe(
+          (res) => {
+            this.toast.success('Xóa phim thành công');
+            this.spinner.hide();
+            this.router.navigate(['/']);
+          },
+          (error) => {
+            this.toast.error(`${'Xóa phim thất bại:'} ${error.message}`);
+            this.spinner.hide();
+          }
+        );
       },
       reject: () => {
         //reject action

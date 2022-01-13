@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Movie } from 'src/app/models/movie';
 import { FilmService } from 'src/app/services/film.service';
+import { UserService } from 'src/app/services/user.service';
 import { NATIONS, TYPES, YEARS, GENRES, STATUS } from 'src/app/utils/constants';
 
 @Component({
@@ -36,17 +38,23 @@ export class AddFilmComponent implements OnInit {
   poster: string = '';
   img: string = '';
   url: string = '';
-	avgRating: number = 1;
+  avgRating: number = 1;
 
   constructor(
     private spinner: NgxSpinnerService,
     private sanitizer: DomSanitizer,
-		private filmService: FilmService,
-		private toast: ToastrService
+    private filmService: FilmService,
+    private toast: ToastrService,
+    private router: Router,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
     this.spinner.hide().then();
+    const id = localStorage.getItem('USER_ID') || '';
+    this.userService.getUser(id).subscribe((res) => {
+      if (!res.user.isAdmin) this.router.navigate(['/']);
+    });
   }
 
   onSubmit(): void {
@@ -58,7 +66,7 @@ export class AddFilmComponent implements OnInit {
       gene: this.selectedGenre || '',
       country: this.selectedNation || '',
       year: this.selectedYear || 0,
-      type: this.selectedType === 'Phim chiếu rạp' ? true:false || true,
+      type: this.selectedType === 'Phim chiếu rạp' ? true : false || true,
       duration: this.duration || '',
       directors: this.directors || '',
       description: this.description || '',
@@ -72,11 +80,14 @@ export class AddFilmComponent implements OnInit {
     };
 
     if (this.isValid()) {
-      this.filmService.postFilm(item).subscribe((data: any) => {
-				this.toast.success('Thêm phim thành công');
-			}, error => {
-				this.toast.error('Thêm phim thất bại');
-			})
+      this.filmService.postFilm(item).subscribe(
+        (data: any) => {
+          this.toast.success('Thêm phim thành công');
+        },
+        (error) => {
+          this.toast.error('Thêm phim thất bại');
+        }
+      );
     }
   }
 
@@ -141,9 +152,9 @@ export class AddFilmComponent implements OnInit {
     return true;
   }
 
-	parseSafeResourceUrl(value: string): SafeResourceUrl {
-		return this.sanitizer.bypassSecurityTrustResourceUrl(value);
-	}
+  parseSafeResourceUrl(value: string): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(value);
+  }
 
   parseInt(value: string): number {
     return Number.parseInt(value);
