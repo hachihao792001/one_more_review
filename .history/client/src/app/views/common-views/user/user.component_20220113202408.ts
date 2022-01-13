@@ -15,13 +15,16 @@ export class UserComponent implements OnInit {
     private userService: UserService)
   { }
   editStatus: boolean = false;
-  user!: any;
+  user!: User;
   id!: any;
-  edit_age!: string;
-  edit_country!: string;
-  edit_gender!: boolean;
-  edit_name!: string;
-  
+    edit_age!: string;
+    edit_country!: string;
+    edit_gender!: boolean;
+    edit_name!: string;
+
+
+ 
+
   ngOnInit(): void {
     this.id = localStorage.getItem('USER_ID');
     this.userService.getUser(this.id).subscribe((res) => {

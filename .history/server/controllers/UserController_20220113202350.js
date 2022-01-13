@@ -121,7 +121,7 @@ export const getUser = async(req, res) => {
         if (user) {
             return res.json({ success: true, message: "Get user successfully", user: user, access_token });
         }
-        return res.status(404).json({ success: false, message: 'Incorrect id', user: user });
+        return res.status(404).json({ success: false, message: 'incorrect id', user: user });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ success: false, message: 'Internal server Error' });

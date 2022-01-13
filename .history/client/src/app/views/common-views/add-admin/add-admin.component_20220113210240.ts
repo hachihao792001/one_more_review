@@ -13,7 +13,7 @@ export class AddAdminComponent implements OnInit {
   email: string = '';
   id: string = '';
   user!: User;
-  isSubmitted: boolean = false;
+  isSubmited: boolean = false;
   constructor(
     private spinner: NgxSpinnerService,
     private userService: UserService,
@@ -32,7 +32,7 @@ export class AddAdminComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.isSubmitted = true;
+    this.isSubmited = true;
     this.userService.getUser(this.id).subscribe((res) => {
       this.user = res.user;
       this.spinner.hide().then();
@@ -49,12 +49,9 @@ export class AddAdminComponent implements OnInit {
   }
 
   onCancel() {
-    this.isSubmitted = false;
+    this.isSubmited = false;
     this.name = '';
     this.email = '';
     this.id = '';
-  }
-  length(value: string): number {
-    return value?.trim().length;
   }
 }

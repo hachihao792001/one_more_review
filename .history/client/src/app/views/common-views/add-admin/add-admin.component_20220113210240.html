@@ -13,24 +13,25 @@
                 <div class="info-container">
                     <div class="block-info">
                         <h4>Tên admin:</h4>
-                        <input class="input" type="text" placeholder="Nobita..." name="name" [(ngModel)]="name" required><br><span *ngIf="length(name) < 1 && isSubmitted" class="text-error">*Trường này là bắt buộc</span
-                            >
+                        <input class="input" type="text" placeholder="Nobita..." name="name" [(ngModel)]="name">
                     </div>
                     <div class="block-info">
                         <h4>Email:</h4>
-                        <input class="input" type="text" placeholder="abc@gmail.com" name="email" [(ngModel)]="email" required><br>
-                        <span *ngIf="length(email) < 1 && isSubmitted" class="text-error">*Trường này là bắt buộc
-                            </span>
+                        <input class="input" type="text" placeholder="abc@gmail.com" name="email" [(ngModel)]="email" required> <span *ngIf="strLength(actors) < 1 && isSubmitted" class="text-error">*Trường này là bắt buộc</span
+                      >
                     </div>
                     <div class="block-info">
                         <h4>ID:</h4>
-                        <input class="input" type="text" placeholder="ID..." name="id" [(ngModel)]="id" required> <br><span *ngIf="length(id) < 1 && isSubmitted" class="text-error">*Trường này là bắt buộc</span
+                        <input class="input" type="text" placeholder="ID..." name="id" [(ngModel)]="id" required> <span
+                        *ngIf="strLength(actors) < 1 && isSubmitted"
+                        class="text-error"
+                        >*Trường này là bắt buộc</span
                       >
                     </div>
                 </div>
                 <div class="btn-container">
                     <button (click)="onCancel()" pButton pRipple type="button" class="p-button-outlined p-button-warning p-button-rounded">Cancel</button>
-                    <button pButton pRipple type="submit" class="p-button-primary p-button-rounded p-button-outlined">Save</button>
+                    <button pButton pRipple type="button" class="p-button-primary p-button-rounded p-button-outlined">Save</button>
                 </div>
             </form>
         </div>

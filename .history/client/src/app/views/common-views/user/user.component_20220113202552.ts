@@ -15,7 +15,7 @@ export class UserComponent implements OnInit {
     private userService: UserService)
   { }
   editStatus: boolean = false;
-  user!: any;
+  user!: User;
   id!: any;
   edit_age!: string;
   edit_country!: string;
