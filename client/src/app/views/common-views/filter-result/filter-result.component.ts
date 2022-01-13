@@ -28,6 +28,7 @@ export class FilterResultComponent implements OnInit, AfterViewInit {
   selectedGenre!: any;
   selectedNation!: any;
   selectedYear!: any;
+  selectedName: string = '';
 
   tempType!: any;
   tempNation!: any;
@@ -52,6 +53,7 @@ export class FilterResultComponent implements OnInit, AfterViewInit {
       this.selectedGenre = params['genre'] || '';
       this.selectedNation = params['country'] || '';
       this.selectedYear = params['year'] || '';
+      this.selectedName = params['name'] || '';
 
       this.tempNation = this.selectedNation;
       this.tempType = this.selectedGenre;
@@ -64,7 +66,15 @@ export class FilterResultComponent implements OnInit, AfterViewInit {
     this.filmService.getAllFilms().subscribe(
       (res) => {
         this.allFilms = res.films;
-        console.log(this.allFilms);
+        if (this.selectedName) {
+          this.allFilms = this.allFilms.filter((film: Movie) => {
+            return (
+              film.name.toLowerCase().includes(this.selectedName) ||
+              film.eng_name.toLowerCase().includes(this.selectedName)
+            );
+          });
+        }
+
         if (this.selectedGenre) {
           this.allFilms = this.allFilms.filter((film: Movie) => {
             return film.gene.includes(this.selectedGenre);
@@ -80,15 +90,16 @@ export class FilterResultComponent implements OnInit, AfterViewInit {
         if (this.selectedYear) {
           this.allFilms = this.allFilms.filter((film: Movie) => {
             if (this.selectedYear.includes('<'))
-              return film.year < Number.parseInt(this.selectedYear.substring(1));
+              return (
+                film.year < Number.parseInt(this.selectedYear.substring(1))
+              );
             else return film.year === Number.parseInt(this.selectedYear);
           });
         }
 
         this.allPage = Math.floor(this.allFilms.length / this.filmPerPage) + 1;
         this.films = this.allFilms.slice(0, this.filmPerPage);
-				if (this.allFilms.length === 0) 
-					this.isFound = false;
+        if (this.allFilms.length === 0) this.isFound = false;
         this.spinner.hide().then();
       },
       (err) => {

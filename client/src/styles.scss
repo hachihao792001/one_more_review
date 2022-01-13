@@ -76,8 +76,18 @@ body {
 .reviews {
   .p-carousel-container {
     .p-carousel-items-content {
+			height: 100%;
       .p-carousel-item {
-        @apply bg-gray-800 m-1 p-5 rounded;
+				@apply px-2;
+				@media (max-width:768px) {
+					@apply px-1;
+				}
+        .carousel-item-wrapper {
+					&.comment {
+						@apply mt-3;
+					}
+					@apply bg-gray-800 p-5 rounded;
+				}
       }
     }
   }
@@ -87,7 +97,52 @@ body {
   color: rgb(255, 236, 68);
 }
 
+.p-input-icon-right.search i {
+		@media (max-width:768px) {
+		display: none;
+	}
+}
+
 .p-inputtext.inputSearch {
   @apply bg-gray-900 text-white rounded-sm;
   width: 500px;
+	@media (max-width: 1250px) {
+		width: 300px;
+	}
+	@media (max-width:768px) {
+		display: none;
+	}
+
+}
+
+.p-confirm-popup {
+	@apply bg-gray-700 text-white;
+}
+
+.p-confirm-popup::before {
+	@apply border-gray-700;
+    border: solid transparent;
+    border-color: rgba(255, 255, 255, 0);
+    border-bottom-color: rgba(55, 65, 81, var(--tw-border-opacity));
+}
+
+.p-confirm-popup::after {
+	@apply border-gray-700;
+    border: solid transparent;
+    border-color: rgba(255, 255, 255, 0);
+    border-bottom-color: rgba(55, 65, 81, var(--tw-border-opacity));
+}
+
+.p-dialog {
+	.p-dialog-header {
+	@apply bg-gray-700 text-white;
+}
+
+	.p-dialog-content {
+	@apply bg-gray-700 text-white;
+}
+
+	.p-dialog-footer {
+	@apply bg-gray-700 text-white;
+}
 }

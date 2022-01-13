@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/models/user';
@@ -14,7 +14,8 @@ import { ProfileService } from 'src/app/services/profile.service';
 })
 export class HeaderComponent implements OnInit {
   userInfo!: User;
-	items!: any[];
+  items!: any[];
+  searchName: string = '';
 
   constructor(
     private authService: AuthService,
@@ -22,27 +23,33 @@ export class HeaderComponent implements OnInit {
     public sanitizer: DomSanitizer,
     private profileService: ProfileService,
     private toast: ToastrService,
-		private router: Router
-	) {}
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.route.queryParams.subscribe((params) => {
+      this.searchName = params['name'] || '';
+    });
+  }
 
   ngOnInit(): void {
     const id = localStorage.getItem('USER_ID') || '';
     this.profileService.getProfile(id).subscribe(
       (res) => {
         if (res) {
-          console.log(res.user);
           this.userInfo = res.user;
 
-					if (this.userInfo.isAdmin) {
-						this.items.push({
-              label: 'Quản lý phim',
-              icon: 'pi pi-user-plus',
-            }) 
+          if (this.userInfo.isAdmin) {
             this.items.push({
-              label: 'Quản lý tài khoản',
+              label: 'Thêm phim',
               icon: 'pi pi-user-plus',
+              url: '/add-film',
             });
-					}
+            this.items.push({
+              label: 'Thêm admin',
+              icon: 'pi pi-user-plus',
+              url: '/add-admin',
+            });
+          }
         }
       },
       (err) => {
@@ -51,7 +58,7 @@ export class HeaderComponent implements OnInit {
       }
     );
 
-		this.items = [
+    this.items = [
       {
         label: 'Trang chủ',
         icon: 'pi pi-home',
@@ -75,9 +82,27 @@ export class HeaderComponent implements OnInit {
   signOut(): void {
     this.authService.signOut();
   }
+
+  onSearch() {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+      this.router.navigate([`/filter-result`], {
+        queryParams: {
+          name: this.searchName,
+        },
+      })
+    );
+  }
+
+  onType(event: any) {
+    if (event.key === 'Enter' && this.searchName) {
+      this.onSearch();
+    }
+  }
 }
 
-$(window).on("scroll", () => {
-	const y = $(window).scrollTop();
-	y || 0 > 100 ? $(".header").addClass("header-scrolled") : $(".header").removeClass("header-scrolled");
-})
+$(window).on('scroll', () => {
+  const y = $(window).scrollTop();
+  y || 0 > 100
+    ? $('.header').addClass('header-scrolled')
+    : $('.header').removeClass('header-scrolled');
+});

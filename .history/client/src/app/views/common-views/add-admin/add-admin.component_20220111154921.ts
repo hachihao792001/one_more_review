@@ -34,7 +34,6 @@ export class AddAdminComponent implements OnInit {
 
     this.user.isAdmin = true;
     this.userService.updateUser(this.user, this.id).subscribe();
-    console.log(this.user);
     alert("Sucess!");
   }
 }

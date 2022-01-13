@@ -6,6 +6,9 @@
 		}
     &-container {
         @apply px-14 py-5 flex justify-between items-center;
+				@media (max-width: 768px) {
+					@apply px-5 py-3;
+				}
         .brand {
             @apply h-12 rounded-sm flex items-center;
             img {
@@ -17,6 +20,9 @@
 								@apply absolute top-0 left-0 w-1 h-full bg-purple-700;
 								content: "";
 							}
+							@media (max-width: 1050px) {
+								display: none;
+							}
 						}
         }
         .user-area {
@@ -24,9 +30,7 @@
                 @apply text-white;
             }
         }
-        .search-container {
-            @apply block mx-auto w-1/3 translate-y-2;
-        }
+
         input#search-bar {
             @apply bg-black text-white border border-solid border-gray-300 outline-none text-base px-4 py-0 rounded-lg w-full h-10;
             &:focus {

@@ -26,6 +26,8 @@ import { ButtonModule } from 'primeng/button';
 import { RatingModule } from 'primeng/rating';
 import { SkeletonModule } from 'primeng/skeleton';
 import { ToolbarModule } from 'primeng/toolbar';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { DialogModule } from 'primeng/dialog';
 @NgModule({
   declarations: [
     PageNotFoundComponent,
@@ -54,7 +56,9 @@ import { ToolbarModule } from 'primeng/toolbar';
 		ButtonModule,
 		RatingModule,
 		SkeletonModule,
-		ToolbarModule
+		ToolbarModule,
+		ConfirmPopupModule,
+		DialogModule
   ],
 })
 export class CommonViewsModule {}

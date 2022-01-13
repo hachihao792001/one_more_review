@@ -84,7 +84,6 @@ export class AuthenticateComponent implements OnInit {
 
     this.service.signUp(data).subscribe(
       (res) => {
-        console.log(res);
         if (res && res.length !== 0) {
           localStorage.setItem('ACCESS_TOKEN', res.access_token);
           localStorage.setItem('USER_ID', res.user._id);
@@ -122,7 +121,6 @@ export class AuthenticateComponent implements OnInit {
     this.service.signIn(data).subscribe(
       (res) => {
         if (res && res.length !== 0) {
-          console.log(res);
           localStorage.setItem('ACCESS_TOKEN', res.token);
 					localStorage.setItem('USER_ID', res.id);
           this.router.navigate([`/`]);

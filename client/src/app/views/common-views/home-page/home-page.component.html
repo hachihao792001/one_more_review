@@ -1,7 +1,9 @@
 <div class="home">
   <app-header></app-header>
   <div class="home-container">
-    <p-carousel
+    <div *ngIf="carouselItems && films">
+			<p-carousel
+			class="hidden md:block"
       [showIndicators]="false"
       [value]="carouselItems"
       orientation="vertical"
@@ -110,6 +112,7 @@
         </div>
       </div>
     </div>
+		</div>
   </div>
   <app-footer></app-footer>
 </div>
