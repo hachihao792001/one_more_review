@@ -54,7 +54,6 @@ export class UserComponent implements OnInit {
       this.toast.error(`${'Cập nhật profile thất bại:'} ${error.message}`);
     });
     this.editStatus = !this.editStatus;
-    this.spinner.hide();
 
 }
 }

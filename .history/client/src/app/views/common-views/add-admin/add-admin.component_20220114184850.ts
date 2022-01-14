@@ -36,17 +36,23 @@ export class AddAdminComponent implements OnInit {
     this.isSubmitted = true;
     this.userService.getUser(this.id).subscribe((res) => {
       this.user = res.user;
+      this.spinner.hide().then();
+      if (!this.user.isAdmin) this.router.navigate(['/']);
     });
+    if (this.user.username !== this.email) {
+      alert('Add admin failed! Email or ID is incorrect!');
+      return;
+    }
     this.user.isAdmin = true;
 
     this.spinner.show();
     this.userService.updateUser(this.user, this.id).subscribe(
       (data : any) => {
-      this.toast.success('Thêm admin thành công');
+      this.toast.success('Cập nhật profile thành công');
       this.spinner.hide();
     },
     (error) => {
-      this.toast.error(`${'Thêm admin thất bại:'} ${error.message}`);
+      this.toast.error(`${'Cập nhật profile thất bại:'} ${error.message}`);
     });    console.log(this.user);
     
   }

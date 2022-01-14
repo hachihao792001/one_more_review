@@ -35,6 +35,9 @@ export class UserComponent implements OnInit {
     this.editStatus = !this.editStatus;
   }
 
+  onSave(): void {
+    this.editStatus = !this.editStatus;
+  }
   onSubmit(event:any): void {
     event.preventDefault();
 
@@ -43,18 +46,18 @@ export class UserComponent implements OnInit {
     this.user.name = this.edit_name || this.user.name;
     this.user.gender = this.edit_gender || this.user.gender;
     console.log(this.user);
+    this.editStatus = !this.editStatus;
     
     this.spinner.show();
     this.userService.updateUser(this.user, this.id).subscribe(
-      (data : any) => {
+      (data : User) => {
       this.toast.success('Cập nhật profile thành công');
       this.spinner.hide();
     },
     (error) => {
       this.toast.error(`${'Cập nhật profile thất bại:'} ${error.message}`);
     });
-    this.editStatus = !this.editStatus;
-    this.spinner.hide();
-
+ 
+ // this.spinner.hide();
 }
 }
