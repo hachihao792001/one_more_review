@@ -35,27 +35,34 @@ export class UserComponent implements OnInit {
     this.editStatus = !this.editStatus;
   }
 
+  onSave(): void {
+    this.editStatus = !this.editStatus;
+  }
   onSubmit(event:any): void {
     event.preventDefault();
+
+    console.log(this.edit_age); console.log(this.edit_name);
+    console.log(this.edit_gender);
+    console.log(this.edit_country);
 
     this.user.age = parseInt(this.edit_age) || this.user.age;
     this.user.country = this.edit_country || this.user.country;
     this.user.name = this.edit_name || this.user.name;
     this.user.gender = this.edit_gender || this.user.gender;
-    console.log(this.user);
+    console.log(this.edit_gender);
+
+    this.editStatus = !this.editStatus;
     
     this.spinner.show();
     this.userService.updateUser(this.user, this.id).subscribe(
-      (res : any) => {
+      (data : User) => {
       this.toast.success('Cập nhật profile thành công');
-			this.user = res.user;
       this.spinner.hide();
     },
     (error) => {
       this.toast.error(`${'Cập nhật profile thất bại:'} ${error.message}`);
     });
-    this.editStatus = !this.editStatus;
-    this.spinner.hide();
-
+ 
+ // this.spinner.hide();
 }
 }

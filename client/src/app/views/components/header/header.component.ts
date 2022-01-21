@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit {
           if (this.userInfo.isAdmin) {
             this.items.push({
               label: 'Thêm phim',
-              icon: 'pi pi-user-plus',
+              icon: 'pi pi-video',
               url: '/add-film',
             });
             this.items.push({
@@ -50,6 +50,14 @@ export class HeaderComponent implements OnInit {
               url: '/add-admin',
             });
           }
+
+					this.items.push({
+            label: 'Đăng xuất',
+            icon: 'pi pi-sign-out',
+            command: () => {
+              this.authService.signOut();
+            },
+          });
         }
       },
       (err) => {
@@ -68,13 +76,6 @@ export class HeaderComponent implements OnInit {
         label: 'Tài khoản',
         icon: 'pi pi-user-edit',
         url: '/profile',
-      },
-      {
-        label: 'Đăng xuất',
-        icon: 'pi pi-sign-out',
-        command: () => {
-          this.authService.signOut();
-        },
       },
     ];
   }

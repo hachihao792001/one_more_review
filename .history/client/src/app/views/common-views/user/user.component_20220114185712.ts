@@ -46,9 +46,8 @@ export class UserComponent implements OnInit {
     
     this.spinner.show();
     this.userService.updateUser(this.user, this.id).subscribe(
-      (res : any) => {
+      (data : any) => {
       this.toast.success('Cập nhật profile thành công');
-			this.user = res.user;
       this.spinner.hide();
     },
     (error) => {
