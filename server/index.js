@@ -13,7 +13,7 @@ const app = express();
 const CORS = cors();
 dotenv.config();
 
-const PORT = 5000; // port connect to backend
+const PORT = process.env.PORT || 5000; // port connect to backend
 //const username='OneMoreReview';
 //const password='TheFourNations';
 const __dirname = path.resolve(); // get the current path ..\server
