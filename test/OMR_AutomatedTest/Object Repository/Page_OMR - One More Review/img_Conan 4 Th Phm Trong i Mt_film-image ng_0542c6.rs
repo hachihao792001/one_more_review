@@ -6,12 +6,15 @@
    <elementGuidId>e428491b-ab2c-462b-85ae-1e4cc60c6001</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>CSS</key>
-         <value></value>
+         <key>BASIC</key>
+         <value>//*[@src = 'https://2.bp.blogspot.com/-dJPwWPkn9pI/WbQCAqh3MxI/AAAAAAAANsg/STSUq_hk9KMQaHIdGVm3427YrzSxPgn3gCHMYCw/w300/' and @alt = 'Xác ướp']</value>
       </entry>
       <entry>
          <key>XPATH</key>
-         <value>//img[@alt='Xác ướp']</value>
+         <value>//div[4]/div/img</value>
+      </entry>
+      <entry>
+         <key>CSS</key>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>

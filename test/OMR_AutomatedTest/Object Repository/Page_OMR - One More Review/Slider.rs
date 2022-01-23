@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WebElementEntity>
+   <description></description>
+   <name>Slider</name>
+   <tag></tag>
+   <elementGuidId>8dd7f4e5-4665-409b-a146-b28a0a97b293</elementGuidId>
+   <selectorCollection>
+      <entry>
+         <key>BASIC</key>
+         <value>id(&quot;movie_player&quot;)/div[@class=&quot;ytp-chrome-bottom&quot;]/div[@class=&quot;ytp-progress-bar-container&quot;]/div[@class=&quot;ytp-progress-bar&quot;]/div[@class=&quot;ytp-scrubber-container&quot;]/div[@class=&quot;ytp-scrubber-button ytp-swatch-background-color&quot;]/div[@class=&quot;ytp-scrubber-pull-indicator&quot;][count(. | //*[@ref_element = 'Object Repository/Page_OMR - One More Review/iframe']) = count(//*[@ref_element = 'Object Repository/Page_OMR - One More Review/iframe'])]</value>
+      </entry>
+      <entry>
+         <key>XPATH</key>
+         <value>//div[@id='movie_player']/div[34]/div/div[2]/div[6]/div/div</value>
+      </entry>
+   </selectorCollection>
+   <selectorMethod>XPATH</selectorMethod>
+   <useRalativeImagePath>false</useRalativeImagePath>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>tag</name>
+      <type>Main</type>
+      <value>div</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>class</name>
+      <type>Main</type>
+      <value>ytp-scrubber-pull-indicator</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>xpath</name>
+      <type>Main</type>
+      <value>id(&quot;movie_player&quot;)/div[@class=&quot;ytp-chrome-bottom&quot;]/div[@class=&quot;ytp-progress-bar-container&quot;]/div[@class=&quot;ytp-progress-bar&quot;]/div[@class=&quot;ytp-scrubber-container&quot;]/div[@class=&quot;ytp-scrubber-button ytp-swatch-background-color&quot;]/div[@class=&quot;ytp-scrubber-pull-indicator&quot;]</value>
+   </webElementProperties>
+   <webElementProperties>
+      <isSelected>true</isSelected>
+      <matchCondition>equals</matchCondition>
+      <name>ref_element</name>
+      <type>Main</type>
+      <value>Object Repository/Page_OMR - One More Review/iframe</value>
+   </webElementProperties>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <type>Main</type>
+      <value>//div[@id='movie_player']/div[34]/div/div[2]/div[6]/div/div
+</value>
+   </webElementXpaths>
+   <webElementXpaths>
+      <isSelected>false</isSelected>
+      <matchCondition>equals</matchCondition>
+      <type>Main</type>
+      <value>//div[6]/div/div</value>
+   </webElementXpaths>
+</WebElementEntity>

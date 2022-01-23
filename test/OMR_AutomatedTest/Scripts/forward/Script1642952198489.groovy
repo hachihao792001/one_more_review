@@ -15,13 +15,17 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import com.kms.katalon.core.windows.keyword.WindowsBuiltinKeywords as Windows
 import internal.GlobalVariable as GlobalVariable
+import org.openqa.selenium.By as By
 import org.openqa.selenium.Keys as Keys
 import com.kms.katalon.core.webui.common.WebUiCommonHelper as WebUiCommonHelper
 import org.openqa.selenium.WebElement as WebElement
+import org.openqa.selenium.WebDriver as WebDriver
+import org.openqa.selenium.interactions.Actions as Actions
+import com.kms.katalon.core.webui.driver.DriverFactory as DriverFactory
 
 WebUI.openBrowser('')
 
-WebUI.navigateToUrl('http://localhost:4200/authenticate')
+WebUI.navigateToUrl('http://localhost:4200')
 
 WebUI.setText(findTestObject('Object Repository/Page_OMR - One More Review/input_Email_email'), 'admin@gmail.com')
 
@@ -33,13 +37,15 @@ WebUI.click(findTestObject('Object Repository/Page_OMR - One More Review/img_Con
 
 WebUI.scrollToElement(findTestObject('Object Repository/Page_OMR - One More Review/span_Din vin'), 2)
 
-WebUI.click(findTestObject('Page_OMR - One More Review/div_Tap to unmute_ytp-cued-thumbnail-overlay-image'))
+WebUI.switchToFrame(findTestObject('Object Repository/Page_OMR - One More Review/iframe'), 2)
 
-//WebElement element = WebUiCommonHelper.findWebElement(findTestObject('Object Repository/Page_OMR - One More Review/div_Watch on_ytp-progress-bar'),30)
-//WebUI.executeJavaScript("arguments[0].click()", Arrays.asList(element))
-WebUI.click(findTestObject('Object Repository/Page_OMR - One More Review/div_Watch on_ytp-progress-bar'))
+WebUI.click(findTestObject('Object Repository/Page_OMR - One More Review/div_Tap to unmute_ytp-cued-thumbnail-overlay-image'))
 
-WebUI.click(findTestObject('Object Repository/Page_OMR - One More Review/video_Ph Phim_video-stream html5-main-video'))
+WebUI.delay(1)
+
+WebUI.click(findTestObject('Page_OMR - One More Review/div_Watch on_ytp-progress-bar'))
+
+WebUI.delay(1)
 
 WebUI.closeBrowser()
 

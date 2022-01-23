@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>fullscreen</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>4ae9ae0e-d2f2-4167-b6e5-38e8b0504de2</testCaseGuid>
+   <variable>
+      <defaultValue>0</defaultValue>
+      <description></description>
+      <id>e7e90465-f9ae-4be3-b4f5-b309bf2840b7</id>
+      <masked>false</masked>
+      <name>sliderWidth</name>
+   </variable>
+</TestCaseEntity>

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WebElementEntity>
    <description></description>
-   <name>iframe</name>
+   <name>h2_nh gi</name>
    <tag></tag>
-   <elementGuidId>eb2a53b0-87a5-44e2-a9b3-5639f21a8e62</elementGuidId>
+   <elementGuidId>85c611d7-7dbd-45e1-b871-c7c793710510</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
-         <value>//html/body/app-root/app-film/div/div[2]/iframe</value>
+         <value>/html/body/app-root/app-film/div/div[3]/h2</value>
       </entry>
       <entry>
          <key>CSS</key>
-         <value>iframe</value>
+         <value>h2.reviews__title</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -21,41 +21,33 @@
       <matchCondition>equals</matchCondition>
       <name>tag</name>
       <type>Main</type>
-      <value>iframe</value>
+      <value>h2</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
-      <name>frameborder</name>
+      <name>class</name>
       <type>Main</type>
-      <value>0</value>
-   </webElementProperties>
-   <webElementProperties>
-      <isSelected>false</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>allowfullscreen</name>
-      <type>Main</type>
-      <value>true</value>
+      <value>reviews__title</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
       <matchCondition>equals</matchCondition>
-      <name>src</name>
+      <name>text</name>
       <type>Main</type>
-      <value>https://www.youtube.com/embed/gH-2U3rxZuk</value>
+      <value>Đánh giá</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath</name>
       <type>Main</type>
-      <value>/html[@class=&quot;dark&quot;]/body[1]/app-root[1]/app-film[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;film-container&quot;]/div[@class=&quot;film-player xl:p-20 lg:p-10 p-5&quot;]/iframe[1]</value>
+      <value>/html[@class=&quot;dark&quot;]/body[1]/app-root[1]/app-film[@class=&quot;ng-star-inserted&quot;]/div[@class=&quot;film-container&quot;]/div[@class=&quot;reviews xl:p-20 lg:p-10 p-5 bg-gray-900&quot;]/h2[@class=&quot;reviews__title&quot;]</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
-      <name>xpath:position</name>
       <type>Main</type>
-      <value>//html/body/app-root/app-film/div/div[2]/iframe</value>
+      <value>/html/body/app-root/app-film/div/div[3]/h2</value>
    </webElementXpaths>
 </WebElementEntity>

@@ -6,12 +6,12 @@
    <elementGuidId>9fcef1a2-3dda-4bd8-8cc5-654c50d326af</elementGuidId>
    <selectorCollection>
       <entry>
-         <key>CSS</key>
-         <value>div.ytp-cued-thumbnail-overlay-image</value>
-      </entry>
-      <entry>
          <key>XPATH</key>
          <value>//div[@id='movie_player']/div[4]/button</value>
+      </entry>
+      <entry>
+         <key>CSS</key>
+         <value>div.ytp-cued-thumbnail-overlay-image</value>
       </entry>
    </selectorCollection>
    <selectorMethod>XPATH</selectorMethod>
@@ -36,13 +36,6 @@
       <name>xpath</name>
       <type>Main</type>
       <value>id(&quot;movie_player&quot;)/div[@class=&quot;ytp-cued-thumbnail-overlay&quot;]/div[@class=&quot;ytp-cued-thumbnail-overlay-image&quot;]</value>
-   </webElementProperties>
-   <webElementProperties>
-      <isSelected>true</isSelected>
-      <matchCondition>equals</matchCondition>
-      <name>ref_element</name>
-      <type>Main</type>
-      <value>Object Repository/Page_OMR - One More Review/iframe</value>
    </webElementProperties>
    <webElementXpaths>
       <isSelected>true</isSelected>

@@ -3,7 +3,7 @@
    <description></description>
    <name>div_Watch on_ytp-progress-bar</name>
    <tag></tag>
-   <elementGuidId>d1727b4f-f7d0-482c-a588-5ed0a4ab1edb</elementGuidId>
+   <elementGuidId>71d95b94-3a50-442b-bb5b-6afab925d25e</elementGuidId>
    <selectorCollection>
       <entry>
          <key>XPATH</key>
@@ -77,14 +77,14 @@
       <matchCondition>equals</matchCondition>
       <name>aria-valuenow</name>
       <type>Main</type>
-      <value>708</value>
+      <value>380</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>aria-valuetext</name>
       <type>Main</type>
-      <value>11 Minutes 48 Seconds of 23 Minutes 44 Seconds</value>
+      <value>6 Minutes 20 Seconds of 23 Minutes 44 Seconds</value>
    </webElementProperties>
    <webElementProperties>
       <isSelected>true</isSelected>
@@ -105,14 +105,14 @@
       <matchCondition>equals</matchCondition>
       <name>xpath:neighbor</name>
       <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='Watch on'])[1]/following::div[8]</value>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='Watch on'])[1]/following::div[7]</value>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
       <matchCondition>equals</matchCondition>
       <name>xpath:neighbor</name>
       <type>Main</type>
-      <value>(.//*[normalize-space(text()) and normalize-space(.)='by Phê Phim'])[5]/following::div[13]</value>
+      <value>(.//*[normalize-space(text()) and normalize-space(.)='by Phê Phim'])[5]/following::div[12]</value>
    </webElementXpaths>
    <webElementXpaths>
       <isSelected>false</isSelected>
