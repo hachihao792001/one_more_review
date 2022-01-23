@@ -4,7 +4,7 @@ import User from "../models/User.js";
 import Review from "../models/Review.js";
 export const createFilm = async (req, res) => {
   try {
-    const { name, type, genre, country, description, actors, avgRating, url } =
+    const { name, type, genre, country, description, actors, avgRating, url, status, directors, duration, year, img, poster, trailer, reviewChannel} =
       req.body;
     if (!name) {
       return res
@@ -26,6 +26,14 @@ export const createFilm = async (req, res) => {
       actors,
       avgRating,
       url,
+      status, 
+      directors, 
+      duration, 
+      year, 
+      img, 
+      poster, 
+      trailer, 
+      reviewChannel,
     });
     try {
       await newFilm.save();
@@ -135,6 +143,14 @@ export const updateFilm = async (req, res) => {
       url,
       commentList,
       reviewList,
+      status, 
+      directors, 
+      duration, 
+      year, 
+      img, 
+      poster, 
+      trailer, 
+      reviewChannel
     } = req.body;
     film.name = name || film.name;
     film.type = type || film.type;
@@ -146,6 +162,14 @@ export const updateFilm = async (req, res) => {
     film.url = url || film.url;
     film.commentList = commentList || film.commentList;
     film.reviewList = reviewList || film.reviewList;
+    film.status = status || film.status;
+    film.directors = directors || film.directors;
+    film.duration = duration || film.duration;
+    film.year = year || film.year;
+    film.url = img || film.img;
+    film.url = poster || film.poster;
+    film.url = trailer || film.trailer;
+    film.url =  reviewChannel || film. reviewChannel;
     let updatedFilm = null;
     try {
       updatedFilm = await film.save(); //  check If the name is unique?

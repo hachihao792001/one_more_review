@@ -81,16 +81,16 @@ const filmSchema=new mongoose.Schema({
     },
     poster:{
         type:String,
+        default:"https://cdn3.vectorstock.com/i/1000x1000/47/67/movie-icon-vector-23534767.jpg"
     },
-    trailer: {
+    reviewChannel:{
         type:String,
+        default:"Phe Phim"
     },
-	reviewChannel:{
+    trailer:{
         type:String,
-    }
-
-
-   
+        default:"https://youtube.com",
+    },
 });
 
 
