@@ -166,10 +166,10 @@ export const updateFilm = async (req, res) => {
     film.directors = directors || film.directors;
     film.duration = duration || film.duration;
     film.year = year || film.year;
-    film.url = img || film.img;
-    film.url = poster || film.poster;
-    film.url = trailer || film.trailer;
-    film.url =  reviewChannel || film. reviewChannel;
+    film.img = img || film.img;
+    film.poster = poster || film.poster;
+    film.trailer = trailer || film.trailer;
+    film.reviewChannel =  reviewChannel || film.reviewChannel;
     let updatedFilm = null;
     try {
       updatedFilm = await film.save(); //  check If the name is unique?
