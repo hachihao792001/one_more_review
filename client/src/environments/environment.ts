@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'http://localhost:4200',
-  serverUrl: 'http://localhost:5000',
+  serverUrl: 'https://onemorereview.herokuapp.com',
 };
 
 /*
