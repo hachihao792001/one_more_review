@@ -4,7 +4,7 @@ import User from "../models/User.js";
 import Review from "../models/Review.js";
 export const createFilm = async (req, res) => {
   try {
-    const { name, type, genre, country, description, actors, avgRating, url, status, directors, duration, year, img, poster, trailer, reviewChannel} =
+    const { name, eng_name, type, genre, country, description, actors, avgRating, url, status, directors, duration, year, img, poster, trailer, reviewChannel} =
       req.body;
     if (!name) {
       return res
@@ -19,6 +19,7 @@ export const createFilm = async (req, res) => {
     }
     const newFilm = new Film({
       name,
+      eng_name,
       type,
       genre,
       country,
@@ -134,6 +135,7 @@ export const updateFilm = async (req, res) => {
     }
     const {
       name,
+      eng_name,
       type,
       gene,
       country,
@@ -153,6 +155,7 @@ export const updateFilm = async (req, res) => {
       reviewChannel
     } = req.body;
     film.name = name || film.name;
+    film.eng_name = eng_name || film.eng_name;
     film.type = type || film.type;
     film.gene = gene || film.gene;
     film.country = country || film.country;
