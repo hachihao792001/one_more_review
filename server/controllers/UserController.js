@@ -49,7 +49,6 @@ export const registerUser = async(req, res) => {
             .json({ success: false, message: "password is not hashed" });
     }
 
-
     const newUser = new User({
         username,
         password: hashedPassword,
@@ -94,7 +93,6 @@ export const loginUser = async(req, res) => {
 
 
         }
-
         const token = jwt.sign({
             _id: user._id,
             name: user.name,
@@ -179,8 +177,6 @@ export const deleteUser = async(req, res) => {
 
 export const searchUser = async(req, res) => {
     try {
-
-
         const name = req.query.name || '';
         const username = req.query.username || '';
         // const age=req.query.age&&Number(req.query.age)!==0?Number(req.query.age):0;
