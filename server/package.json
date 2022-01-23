@@ -6,12 +6,13 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "concurrently \"npm run start\" \"cd ../client && npm run start\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "argon2": "^0.28.2",
+    "concurrently": "^7.0.0",
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
     "crypto-random-string": "^2.0.0",
