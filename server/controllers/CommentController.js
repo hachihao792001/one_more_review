@@ -78,10 +78,26 @@ export const updateComment=async(req,res)=>{
 export const deleteComment=async(req,res)=>{
     try {
         const comment=await Comment.findById(req.params.id);
+        let film=await Film.findById(comment.idFilm);
+        let arrComment=film.commentList;
+        let resComment=[]
+        console.log("comment ===");
+        console.log(comment._id)
+        for(let ele of arrComment){
+            console.log("ele==")
+            console.log(ele)
+            if(ele.toString()!=comment._id.toString()){
+                resComment.push(ele)
+            }
+        }
+        console.log(resComment)
         if(!comment){
+            
             return res.status(404).json({success:false,message:'comment not found'});
         }
         const deletedComment=await comment.remove();
+        film.commentList=resComment;
+        await film.save();
         return res.status(200).json({success:true,message:'delete comment successfully',comment:deletedComment});
     } catch (error) {
         console.log(error);

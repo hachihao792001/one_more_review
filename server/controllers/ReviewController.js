@@ -93,14 +93,24 @@ export const updateReview = async (req, res) => {
 export const deleteReview = async (req, res) => {
   try {
     const review = await Review.findById(req.params.id);
+    const film=await Film.findById(review.idFilm);
+    let arrReview=film.reviewList;
+    let resReview=[]
+    for(let ele of arrReview){
+      if(ele.toString()!=review._id.toString()){
+        resReview.push(ele)
+      }
+    }
     if (!review) {
       return res
         .status(404)
         .json({ success: false, message: "Incorrect review" });
     }
     let deletedReview = null;
+    film.reviewList=resReview;
     try {
       deletedReview = await review.remove();
+      await film.save();
     } catch (error) {
       return res
         .status(404)

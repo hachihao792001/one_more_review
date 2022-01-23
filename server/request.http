@@ -54,14 +54,7 @@ DELETE http://localhost:5000/api/users/619e5b431c83cc30adac1dc1
 
 ###
 PUT http://localhost:5000/api/films/update
-Content-Type: application/json
 
-{
-  "name":"Tam Quoc Dien Nghia 2",
-  "genre":"document",
-  "description":"film hay",
-  
-}
 
 ###
 GET http://localhost:5000/api/films/61aadb9d1c02b845c13918c5

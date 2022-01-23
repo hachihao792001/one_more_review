@@ -79,6 +79,17 @@ const filmSchema=new mongoose.Schema({
         type:String,
         default:"https://www.ssphim.net/static/5fe2d564b3fa6403ffa11d1c/61a0e3157e072c580d171d1e_phong-than-dat-ky.jpg"
     },
+    poster:{
+        type:String,
+    },
+    trailer: {
+        type:String,
+    },
+	reviewChannel:{
+        type:String,
+    }
+
+
    
 });
 
