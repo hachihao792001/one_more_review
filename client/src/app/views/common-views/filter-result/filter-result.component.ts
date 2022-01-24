@@ -153,7 +153,6 @@ export class FilterResultComponent implements OnInit, AfterViewInit {
         this.page * this.filmPerPage,
         this.page * this.filmPerPage + this.filmPerPage
       );
-      console.log(this.films);
     }
   }
 

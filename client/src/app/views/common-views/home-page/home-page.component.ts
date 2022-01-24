@@ -56,7 +56,7 @@ export class HomePageComponent implements OnInit, AfterViewInit {
       },
       (err) => {
         this.spinner.hide();
-        this.toast.error('ERROR LOADING DATA FROM SERVER');
+        this.toast.error('Có lỗi khi kết nối đến server');
       }
     );
   }
@@ -96,7 +96,6 @@ export class HomePageComponent implements OnInit, AfterViewInit {
         this.page * this.filmPerPage,
         this.page * this.filmPerPage + this.filmPerPage
       );
-      console.log(this.films);
     }
   }
 }
