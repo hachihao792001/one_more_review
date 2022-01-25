@@ -8,7 +8,9 @@ import commentRouter from "./routers/commentRouter.js";
 import reviewRouter from "./routers/reviewRouter.js";
 import passRouter from "./routers/passwordRouter.js";
 import cors from "cors"
+import multer from "multer";
 
+const upload = multer({ dest: 'resources/' });
 const app = express();
 const CORS = cors();
 dotenv.config();
@@ -38,7 +40,11 @@ app.use(CORS);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/resources", express.static(path.join(__dirname, "/resources")));
-
+// app.post('/stats', upload.single('uploaded_file'), function (req, res) {
+//     // req.file is the name of your file in the form above, here 'uploaded_file'
+//     // req.body will hold the text fields, if there were any 
+//     console.log(req.file, req.body)
+//  });
 // routers
 app.use("/api/users", userRouter);
 app.use("/api/films", filmRouter);
