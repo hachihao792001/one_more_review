@@ -46,7 +46,7 @@ export class HomePageComponent implements OnInit, AfterViewInit {
     this.filmService.getAllFilms().subscribe(
       (res) => {
         if (res) {
-          this.allFilms = res.films;
+          this.allFilms = res.films.reverse();
           this.carouselItems = res.films;
           this.allPage =
             Math.floor(this.allFilms.length / this.filmPerPage) + 1;
