@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"node index.js"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
@@ -23,6 +23,7 @@
     "mongodb": "^4.1.4",
     "mongoose": "^6.0.12",
     "mongoose-double": "^0.0.1",
+    "multer": "^1.4.4",
     "nodemailer": "^6.7.2",
     "parse-json": "^6.0.0"
   },
